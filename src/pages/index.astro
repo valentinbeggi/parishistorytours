@@ -2,22 +2,71 @@
 import WhatsAppButton from "../components/WhatsAppButton.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/global.css";
+import guidePhoto from "/photos_leo/guide-photo.jpg"; // Assurez-vous que l'image est placée ici
 ---
 
 <BaseLayout title="Paris History Tours">
-	<section class="py-16 px-6 max-w-4xl mx-auto text-lg leading-8">
-	<p class="mb-5">
-		I’m <strong>Clément</strong>, a passionate history enthusiast and independent tour guide.
-		I offer immersive walking tours focused on World War&nbsp;II in Paris — and soon on other topics.
-	</p>
-	<p class="mb-8">
-		Whether you’re a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
-	</p>
-
-	<div class="flex flex-wrap gap-4">
-		<a href="/tours/left-bank" class="px-6 py-3 bg-indigo-600 text-white rounded-lg">Left-Bank Tour</a>
-		<a href="/tours/right-bank" class="px-6 py-3 bg-indigo-600 text-white rounded-lg">Right-Bank Tour</a>
-		<WhatsAppButton />
-	</div>
+	{/* Bannière de navigation fixe */}
+	<nav class="fixed top-0 left-0 w-full bg-white/95 border-b border-gray-200 z-50 shadow-sm">
+		<div class="max-w-4xl mx-auto flex items-center justify-center gap-8 py-3">
+			<a href="/tours/left-bank" class="text-gray-800 font-semibold hover:text-gray-600 transition">Left-Bank Tour</a>
+			<a href="/tours/right-bank" class="text-gray-800 font-semibold hover:text-gray-600 transition">Right-Bank Tour</a>
+			<a href="/" class="text-gray-800 font-semibold hover:text-gray-600 transition">Accueil</a>
+		</div>
+	</nav>
+	{/* Décale le contenu pour ne pas passer sous la bannière */}
+	<section class="py-24 px-0 max-w-full text-lg leading-8" style='font-family: "Montserrat", Inter, system-ui, sans-serif;'>
+		{/* Barre supérieure pleine largeur avec titre centré */}
+		<div class="w-full bg-gray-800 flex items-center justify-center py-0 mb-0" style="height: 120px;">
+			<h1 class="text-4xl md:text-5xl font-semibold text-center text-white m-0 p-0 drop-shadow-lg w-full">
+				Explorez Paris autrement : Plongez dans l’Histoire vivante !
+			</h1>
+		</div>
+		{/* Partie photo et contenu sur fond clair */}
+		<div class="bg-white flex justify-center mb-10 rounded-b-xl max-w-4xl mx-auto">
+			<img 
+				src={"/photos_leo/guide-photo.jpg"} 
+				alt="Guide Paris History Tours" 
+				class="rounded-xl shadow-lg max-w-full h-auto mt-8 mb-8"
+			/>
+		</div>
+		<div class="bg-white/90 rounded-xl shadow p-8 mb-8 border border-gray-200 max-w-4xl mx-auto">
+			<p class="mb-5 text-xl font-medium text-gray-900">
+				I’m <strong>Clément</strong>, a passionate history enthusiast and independent tour guide.<br/>
+				I offer immersive walking tours focused on World War&nbsp;II in Paris — and soon on other topics.
+			</p>
+			<p class="mb-8 text-lg text-gray-700">
+				Whether you’re a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
+			</p>
+			<div class="flex flex-wrap gap-4 justify-center">
+				<a href="/tours/left-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
+					Left-Bank Tour
+				</a>
+				<a href="/tours/right-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
+					Right-Bank Tour
+				</a>
+				<WhatsAppButton />
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+				Whether you’re a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
+			</p>
+			<div class="flex flex-wrap gap-4 justify-center">
+				<a href="/tours/left-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
+					Left-Bank Tour
+				</a>
+				<a href="/tours/right-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
+					Right-Bank Tour
+				</a>
+				<WhatsAppButton />
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
 	</section>
 </BaseLayout>
