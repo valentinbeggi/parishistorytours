@@ -14,6 +14,22 @@ const stops = [
 <BaseLayout title="Left-Bank tour">
   <section class="px-2 md:px-6 max-w-6xl mx-auto py-20">
     <h1 class="text-3xl font-bold mb-12 text-center">Paris – Left-Bank Tour</h1>
+	{/* Version mobile simplifiée */}
+<div class="block md:hidden space-y-10 mb-16">
+  {stops.map((stop, idx) => (
+    <div class="bg-white shadow rounded-lg border border-gray-100 p-4">
+      <div class="font-bold text-xl mb-2">{stop.title}</div>
+      <img src={stop.img} alt={stop.title} class="w-full rounded-md mb-3 object-cover h-48" />
+      <p class="text-gray-700 text-base">{stop.description}</p>
+    </div>
+  ))}
+</div>
+
+{/* Version desktop avec frise */}
+<div class="hidden md:block">
+  {/* ici tu laisses tout ton système de frise tel qu’il est */}
+</div>
+
     <div class="relative w-full pb-24">
       <div class="relative h-[1400px] w-full flex justify-center">
         <div class="absolute left-1/2 top-0 h-full w-2 bg-gray-200 rounded-full -translate-x-1/2 z-0"></div>
