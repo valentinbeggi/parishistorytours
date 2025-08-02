@@ -1,0 +1,23 @@
+---
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/global.css";
+---
+
+<BaseLayout title="Paris History Tours">
+	<section class="py-16 px-6 max-w-4xl mx-auto text-lg leading-8">
+	<p class="mb-5">
+		I’m <strong>Clément</strong>, a passionate history enthusiast and independent tour guide.
+		I offer immersive walking tours focused on World War&nbsp;II in Paris — and soon on other topics.
+	</p>
+	<p class="mb-8">
+		Whether you’re a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
+	</p>
+
+	<div class="flex flex-wrap gap-4">
+		<a href="/tours/left-bank" class="px-6 py-3 bg-indigo-600 text-white rounded-lg">Left-Bank Tour</a>
+		<a href="/tours/right-bank" class="px-6 py-3 bg-indigo-600 text-white rounded-lg">Right-Bank Tour</a>
+		<WhatsAppButton />
+	</div>
+	</section>
+</BaseLayout>

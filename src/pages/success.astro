@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout>
+<html>
+  <head>
+    <title>Thank You!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #91e0ab, #4d78c2);
+        overflow: hidden;
+      }
+      .thank-you-container {
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+      }
+      .thank-you-message {
+        font-size: 2.5rem;
+        color: #fff;
+        margin-bottom: 1rem;
+      }
+      .animation {
+        font-size: 5rem;
+        color: #fff;
+        animation: bounce 1.5s infinite;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thank-you-container">
+      <div class="thank-you-message">Thank you for your booking!</div>
+      <div class="animation">🎉</div>
+      <p>We will get in touch with you shortly to finalize the details.</p>
+    </div>
+  </body>
+</html>
+</BaseLayout>

@@ -1,0 +1,15 @@
+---
+import "../styles/global.css";
+const { title = "Paris History Tours" } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body class="font-sans text-gray-900 antialiased">
+    <slot />
+  </body>
+</html>
