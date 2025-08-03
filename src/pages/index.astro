@@ -1,8 +1,7 @@
 ---
-import WhatsAppButton from "../components/WhatsAppButton.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/global.css";
-import guidePhoto from "/photos_leo/guide-photo.jpg"; // Assurez-vous que l'image est placée ici
+import guidePhoto from "/photos_leo/guide-photo.webp";
 ---
 
 <BaseLayout title="Paris History Tours">
@@ -14,59 +13,77 @@ import guidePhoto from "/photos_leo/guide-photo.jpg"; // Assurez-vous que l'imag
 			<a href="/" class="text-gray-800 font-semibold hover:text-gray-600 transition">Accueil</a>
 		</div>
 	</nav>
-	{/* Décale le contenu pour ne pas passer sous la bannière */}
-	<section class="py-24 px-0 max-w-full text-lg leading-8" style='font-family: "Montserrat", Inter, system-ui, sans-serif;'>
+	
+	<section class="py-24 px-2 max-w-full text-lg leading-8 bg-[#ebebef] min-h-screen" style='font-family: "Montserrat", Inter, system-ui, sans-serif;'>
 		{/* Barre supérieure pleine largeur avec titre centré */}
 		<div class="w-full bg-gray-800 flex items-center justify-center py-0 mb-0" style="height: 120px;">
 			<h1 class="text-4xl md:text-5xl font-semibold text-center text-white m-0 p-0 drop-shadow-lg w-full">
-				Explorez Paris autrement : Plongez dans l’Histoire vivante !
+				Explorez Paris autrement : Plongez dans l'Histoire vivante !
 			</h1>
 		</div>
 		{/* Partie photo et contenu sur fond clair */}
-		<div class="bg-white flex justify-center mb-10 rounded-b-xl max-w-4xl mx-auto">
+		<div class="flex justify-center mb-10 max-w-4xl mx-auto">
 			<img 
-				src={"/photos_leo/guide-photo.jpg"} 
+				src={"/photos_leo/guide-photo.webp"} 
 				alt="Guide Paris History Tours" 
 				class="rounded-xl shadow-lg max-w-full h-auto mt-8 mb-8"
 			/>
 		</div>
-		<div class="bg-white/90 rounded-xl shadow p-8 mb-8 border border-gray-200 max-w-4xl mx-auto">
-			<p class="mb-5 text-xl font-medium text-gray-900">
-				I’m <strong>Clément</strong>, a passionate history enthusiast and independent tour guide.<br/>
-				I offer immersive walking tours focused on World War&nbsp;II in Paris — and soon on other topics.
-			</p>
-			<p class="mb-8 text-lg text-gray-700">
-				Whether you’re a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
-			</p>
-			<div class="flex flex-wrap gap-4 justify-center">
-				<a href="/tours/left-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
-					Left-Bank Tour
-				</a>
-				<a href="/tours/right-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
-					Right-Bank Tour
-				</a>
-				<WhatsAppButton />
+
+		{/* Section Welcome avec équerres */}
+		<div class="flex flex-col items-center mb-16">
+			<div class="text-3xl font-bold text-gray-700 text-center mb-8">Welcome</div>
+			<div class="relative max-w-3xl w-full mx-auto px-4">
+				{/* Équerre haut gauche */}
+				<div class="absolute -top-4 -left-4 w-12 h-12 hidden md:block">
+					<svg width="48" height="48" viewBox="0 0 48 48" class="text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="0" y="0" width="36" height="6" fill="currentColor"/>
+						<rect x="0" y="0" width="6" height="36" fill="currentColor"/>
+					</svg>
+				</div>
+				{/* Équerre bas droite */}
+				<div class="absolute -bottom-4 -right-4 w-12 h-12 hidden md:block">
+					<svg width="48" height="48" viewBox="0 10 48 48" class="text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect x="12" y="42" width="36" height="6" fill="currentColor"/>
+						<rect x="42" y="12" width="6" height="36" fill="currentColor"/>
+					</svg>
+				</div>
+				<div class="bg-transparent px-6 py-8 text-center text-lg md:text-xl text-gray-900 font-medium relative z-10">
+					<p class="mb-5">
+						I'm <strong>Clément</strong>, a passionate history enthusiast and independent tour guide.<br/>
+						I offer immersive walking tours focused on World War&nbsp;II in Paris — and soon on other topics.
+					</p>
+					<p class="text-gray-700 font-normal text-base md:text-lg">
+						Whether you're a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
+					</p>
+				</div>
 			</div>
 		</div>
-	</section>
-</BaseLayout>
-				Whether you’re a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
-			</p>
-			<div class="flex flex-wrap gap-4 justify-center">
-				<a href="/tours/left-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
-					Left-Bank Tour
+
+		{/* Section Tours available */}
+		<div class="mb-16">
+			<h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Tours available</h2>
+			<p class="text-center text-gray-600 mb-12 text-lg">Here are the tours about WW2 I propose in Paris.</p>
+			<div class="flex flex-col md:flex-row gap-8 justify-center items-center max-w-5xl mx-auto px-4">
+				{/* Left Bank */}
+				<a href="/tours/left-bank" class="group block w-full md:w-1/2 max-w-lg rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+					<div class="relative">
+						<img src={"/photos/pantheon_de_Paris.webp"} alt="Left Bank Tour" class="w-full h-72 object-cover" />
+						<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+							<span class="text-white text-3xl md:text-4xl font-bold tracking-wider drop-shadow-lg">Left Bank</span>
+						</div>
+					</div>
 				</a>
-				<a href="/tours/right-bank" class="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold shadow hover:bg-gray-700 transition">
-					Right-Bank Tour
+				{/* Right Bank */}
+				<a href="/tours/right-bank" class="group block w-full md:w-1/2 max-w-lg rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+					<div class="relative">
+						<img src={"/photos/place_vendome_paris.webp"} alt="Right Bank Tour" class="w-full h-72 object-cover" />
+						<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+							<span class="text-white text-3xl md:text-4xl font-bold tracking-wider drop-shadow-lg">Right Bank</span>
+						</div>
+					</div>
 				</a>
-				<WhatsAppButton />
 			</div>
 		</div>
-	</section>
-</BaseLayout>
-			</div>
-		</div>
-	</section>
-</BaseLayout>
 	</section>
 </BaseLayout>
