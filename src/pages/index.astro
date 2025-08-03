@@ -15,43 +15,42 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 	</nav>
 	
 	<section class="py-8 md:py-24 px-2 max-w-full text-lg leading-8 bg-[#ebebef] min-h-screen" style='font-family: "Montserrat", Inter, system-ui, sans-serif;'>
-		{/* Barre supérieure avec titre centré */}
-		<div class="max-w-4xl mx-auto flex items-center justify-center mb-0">
-			<h1 class="text-4xl md:text-5xl font-semibold text-center text-gray-800 m-0 p-0 drop-shadow-lg w-full">
-				Explorez Paris autrement : Plongez dans l'Histoire vivante !
+		{/* Titre principal et sous-titre */}
+		<div class="max-w-4xl mx-auto flex flex-col items-center justify-center mb-0">
+			<h1 class="text-4xl md:text-6xl font-bold text-center text-gray-800 m-0 p-0 mb-4">
+				Discover Paris differently
 			</h1>
+			<h2 class="text-xl md:text-2xl font-medium text-center text-gray-600 m-0 p-0">
+				Immersive visits about WW2 in Paris
+			</h2>
 		</div>
 		{/* Partie photo et contenu sur fond clair */}
-		<div class="flex justify-center mb-10 max-w-4xl mx-auto">
+		<div class="flex justify-center mb-4 max-w-4xl mx-auto">
 			<img 
 				src={"/photos_leo/guide-photo.webp"} 
 				alt="Guide Paris History Tours" 
 				class="rounded-xl shadow-lg max-w-full h-auto mt-8 mb-8"
 			/>
 		</div>
+		
+		{/* Séparateur ligne */}
+		<div class="flex justify-center mb-8">
+			<div class="w-32 h-1 bg-gray-400 rounded-full"></div>
+		</div>
 
-		{/* Section Welcome avec équerres */}
+		{/* Section Welcome sans équerres sur mobile */}
 		<div class="flex flex-col items-center mb-16">
 			<div class="text-3xl font-bold text-gray-700 text-center mb-8">Welcome</div>
 			<div class="relative max-w-3xl w-full mx-auto px-4">
-				{/* Équerre haut gauche */}
-				<div class="absolute -top-2 -left-2 md:-top-4 md:-left-4 w-8 h-8 md:w-12 md:h-12">
-					<svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 md:hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="0" y="0" width="24" height="4" fill="currentColor"/>
-						<rect x="0" y="0" width="4" height="24" fill="currentColor"/>
-					</svg>
-					<svg width="48" height="48" viewBox="0 0 48 48" class="text-gray-400 hidden md:block" fill="none" xmlns="http://www.w3.org/2000/svg">
+				{/* Équerres uniquement sur desktop */}
+				<div class="absolute -top-4 -left-4 w-12 h-12 hidden md:block">
+					<svg width="48" height="48" viewBox="0 0 48 48" class="text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect x="0" y="0" width="36" height="6" fill="currentColor"/>
 						<rect x="0" y="0" width="6" height="36" fill="currentColor"/>
 					</svg>
 				</div>
-				{/* Équerre bas droite */}
-				<div class="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-8 h-8 md:w-12 md:h-12">
-					<svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 md:hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="8" y="28" width="24" height="4" fill="currentColor"/>
-						<rect x="28" y="8" width="4" height="24" fill="currentColor"/>
-					</svg>
-					<svg width="48" height="48" viewBox="0 0 48 48" class="text-gray-400 hidden md:block" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<div class="absolute -bottom-4 -right-4 w-12 h-12 hidden md:block">
+					<svg width="48" height="48" viewBox="0 0 48 48" class="text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect x="12" y="42" width="36" height="6" fill="currentColor"/>
 						<rect x="42" y="12" width="6" height="36" fill="currentColor"/>
 					</svg>
@@ -122,4 +121,5 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 			</div>
 		</div>
 	</footer>
+</BaseLayout>
 </BaseLayout>
