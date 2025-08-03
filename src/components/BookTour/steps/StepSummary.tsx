@@ -1,0 +1,100 @@
+import React, { useState } from "react";
+import { useBooking } from "../BookingContext";
+
+interface Props {
+  back: () => void;
+}
+
+const StepSummary: React.FC<Props> = ({ back }) => {
+  const { booking } = useBooking();
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async () => {
+    setSending(true);
+    try {
+      // Simulate email sending
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      alert(
+        "Booking request sent successfully! We will contact you within 24 hours."
+      );
+    } catch (error) {
+      alert(
+        "Error sending booking request. Please try again or contact us directly."
+      );
+      console.error("Booking error:", error);
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  return (
+    <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 mt-6 max-w-4xl mx-auto">
+      <h3 className="text-xl font-semibold text-gray-800 mb-6">
+        Step 6: Booking Summary
+      </h3>
+
+      <div className="space-y-4 mb-8">
+        <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <span className="font-medium text-gray-700">Tour:</span>
+          <span className="text-gray-900">
+            {booking.tour === "left-bank"
+              ? "Left Bank Tour"
+              : "Right Bank Tour"}
+          </span>
+        </div>
+        <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <span className="font-medium text-gray-700">Participants:</span>
+          <span className="text-gray-900">
+            {booking.participants}{" "}
+            {booking.participants === 1 ? "person" : "people"}
+          </span>
+        </div>
+        <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <span className="font-medium text-gray-700">Tour Type:</span>
+          <span className="text-gray-900">
+            {booking.tourType === "regular" ? "Regular Tour" : "Private Tour"}
+          </span>
+        </div>
+        <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <span className="font-medium text-gray-700">Date & Time:</span>
+          <span className="text-gray-900">
+            {booking.date && formatDate(booking.date)} at {booking.time}
+          </span>
+        </div>
+        <div className="flex justify-between items-center py-2 border-b border-gray-200">
+          <span className="font-medium text-gray-700">Contact:</span>
+          <span className="text-gray-900">
+            {booking.name} ({booking.email})
+          </span>
+        </div>
+      </div>
+
+      <div className="flex gap-4 justify-center">
+        <button
+          onClick={back}
+          className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+        >
+          ← Edit Details
+        </button>
+        <button
+          onClick={handleSubmit}
+          disabled={sending}
+          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+        >
+          {sending ? "Sending..." : "Confirm and Ask for Booking"}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default StepSummary;
