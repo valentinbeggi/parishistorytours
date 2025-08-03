@@ -6,7 +6,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 
 <BaseLayout title="Paris History Tours">
 	{/* Bannière de navigation fixe */}
-	<nav class="fixed top-0 left-0 w-full bg-white/95 border-b border-gray-200 z-50 shadow-sm">
+	<nav class="hidden md:fixed top-0 left-0 w-full bg-white/95 border-b border-gray-200 z-50 shadow-sm">
 		<div class="max-w-4xl mx-auto flex items-center justify-center gap-8 py-3">
 			<a href="/tours/left-bank" class="text-gray-800 font-semibold hover:text-gray-600 transition">Left-Bank Tour</a>
 			<a href="/tours/right-bank" class="text-gray-800 font-semibold hover:text-gray-600 transition">Right-Bank Tour</a>
@@ -14,10 +14,10 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 		</div>
 	</nav>
 	
-	<section class="py-24 px-2 max-w-full text-lg leading-8 bg-[#ebebef] min-h-screen" style='font-family: "Montserrat", Inter, system-ui, sans-serif;'>
-		{/* Barre supérieure pleine largeur avec titre centré */}
-		<div class="w-full bg-gray-800 flex items-center justify-center py-0 mb-0" style="height: 120px;">
-			<h1 class="text-4xl md:text-5xl font-semibold text-center text-white m-0 p-0 drop-shadow-lg w-full">
+	<section class="py-8 md:py-24 px-2 max-w-full text-lg leading-8 bg-[#ebebef] min-h-screen" style='font-family: "Montserrat", Inter, system-ui, sans-serif;'>
+		{/* Barre supérieure avec titre centré */}
+		<div class="max-w-4xl mx-auto flex items-center justify-center mb-0">
+			<h1 class="text-4xl md:text-5xl font-semibold text-center text-gray-800 m-0 p-0 drop-shadow-lg w-full">
 				Explorez Paris autrement : Plongez dans l'Histoire vivante !
 			</h1>
 		</div>
@@ -35,7 +35,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 			<div class="text-3xl font-bold text-gray-700 text-center mb-8">Welcome</div>
 			<div class="relative max-w-3xl w-full mx-auto px-4">
 				{/* Équerre haut gauche */}
-				<div class="absolute -top-4 -left-4 w-8 h-8 md:w-12 md:h-12">
+				<div class="absolute -top-2 -left-2 md:-top-4 md:-left-4 w-8 h-8 md:w-12 md:h-12">
 					<svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 md:hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect x="0" y="0" width="24" height="4" fill="currentColor"/>
 						<rect x="0" y="0" width="4" height="24" fill="currentColor"/>
@@ -46,7 +46,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 					</svg>
 				</div>
 				{/* Équerre bas droite */}
-				<div class="absolute -bottom-4 -right-4 w-8 h-8 md:w-12 md:h-12">
+				<div class="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-8 h-8 md:w-12 md:h-12">
 					<svg width="32" height="32" viewBox="0 0 32 32" class="text-gray-400 md:hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect x="8" y="28" width="24" height="4" fill="currentColor"/>
 						<rect x="28" y="8" width="4" height="24" fill="currentColor"/>
@@ -94,4 +94,32 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 			</div>
 		</div>
 	</section>
+	{/* Footer */}
+	<footer class="w-full py-8 bg-gray-100 border-t border-gray-200 text-center text-gray-600 text-sm">
+		<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 px-4">
+			<div>
+				© {new Date().getFullYear()} Paris History Tours<br/>
+				<span class="text-xs">By Clément Daguet</span>
+			</div>
+			<div class="flex flex-col md:flex-row gap-8">
+				{/* Section Pages */}
+				<div class="flex flex-col items-center md:items-start">
+					<h4 class="font-semibold text-gray-800 mb-2">Pages</h4>
+					<div class="flex flex-col gap-2 items-center md:items-start">
+						<a href="/" class="text-gray-700 hover:text-gray-900 underline transition">Accueil</a>
+						<a href="/tours/left-bank" class="text-gray-700 hover:text-gray-900 underline transition">Left Bank</a>
+						<a href="/tours/right-bank" class="text-gray-700 hover:text-gray-900 underline transition">Right Bank</a>
+					</div>
+				</div>
+				{/* Section Contact */}
+				<div class="flex flex-col items-center md:items-start">
+					<h4 class="font-semibold text-gray-800 mb-2">Contact</h4>
+					<div class="flex flex-col gap-2 items-center md:items-start">
+						<a href="https://wa.me/33620622480" target="_blank" class="text-gray-700 hover:text-gray-900 underline transition">WhatsApp redirection</a>
+						<a href="mailto:clemdaguetschott@gmail.com" class="text-gray-700 hover:text-gray-900 underline transition">clemdaguetschott@gmail.com</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 </BaseLayout>
