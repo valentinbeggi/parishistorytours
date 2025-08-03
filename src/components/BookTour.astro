@@ -163,7 +163,7 @@ import BookingCalendar from "./BookingCalendar.tsx";
 				{/* Note explicative */}
 				<div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
 					<p class="text-sm text-blue-700">
-						<strong>Note:</strong> This is your preferred date and time. We will confirm availability and get back to you within 24 hours.
+						<strong>Note:</strong> This is your preferred date and time. We will confirm availability and get back to you within 12 hours.
 					</p>
 				</div>
 			</div>
@@ -266,43 +266,26 @@ import BookingCalendar from "./BookingCalendar.tsx";
 	// Variables globales pour stocker le tour sélectionné
 	let selectedTour: string = '';
 
+	// Function to smoothly scroll to an element
+	function scrollToElement(elementId: string, delay: number = 800) {
+		setTimeout(() => {
+			const element = document.getElementById(elementId);
+			if (element) {
+				element.scrollIntoView({ 
+					behavior: 'smooth', 
+					block: 'start',
+					inline: 'nearest'
+				});
+			}
+		}, delay);
+	}
+
 	tourOptions.forEach(option => {
 		option.addEventListener('click', () => {
 			// Stocker le tour sélectionné
 			selectedTour = (option as HTMLElement).dataset.tour || '';
 			
 			// ...existing code pour l'animation de sélection de tour...
-			tourOptions.forEach(opt => {
-				if (opt !== option) {
-					(opt as HTMLElement).style.opacity = '0';
-					(opt as HTMLElement).style.transform = 'scale(0.8)';
-					setTimeout(() => {
-						(opt as HTMLElement).style.display = 'none';
-					}, 300);
-				}
-			});
-			
-			setTimeout(() => {
-				option.classList.remove('md:w-1/2');
-				option.classList.add('max-w-sm', 'mx-auto');
-				(option as HTMLElement).style.transition = 'transform 0.6s ease-out';
-				(option as HTMLElement).style.transform = 'scale(1.05)';
-				
-				setTimeout(() => {
-					(option as HTMLElement).style.transform = 'scale(1)';
-				}, 400);
-			}, 300);
-			
-			setTimeout(() => {
-				if (selectedTourDiv) {
-					selectedTourDiv.classList.remove('hidden');
-					selectedTourDiv.style.opacity = '0';
-					selectedTourDiv.style.transition = 'opacity 0.4s ease-in';
-					setTimeout(() => {
-						selectedTourDiv.style.opacity = '1';
-					}, 50);
-				}
-			}, 700);
 			
 			setTimeout(() => {
 				if (stepParticipants) {
@@ -313,6 +296,8 @@ import BookingCalendar from "./BookingCalendar.tsx";
 						stepParticipants.style.opacity = '1';
 					}, 50);
 				}
+				// Scroll to step 2 after it appears
+				scrollToElement('step-participants', 500);
 			}, 800);
 		});
 	});
@@ -400,6 +385,8 @@ import BookingCalendar from "./BookingCalendar.tsx";
 					stepTourType.style.opacity = '1';
 				}, 50);
 			}
+			// Scroll to step 3 after it appears
+			scrollToElement('step-tour-type', 500);
 		}, 300);
 	}
 
@@ -484,6 +471,8 @@ import BookingCalendar from "./BookingCalendar.tsx";
 							stepTourType.style.opacity = '1';
 						}, 50);
 					}
+					// Scroll to step 3 after it appears
+					scrollToElement('step-tour-type', 500);
 				}, 300);
 			}
 		});
@@ -581,6 +570,8 @@ import BookingCalendar from "./BookingCalendar.tsx";
 								showBookingCalendar(selectedTour);
 							}, 50);
 						}
+						// Scroll to step 4 calendar
+						scrollToElement('step-calendar', 500);
 					} else if (tourType === 'private') {
 						// Masquer l'étape calendar si elle était visible
 						if (stepCalendar) {
@@ -593,8 +584,12 @@ import BookingCalendar from "./BookingCalendar.tsx";
 							stepDateTime.style.transition = 'opacity 0.5s ease-in';
 							setTimeout(() => {
 								stepDateTime.style.opacity = '1';
+								// Attach event listeners after the step is visible
+								attachPrivateTourListeners();
 							}, 50);
 						}
+						// Scroll to step 4 date/time
+						scrollToElement('step-date-time', 500);
 					}
 				}, 300);
 			}
@@ -676,17 +671,27 @@ import BookingCalendar from "./BookingCalendar.tsx";
 			
 			if (!isSelected) {
 				bookingData.tourType = tourType || '';
+				// Reset date and time when changing tour type
+				bookingData.date = '';
+				bookingData.time = '';
 			}
 			// ...existing code...
 		});
 	});
 
 	// Gestion des inputs pour Private Tour - afficher l'étape contact
-	const tourDateInput = document.getElementById('tour-date') as HTMLInputElement;
-	const tourTimeSelect = document.getElementById('tour-time') as HTMLSelectElement;
 	const stepContact = document.getElementById('step-contact');
 
 	function checkPrivateTourCompletion() {
+		const tourDateInput = document.getElementById('tour-date') as HTMLInputElement;
+		const tourTimeSelect = document.getElementById('tour-time') as HTMLSelectElement;
+		
+		console.log('Checking private tour completion...', {
+			tourType: bookingData.tourType,
+			date: tourDateInput?.value,
+			time: tourTimeSelect?.value
+		});
+		
 		if (bookingData.tourType === 'private') {
 			const date = tourDateInput?.value;
 			const time = tourTimeSelect?.value;
@@ -694,6 +699,8 @@ import BookingCalendar from "./BookingCalendar.tsx";
 			if (date && time) {
 				bookingData.date = date;
 				bookingData.time = time;
+				
+				console.log('Private tour data complete, showing contact step');
 				
 				setTimeout(() => {
 					if (stepContact) {
@@ -704,17 +711,66 @@ import BookingCalendar from "./BookingCalendar.tsx";
 							stepContact.style.opacity = '1';
 						}, 50);
 					}
-				}, 500);
+					// Scroll to step 5 contact
+					scrollToElement('step-contact', 500);
+				}, 300);
 			}
 		}
 	}
 
-	if (tourDateInput) {
-		tourDateInput.addEventListener('change', checkPrivateTourCompletion);
+	function attachPrivateTourListeners() {
+		const dateInput = document.getElementById('tour-date') as HTMLInputElement;
+		const timeSelect = document.getElementById('tour-time') as HTMLSelectElement;
+		
+		console.log('Attaching private tour listeners...', { dateInput, timeSelect });
+		
+		if (dateInput && timeSelect) {
+			// Remove any existing listeners first
+			dateInput.removeEventListener('change', checkPrivateTourCompletion);
+			timeSelect.removeEventListener('change', checkPrivateTourCompletion);
+			
+			// Add new listeners
+			dateInput.addEventListener('change', () => {
+				console.log('Date changed:', dateInput.value);
+				checkPrivateTourCompletion();
+			});
+			
+			timeSelect.addEventListener('change', () => {
+				console.log('Time changed:', timeSelect.value);
+				checkPrivateTourCompletion();
+			});
+		}
 	}
-	if (tourTimeSelect) {
-		tourTimeSelect.addEventListener('change', checkPrivateTourCompletion);
-	}
+
+	// Use event delegation for private tour inputs
+	document.addEventListener('change', (event) => {
+		const target = event.target as HTMLElement;
+		if (target.id === 'tour-date' || target.id === 'tour-time') {
+			console.log('Private tour input changed:', target.id, (target as HTMLInputElement).value);
+			checkPrivateTourCompletion();
+		}
+	});
+
+	// Écouter les événements du calendrier pour Regular Tour
+	window.addEventListener('dateSelected', (event: any) => {
+		if (bookingData.tourType === 'regular') {
+			bookingData.date = event.detail.date;
+			bookingData.time = event.detail.time;
+			
+			setTimeout(() => {
+				if (stepContact) {
+					stepContact.classList.remove('hidden');
+					stepContact.style.opacity = '0';
+					stepContact.style.transition = 'opacity 0.5s ease-in';
+					setTimeout(() => {
+						stepContact.style.opacity = '1';
+					}, 50);
+				}
+				// Scroll to step 5 contact
+				scrollToElement('step-contact', 500);
+			}, 300);
+		}
+	});
 
 	// Gestion des inputs de contact - afficher le récapitulatif
 	const contactNameInput = document.getElementById('contact-name') as HTMLInputElement;
@@ -741,6 +797,8 @@ import BookingCalendar from "./BookingCalendar.tsx";
 						stepSummary.style.opacity = '1';
 					}, 50);
 				}
+				// Scroll to step 6 summary
+				scrollToElement('step-summary', 500);
 			}, 500);
 		}
 	}
@@ -804,4 +862,5 @@ import BookingCalendar from "./BookingCalendar.tsx";
 			}
 		});
 	}
+</script>
 </script>
