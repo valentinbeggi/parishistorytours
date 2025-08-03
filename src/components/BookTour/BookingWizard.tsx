@@ -44,7 +44,7 @@ const Wizard: React.FC = () => {
       { number: 3, label: "Type" },
       { number: 4, label: "Date & Time" },
       { number: 5, label: "Contact" },
-      { number: 6, label: "Summary" }
+      { number: 6, label: "Summary" },
     ];
 
     return (
@@ -62,20 +62,30 @@ const Wizard: React.FC = () => {
                   }`}
                 >
                   {step > stepItem.number ? (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    <svg
+                      className="w-5 h-5"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
                     </svg>
                   ) : (
                     stepItem.number
                   )}
                 </div>
-                <span className={`text-xs mt-1 hidden sm:block ${
-                  step >= stepItem.number ? "text-gray-800" : "text-gray-500"
-                }`}>
+                <span
+                  className={`text-xs mt-1 hidden sm:block ${
+                    step >= stepItem.number ? "text-gray-800" : "text-gray-500"
+                  }`}
+                >
                   {stepItem.label}
                 </span>
               </div>
-              
+
               {/* Connector line */}
               {index < steps.length - 1 && (
                 <div
@@ -92,12 +102,14 @@ const Wizard: React.FC = () => {
   };
 
   // Step wrapper with transitions
-  const StepWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <div 
+  const StepWrapper: React.FC<{ children: React.ReactNode }> = ({
+    children,
+  }) => (
+    <div
       className={`transition-all duration-300 ease-in-out ${
-        isTransitioning 
-          ? 'opacity-0 transform translate-x-4' 
-          : 'opacity-100 transform translate-x-0'
+        isTransitioning
+          ? "opacity-0 transform translate-x-4"
+          : "opacity-100 transform translate-x-0"
       }`}
     >
       {children}
@@ -114,39 +126,37 @@ const Wizard: React.FC = () => {
           Let's organize your visit step by step
         </p>
 
-        {step === 1 && <StepTourSelection next={next} />}
-        {step === 2 && <StepParticipants next={next} back={back} />}
-        {step === 3 && <StepTourType next={next} back={back} />}
+        {step === 1 && (
+          <StepWrapper>
+            <StepTourSelection next={next} />
+          </StepWrapper>
+        )}
+        {step === 2 && (
+          <StepWrapper>
+            <StepParticipants next={next} back={back} />
+          </StepWrapper>
+        )}
+        {step === 3 && (
+          <StepWrapper>
+            <StepTourType next={next} back={back} />
+          </StepWrapper>
+        )}
         {step === 4 && (
-          <>
+          <StepWrapper>
             <StepCalendarRegular next={next} back={back} active />
             <StepDateTimePrivate next={next} back={back} active />
-          </>
+          </StepWrapper>
         )}
-        {step === 5 && <StepContact next={next} back={back} />}
-        {step === 6 && <StepSummary back={back} onRestart={() => goTo(1)} />}
-
-        <ProgressIndicator />
-      </div>
-    </BookingProvider>
-  );
-};
-
-export default Wizard;
-              <StepDateTimePrivate next={next} back={back} active />
-            </StepWrapper>
-          )}
-          {step === 5 && (
-            <StepWrapper>
-              <StepContact next={next} back={back} />
-            </StepWrapper>
-          )}
-          {step === 6 && (
-            <StepWrapper>
-              <StepSummary back={() => goTo(1)} />
-            </StepWrapper>
-          )}
-        </div>
+        {step === 5 && (
+          <StepWrapper>
+            <StepContact next={next} back={back} />
+          </StepWrapper>
+        )}
+        {step === 6 && (
+          <StepWrapper>
+            <StepSummary back={() => goTo(1)} />
+          </StepWrapper>
+        )}
 
         <ProgressIndicator />
       </div>
