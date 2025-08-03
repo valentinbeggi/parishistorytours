@@ -115,7 +115,7 @@ export default function BookingCalendar({
                 disabled={s.free === 0}
                 key={s.id}
                 onClick={() => setChosenSlot(s)}
-                className={`border rounded p-3 hover:bg-indigo-50 disabled:opacity-30`}
+                className="border rounded p-3 hover:bg-indigo-50 disabled:opacity-30"
               >
                 {time} – {s.free} places
               </button>
