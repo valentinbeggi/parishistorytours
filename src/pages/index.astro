@@ -110,7 +110,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 							rating: 5, 
 							text: "Best tour ever organized!",
 							details: "Clement is the best tour guide I have ever encountered, and I have traveled extensively for many years. He stands out for his enthusiasm and passion for his subject. He is clearly immersed in his topic, in this case French resistance during World War II. He provides a wealth of information, tells fascinating stories, and answers all questions with good humor and competence. He is a real talent, well educated, enthusiastic and humble. Join one of his tours if you get the chance!",
-							date: "15th of September 2024"
+							date: "3rd of August 2025"
 						},
 						{ 
 							name: "Anonymous", 
@@ -118,7 +118,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 							rating: 5, 
 							text: "Engaging and immersive - a must do!",
 							details: "Our tour with Clement was extraordinary! We loved every minute and could have spent hours more on his circuit. Every stop was captivating and immersive. He can answer any question about WWII Paris and brings the history to life with incredible storytelling and knowledge.",
-							date: "15th of July 2024"
+							date: "5th of July 2025"
 						},
 						{ 
 							name: "Anonymous", 
@@ -126,7 +126,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 							rating: 5, 
 							text: "Fantastic Tour",
 							details: "We did three free tours and this one was by far the best. A must for anyone interested in history. Clement was an exceptional guide with incredible knowledge and passion for the subject.",
-							date: "3rd of June 2024"
+							date: "30th of June 2025"
 						},
 						{ 
 							name: "Anonymous", 
@@ -134,7 +134,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 							rating: 5, 
 							text: "Best tour in Paris",
 							details: "Clement had incredible knowledge and passion for the tour. It started with a brief on the topic and continued with many stops filled with information. Amazing that this experience is free, the tours are perfect.",
-							date: "28th of June 2024"
+							date: "29th of June 2025"
 						}
 					].map((review, index) => (
 						<div class="min-w-full px-4">
@@ -153,7 +153,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 											</>
 										))}
 									</div>
-									<span class="text-sm text-gray-500">Rated on {review.date}</span>
+									<span class="text-sm text-gray-500">{review.date}</span>
 								</div>
 								
 								{/* Titre du commentaire */}
@@ -228,7 +228,7 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 					<span>See more reviews on Freetour.com</span>
 				</a>
 				<span class="text-gray-400 hidden md:inline">|</span>
-				<a href="https://share.google/UZ5MCgS3rtptbxOah" target="_blank" class="flex items-center gap-2 text-gray-700 hover:text-gray-900 underline transition text-sm text-center">
+				<a href="https://share.google/aW3AOcxm9fGmHUy1k" target="_blank" class="flex items-center gap-2 text-gray-700 hover:text-gray-900 underline transition text-sm text-center">
 					<img 
 						src={"/logos/Google__logo.webp"}
 						alt="Google logo" 
@@ -238,11 +238,55 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 				</a>
 			</div>
 		</div>
+
+		{/* Section Book your tour */}
+		<div class="mb-16">
+			<h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Book your tour</h2>
+			<p class="text-center text-gray-600 mb-12 text-lg">Let's organize your visit step by step</p>
+			
+			<div class="max-w-4xl mx-auto px-4">
+				{/* Étape 1: Choix du tour */}
+				<div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+					<h3 class="text-xl font-semibold text-gray-800 mb-6">Step 1: Choose your tour</h3>
+					
+					<div class="flex flex-col md:flex-row gap-6 justify-center items-center" id="tour-selection">
+						{/* Left Bank Option */}
+						<div class="tour-option w-full md:w-1/2 max-w-sm cursor-pointer transition-all duration-300" data-tour="left-bank">
+							<div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+								<img src={"/photos/pantheon_de_Paris.webp"} alt="Left Bank Tour" class="w-full h-48 object-cover" />
+								<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+									<span class="text-white text-2xl font-bold tracking-wider drop-shadow-lg">Left Bank</span>
+								</div>
+							</div>
+							<p class="text-center text-gray-600 mt-3 text-sm">Resistance & Liberation</p>
+						</div>
+						
+						{/* Right Bank Option */}
+						<div class="tour-option w-full md:w-1/2 max-w-sm cursor-pointer transition-all duration-300" data-tour="right-bank">
+							<div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+								<img src={"/photos/place_vendome_paris.webp"} alt="Right Bank Tour" class="w-full h-48 object-cover" />
+								<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+									<span class="text-white text-2xl font-bold tracking-wider drop-shadow-lg">Right Bank</span>
+								</div>
+							</div>
+							<p class="text-center text-gray-600 mt-3 text-sm">Occupation & Collaboration</p>
+						</div>
+					</div>
+					
+					{/* Tour sélectionné */}
+					<div class="hidden mt-8 text-center" id="selected-tour">
+						<button class="text-blue-500 text-sm font-medium hover:text-blue-600 transition cursor-pointer" id="change-tour">
+							← Change tour selection
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	{/* Footer */}
 	<footer class="w-full py-8 bg-gray-100 border-t border-gray-200 text-center text-gray-600 text-sm">
 		<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 px-4">
-			<div>
+			<div class="hidden md:block">
 				© {new Date().getFullYear()} Paris History Tours<br/>
 				<span class="text-xs">By Clément Daguet</span>
 			</div>
@@ -262,8 +306,13 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 					<div class="flex flex-col gap-2 items-center md:items-start">
 						<a href="https://wa.me/33620622480" target="_blank" class="text-gray-700 hover:text-gray-900 underline transition">WhatsApp redirection</a>
 						<a href="mailto:clemdaguetschott@gmail.com" class="text-gray-700 hover:text-gray-900 underline transition">clemdaguetschott@gmail.com</a>
+						<a href="https://share.google.com/aW3AOcxm9fGmHUy1k" target="_blank" class="text-gray-700 hover:text-gray-900 underline transition">Google</a>
 					</div>
 				</div>
+			</div>
+			<div class="md:hidden mt-8 pt-4 border-t border-gray-200">
+				© {new Date().getFullYear()} Paris History Tours<br/>
+				<span class="text-xs">By Clément Daguet</span>
 			</div>
 		</div>
 	</footer>
@@ -352,4 +401,46 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 
 		// Auto-défilement
 		setInterval(nextReview, 5000);
+
+		// Script pour la sélection de tour
+		const tourOptions = document.querySelectorAll('.tour-option');
+		const selectedTourDiv = document.getElementById('selected-tour');
+		const changeTourBtn = document.getElementById('change-tour');
+
+		tourOptions.forEach(option => {
+			option.addEventListener('click', () => {
+				// Masquer les autres options
+				tourOptions.forEach(opt => {
+					if (opt !== option) {
+						(opt as HTMLElement).style.display = 'none';
+					}
+				});
+				
+				// Centrer l'option sélectionnée
+				option.classList.remove('md:w-1/2');
+				option.classList.add('max-w-sm', 'mx-auto');
+				
+				// Afficher le bouton de retour
+				if (selectedTourDiv) {
+					selectedTourDiv.classList.remove('hidden');
+				}
+			});
+		});
+
+		// Bouton pour revenir en arrière
+		if (changeTourBtn) {
+			changeTourBtn.addEventListener('click', () => {
+				// Réafficher toutes les options
+				tourOptions.forEach(opt => {
+					(opt as HTMLElement).style.display = 'block';
+					opt.classList.add('md:w-1/2');
+					opt.classList.remove('max-w-sm', 'mx-auto');
+				});
+				
+				// Masquer le bouton de retour
+				if (selectedTourDiv) {
+					selectedTourDiv.classList.add('hidden');
+				}
+			});
+		}
 	</script>
