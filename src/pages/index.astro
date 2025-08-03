@@ -1,5 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Welcome from "../components/Welcome.astro";
+import ToursAvailable from "../components/ToursAvailable.astro";
+import Reviews from "../components/Reviews.astro";
+import BookTour from "../components/BookTour.astro";
 import "../styles/global.css";
 import guidePhoto from "/photos_leo/guide-photo.webp";
 ---
@@ -40,287 +44,12 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 			<div class="w-32 h-1 bg-gray-400 rounded-full"></div>
 		</div>
 
-		{/* Section Welcome sans équerres sur mobile */}
-		<div class="flex flex-col items-center mb-16">
-			<div class="text-3xl font-bold text-gray-700 text-center mb-8">Welcome</div>
-			<div class="relative max-w-3xl w-full mx-auto px-4">
-				{/* Équerres uniquement sur desktop */}
-				<div class="absolute -top-4 -left-4 w-12 h-12 hidden md:block">
-					<svg width="48" height="48" viewBox="0 0 48 48" class="text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="0" y="0" width="36" height="6" fill="currentColor"/>
-						<rect x="0" y="0" width="6" height="36" fill="currentColor"/>
-					</svg>
-				</div>
-				<div class="absolute -bottom-4 -right-4 w-12 h-12 hidden md:block">
-					<svg width="48" height="48" viewBox="0 0 48 48" class="text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="12" y="42" width="36" height="6" fill="currentColor"/>
-						<rect x="42" y="12" width="6" height="36" fill="currentColor"/>
-					</svg>
-				</div>
-				<div class="bg-transparent px-6 py-8 text-center text-lg md:text-xl text-gray-900 font-medium relative z-10">
-					<p class="mb-5">
-						I'm <strong>Clément</strong>, a passionate history enthusiast and independent tour guide.<br/>
-						I offer immersive walking tours focused on World War&nbsp;II in Paris — and soon on other topics.
-					</p>
-					<p class="text-gray-700 font-normal text-base md:text-lg">
-						Whether you're a curious traveler, a history lover, or an educator, my tours are designed to bring the past to life through stories, places, and personal insights.
-					</p>
-				</div>
-			</div>
-		</div>
-
-		{/* Section Tours available */}
-		<div class="mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Tours available</h2>
-			<p class="text-center text-gray-600 mb-12 text-lg">Here are the tours about WW2 I propose in Paris.</p>
-			<div class="flex flex-col md:flex-row gap-8 justify-center items-center max-w-5xl mx-auto px-4">
-				{/* Left Bank */}
-				<a href="/tours/left-bank" class="group block w-full md:w-1/2 max-w-lg rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
-					<div class="relative">
-						<img src={"/photos/pantheon_de_Paris.webp"} alt="Left Bank Tour" class="w-full h-72 object-cover" />
-						<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
-							<span class="text-white text-3xl md:text-4xl font-bold tracking-wider drop-shadow-lg">Left Bank</span>
-						</div>
-					</div>
-				</a>
-				{/* Right Bank */}
-				<a href="/tours/right-bank" class="group block w-full md:w-1/2 max-w-lg rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
-					<div class="relative">
-						<img src={"/photos/place_vendome_paris.webp"} alt="Right Bank Tour" class="w-full h-72 object-cover" />
-						<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
-							<span class="text-white text-3xl md:text-4xl font-bold tracking-wider drop-shadow-lg">Right Bank</span>
-						</div>
-					</div>
-				</a>
-			</div>
-		</div>
-
-		{/* Section Reviews */}
-		<div class="mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Reviews</h2>
-			<p class="text-center text-gray-600 mb-12 text-lg">What visitors say about our tours</p>
-			
-			{/* Carrousel de reviews */}
-			<div class="relative max-w-4xl mx-auto overflow-hidden">
-				<div class="flex transition-transform duration-500 ease-in-out" id="review-carousel">
-					{[
-						{ 
-							name: "Anonymous", 
-							platform: "Freetour.com", 
-							rating: 5, 
-							text: "Best tour ever organized!",
-							details: "Clement is the best tour guide I have ever encountered, and I have traveled extensively for many years. He stands out for his enthusiasm and passion for his subject. He is clearly immersed in his topic, in this case French resistance during World War II. He provides a wealth of information, tells fascinating stories, and answers all questions with good humor and competence. He is a real talent, well educated, enthusiastic and humble. Join one of his tours if you get the chance!",
-							date: "3rd of August 2025"
-						},
-						{ 
-							name: "Anonymous", 
-							platform: "Freetour.com", 
-							rating: 5, 
-							text: "Engaging and immersive - a must do!",
-							details: "Our tour with Clement was extraordinary! We loved every minute and could have spent hours more on his circuit. Every stop was captivating and immersive. He can answer any question about WWII Paris and brings the history to life with incredible storytelling and knowledge.",
-							date: "5th of July 2025"
-						},
-						{ 
-							name: "Anonymous", 
-							platform: "Freetour.com", 
-							rating: 5, 
-							text: "Fantastic Tour",
-							details: "We did three free tours and this one was by far the best. A must for anyone interested in history. Clement was an exceptional guide with incredible knowledge and passion for the subject.",
-							date: "30th of June 2025"
-						},
-						{ 
-							name: "Anonymous", 
-							platform: "Freetour.com", 
-							rating: 5, 
-							text: "Best tour in Paris",
-							details: "Clement had incredible knowledge and passion for the tour. It started with a brief on the topic and continued with many stops filled with information. Amazing that this experience is free, the tours are perfect.",
-							date: "29th of June 2025"
-						}
-					].map((review, index) => (
-						<div class="min-w-full px-4">
-							<div class="bg-white rounded-xl shadow-lg p-8 mx-auto max-w-3xl border border-gray-100 min-h-96 flex flex-col">
-								{/* Header avec étoiles et date */}
-								<div class="flex items-center justify-between mb-4 gap-4">
-									<div class="flex text-yellow-400">
-										{Array.from({ length: 5 }, (_, i) => (
-											// Move key to the fragment
-											<>
-												<span>
-													<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-													</svg>
-												</span>
-											</>
-										))}
-									</div>
-									<span class="text-sm text-gray-500">{review.date}</span>
-								</div>
-								
-								{/* Titre du commentaire */}
-								<h3 class="text-xl font-bold text-gray-800 mb-4 leading-tight">"{review.text}"</h3>
-								
-								{/* Contenu détaillé avec affichage limité */}
-								<div class="flex-1 flex flex-col overflow-hidden">
-									<div class={`text-gray-700 leading-relaxed mb-4 flex-1 review-text-${index} break-words`}>
-										<span class={`review-preview-${index}`}>
-											{review.details.length > 150 ? review.details.substring(0, 150) + "..." : review.details}
-										</span>
-										<span class={`review-full-${index} hidden`}>
-											{review.details}
-										</span>
-									</div>
-									{review.details.length > 150 && (
-										<button 
-											class={`text-blue-500 text-sm font-medium hover:text-blue-600 transition self-start mb-4 show-more-${index} cursor-pointer flex-shrink-0`}
-											onclick={`toggleReview(${index})`}
-										>
-											Show more
-										</button>
-									)}
-								</div>
-								
-								{/* Footer avec plateforme */}
-								<div class="border-t border-gray-100 pt-4 mt-auto flex-shrink-0">
-									<div class="flex items-center justify-between">
-										<div class="flex items-center gap-2">
-											<img 
-												src="/logos/Freetour_logo.png"
-												alt="Freetour logo" 
-												class="w-5 h-5 object-contain"
-											/>
-											<span class="text-sm font-medium text-gray-600">{review.platform}</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-				
-				{/* Boutons de navigation */}
-				<button id="prev-review" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition cursor-pointer">
-					<svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-					</svg>
-				</button>
-				<button id="next-review" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition cursor-pointer">
-					<svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-					</svg>
-				</button>
-				
-				{/* Indicateurs */}
-				<div class="flex justify-center mt-6 space-x-2" id="review-indicators">
-					{Array.from({ length: 4 }, (_, i) => (
-						<button class={`w-3 h-3 rounded-full transition cursor-pointer ${i === 0 ? 'bg-gray-800' : 'bg-gray-300'}`} data-index={i}></button>
-					))}
-				</div>
-			</div>
-			
-			{/* Liens vers les plateformes */}
-			<div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mt-8">
-				<a href="https://www.freetour.com/paris/second-world-war-tour-in-paris-fall-resistance-liberation" target="_blank" class="flex items-center gap-2 text-gray-700 hover:text-gray-900 underline transition text-sm text-center">
-					<img 
-						src="/logos/Freetour_logo.png"
-						alt="Freetour logo" 
-						class="w-6 h-6 object-contain"
-					/>
-					<span>See more reviews on Freetour.com</span>
-				</a>
-				<span class="text-gray-400 hidden md:inline">|</span>
-				<a href="https://share.google/aW3AOcxm9fGmHUy1k" target="_blank" class="flex items-center gap-2 text-gray-700 hover:text-gray-900 underline transition text-sm text-center">
-					<img 
-						src={"/logos/Google__logo.webp"}
-						alt="Google logo" 
-						class="w-6 h-6 object-contain"
-					/>
-					<span>Find us on Google Maps</span>
-				</a>
-			</div>
-		</div>
-
-		{/* Section Book your tour */}
-		<div class="mb-16">
-			<h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Book your tour</h2>
-			<p class="text-center text-gray-600 mb-12 text-lg">Let's organize your visit step by step</p>
-			
-			<div class="max-w-4xl mx-auto px-4">
-				{/* Étape 1: Choix du tour */}
-				<div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
-					<h3 class="text-xl font-semibold text-gray-800 mb-6">Step 1: Choose your tour</h3>
-					
-					<div class="flex flex-col md:flex-row gap-6 justify-center items-center" id="tour-selection">
-						{/* Left Bank Option */}
-						<div class="tour-option w-full md:w-1/2 max-w-sm cursor-pointer transition-all duration-300" data-tour="left-bank">
-							<div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-								<img src={"/photos/pantheon_de_Paris.webp"} alt="Left Bank Tour" class="w-full h-48 object-cover" />
-								<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-									<span class="text-white text-2xl font-bold tracking-wider drop-shadow-lg">Left Bank</span>
-								</div>
-							</div>
-							<p class="text-center text-gray-600 mt-3 text-sm">Resistance & Liberation</p>
-						</div>
-						
-						{/* Right Bank Option */}
-						<div class="tour-option w-full md:w-1/2 max-w-sm cursor-pointer transition-all duration-300" data-tour="right-bank">
-							<div class="relative rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
-								<img src={"/photos/place_vendome_paris.webp"} alt="Right Bank Tour" class="w-full h-48 object-cover" />
-								<div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-									<span class="text-white text-2xl font-bold tracking-wider drop-shadow-lg">Right Bank</span>
-								</div>
-							</div>
-							<p class="text-center text-gray-600 mt-3 text-sm">Occupation & Collaboration</p>
-						</div>
-					</div>
-					
-					{/* Tour sélectionné */}
-					<div class="hidden mt-8 text-center" id="selected-tour">
-						<button class="text-blue-500 text-sm font-medium hover:text-blue-600 transition cursor-pointer" id="change-tour">
-							← Change tour selection
-						</button>
-					</div>
-				</div>
-
-				{/* Étape 2: Nombre de personnes - Hidden by default */}
-				<div class="hidden bg-white rounded-xl shadow-lg p-8 border border-gray-100 mt-6" id="step-participants">
-					<h3 class="text-xl font-semibold text-gray-800 mb-6">Step 2: Number of participants</h3>
-					
-					<div class="space-y-4">
-						{/* Options 1-4 personnes */}
-						<div class="flex gap-3 justify-center">
-							{Array.from({ length: 4 }, (_, i) => (
-								<button 
-									class="participant-option p-3 border-2 border-gray-200 rounded-lg text-center hover:border-blue-400 hover:bg-blue-50 transition-all duration-200 cursor-pointer min-w-16"
-									data-count={i + 1}
-								>
-									<div class="text-xl font-bold text-gray-700">{i + 1}</div>
-									<div class="text-xs text-gray-500">
-										{i === 0 ? 'person' : 'people'}
-									</div>
-								</button>
-							))}
-						</div>
-
-						{/* Option "5 or more" */}
-						<div class="border-t border-gray-200 pt-4">
-							<div class="flex items-center gap-4 justify-center">
-								<span class="text-gray-700 font-medium">5 or more people:</span>
-								<select 
-									class="border border-gray-300 rounded-lg px-3 py-2 bg-white focus:border-blue-400 focus:outline-none cursor-pointer"
-									id="more-participants"
-								>
-									<option value="">Select...</option>
-									{Array.from({ length: 6 }, (_, i) => (
-										<option value={i + 5}>{i + 5} people</option>
-									))}
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<Welcome />
+		<ToursAvailable />
+		<Reviews />
+		<BookTour />
 	</section>
+	
 	{/* Footer */}
 	<footer class="w-full py-8 bg-gray-100 border-t border-gray-200 text-center text-gray-600 text-sm">
 		<div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 px-4">
@@ -354,6 +83,244 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 			</div>
 		</div>
 	</footer>
+</BaseLayout>
+
+<script>
+		// Ajout de la déclaration pour étendre l'interface Window
+		declare global {
+			interface Window {
+				toggleReview: (index: number) => void;
+			}
+		}
+
+		// Fonction pour afficher/masquer le contenu complet des reviews
+		function toggleReview(index: number) {
+			const preview = document.querySelector(`.review-preview-${index}`);
+			const full = document.querySelector(`.review-full-${index}`);
+			const button = document.querySelector(`.show-more-${index}`);
+			
+			if (!preview || !full || !button) {
+				return;
+			}
+
+			if (preview.classList.contains('hidden')) {
+				// Afficher le preview, masquer le complet
+				preview.classList.remove('hidden');
+				full.classList.add('hidden');
+				button.textContent = 'Show more';
+			} else {
+				// Afficher le complet, masquer le preview
+				preview.classList.add('hidden');
+				full.classList.remove('hidden');
+				button.textContent = 'Show less';
+			}
+		}
+
+		// Rendre la fonction globale pour qu'elle soit accessible depuis l'onclick
+		window.toggleReview = toggleReview;
+
+		// Script pour le carrousel de reviews
+		let currentReviewIndex = 0;
+		const totalReviews = 4;
+		const carousel = document.getElementById('review-carousel');
+		const indicators = document.querySelectorAll('#review-indicators button');
+		const prevBtn = document.getElementById('prev-review');
+		const nextBtn = document.getElementById('next-review');
+
+		function updateCarousel() {
+			const offset = -currentReviewIndex * 100;
+			if (carousel) {
+				carousel.style.transform = `translateX(${offset}%)`;
+			}
+			
+			// Mettre à jour les indicateurs
+			indicators.forEach((indicator, index) => {
+				indicator.classList.toggle('bg-gray-800', index === currentReviewIndex);
+				indicator.classList.toggle('bg-gray-300', index !== currentReviewIndex);
+			});
+		}
+
+		function nextReview() {
+			currentReviewIndex = (currentReviewIndex + 1) % totalReviews;
+			updateCarousel();
+		}
+
+		function prevReview() {
+			currentReviewIndex = (currentReviewIndex - 1 + totalReviews) % totalReviews;
+			updateCarousel();
+		}
+
+		// Event listeners
+		if (nextBtn) {
+			nextBtn.addEventListener('click', nextReview);
+		}
+		if (prevBtn) {
+			prevBtn.addEventListener('click', prevReview);
+		}
+
+		// Indicateurs cliquables
+		indicators.forEach((indicator, index) => {
+			indicator.addEventListener('click', () => {
+				currentReviewIndex = index;
+				updateCarousel();
+			});
+		});
+
+		// Auto-défilement
+		setInterval(nextReview, 5000);
+
+		// Script pour la sélection de tour
+		const tourOptions = document.querySelectorAll('.tour-option');
+		const selectedTourDiv = document.getElementById('selected-tour');
+		const changeTourBtn = document.getElementById('change-tour');
+		const stepParticipants = document.getElementById('step-participants');
+
+		tourOptions.forEach(option => {
+			option.addEventListener('click', () => {
+				// Masquer les autres options avec animation
+				tourOptions.forEach(opt => {
+					if (opt !== option) {
+						(opt as HTMLElement).style.opacity = '0';
+						(opt as HTMLElement).style.transform = 'scale(0.8)';
+						setTimeout(() => {
+							(opt as HTMLElement).style.display = 'none';
+						}, 300);
+					}
+				});
+				
+				// Animer l'option sélectionnée avec plus de douceur
+				setTimeout(() => {
+					option.classList.remove('md:w-1/2');
+					option.classList.add('max-w-sm', 'mx-auto');
+					(option as HTMLElement).style.transition = 'transform 0.6s ease-out';
+					(option as HTMLElement).style.transform = 'scale(1.05)';
+					
+					setTimeout(() => {
+						(option as HTMLElement).style.transform = 'scale(1)';
+					}, 400);
+				}, 300);
+				
+				// Afficher le bouton de retour avec animation
+				setTimeout(() => {
+					if (selectedTourDiv) {
+						selectedTourDiv.classList.remove('hidden');
+						selectedTourDiv.style.opacity = '0';
+						selectedTourDiv.style.transition = 'opacity 0.4s ease-in';
+						setTimeout(() => {
+							selectedTourDiv.style.opacity = '1';
+						}, 50);
+					}
+				}, 700);
+				
+				// Afficher le step 2 après la sélection du tour
+				setTimeout(() => {
+					if (stepParticipants) {
+						stepParticipants.classList.remove('hidden');
+						stepParticipants.style.opacity = '0';
+						stepParticipants.style.transition = 'opacity 0.5s ease-in';
+						setTimeout(() => {
+							stepParticipants.style.opacity = '1';
+						}, 50);
+					}
+				}, 800);
+			});
+		});
+
+		// Bouton pour revenir en arrière
+		if (changeTourBtn) {
+			changeTourBtn.addEventListener('click', () => {
+				// Masquer le bouton de retour
+				if (selectedTourDiv) {
+					selectedTourDiv.style.opacity = '0';
+					setTimeout(() => {
+						selectedTourDiv.classList.add('hidden');
+					}, 200);
+				}
+				
+				// Réafficher toutes les options avec animation
+				tourOptions.forEach(opt => {
+					(opt as HTMLElement).style.display = 'block';
+					(opt as HTMLElement).style.opacity = '0';
+					(opt as HTMLElement).style.transform = 'scale(0.8)';
+					opt.classList.add('md:w-1/2');
+					opt.classList.remove('max-w-sm', 'mx-auto');
+					
+					setTimeout(() => {
+						(opt as HTMLElement).style.opacity = '1';
+						(opt as HTMLElement).style.transform = 'scale(1)';
+					}, 100);
+				});
+				
+				// Masquer le step 2
+				if (stepParticipants) {
+					stepParticipants.style.opacity = '0';
+					setTimeout(() => {
+						stepParticipants.classList.add('hidden');
+					}, 200);
+				}
+			});
+		}
+
+		// Script pour la sélection du nombre de participants
+		const participantOptions = document.querySelectorAll('.participant-option');
+		const moreParticipantsSelect = document.getElementById('more-participants') as HTMLSelectElement;
+
+		function selectParticipantCount(count: number) {
+			// Réinitialiser tous les styles
+			participantOptions.forEach(opt => {
+				opt.classList.remove('border-blue-500', 'bg-blue-600', 'text-white');
+				opt.classList.add('border-gray-200', 'opacity-50');
+				const numberDiv = opt.querySelector('div:first-child');
+				const textDiv = opt.querySelector('div:last-child');
+				if (numberDiv) numberDiv.classList.remove('text-white');
+				if (textDiv) textDiv.classList.remove('text-white');
+			});
+
+			if (moreParticipantsSelect) {
+				moreParticipantsSelect.value = '';
+			}
+		}
+
+		// Event listeners pour les boutons 1-4
+		participantOptions.forEach(option => {
+			option.addEventListener('click', () => {
+				const count = parseInt((option as HTMLElement).dataset.count || '0');
+				
+				// Réinitialiser d'abord
+				selectParticipantCount(count);
+				
+				// Mettre en surbrillance l'option sélectionnée
+				option.classList.remove('border-gray-200', 'opacity-50');
+				option.classList.add('border-blue-500', 'bg-blue-600', 'text-white');
+				
+				const numberDiv = option.querySelector('div:first-child');
+				const textDiv = option.querySelector('div:last-child');
+				if (numberDiv) numberDiv.classList.add('text-white');
+				if (textDiv) textDiv.classList.add('text-white');
+			});
+		});
+
+		// Event listener pour le select "5 or more"
+		if (moreParticipantsSelect) {
+			moreParticipantsSelect.addEventListener('change', () => {
+				const count = parseInt(moreParticipantsSelect.value);
+				if (count) {
+					// Réinitialiser les boutons 1-4
+					participantOptions.forEach(opt => {
+						opt.classList.remove('border-blue-500', 'bg-blue-600', 'text-white');
+						opt.classList.add('border-gray-200', 'opacity-50');
+						const numberDiv = opt.querySelector('div:first-child');
+						const textDiv = opt.querySelector('div:last-child');
+						if (numberDiv) numberDiv.classList.remove('text-white');
+						if (textDiv) textDiv.classList.remove('text-white');
+					});
+				}
+			});
+		}
+	</script>
+			</div>
+		</div>
+	</section>
 </BaseLayout>
 
 <script>

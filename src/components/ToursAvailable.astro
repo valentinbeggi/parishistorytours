@@ -1,0 +1,29 @@
+---
+// Aucune logique nécessaire pour ce composant
+---
+
+{/* Section Tours available */}
+<div class="mb-16">
+	<h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">Tours available</h2>
+	<p class="text-center text-gray-600 mb-12 text-lg">Here are the tours about WW2 I propose in Paris.</p>
+	<div class="flex flex-col md:flex-row gap-8 justify-center items-center max-w-5xl mx-auto px-4">
+		{/* Left Bank */}
+		<a href="/tours/left-bank" class="group block w-full md:w-1/2 max-w-lg rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+			<div class="relative">
+				<img src={"/photos/pantheon_de_Paris.webp"} alt="Left Bank Tour" class="w-full h-72 object-cover" />
+				<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+					<span class="text-white text-3xl md:text-4xl font-bold tracking-wider drop-shadow-lg">Left Bank</span>
+				</div>
+			</div>
+		</a>
+		{/* Right Bank */}
+		<a href="/tours/right-bank" class="group block w-full md:w-1/2 max-w-lg rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-105">
+			<div class="relative">
+				<img src={"/photos/place_vendome_paris.webp"} alt="Right Bank Tour" class="w-full h-72 object-cover" />
+				<div class="absolute inset-0 bg-black/30 flex items-center justify-center">
+					<span class="text-white text-3xl md:text-4xl font-bold tracking-wider drop-shadow-lg">Right Bank</span>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
