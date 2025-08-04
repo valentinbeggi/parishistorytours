@@ -2,21 +2,34 @@ import React, { useState } from "react";
 import { useBooking } from "../BookingContext";
 
 interface Props {
-  back: () => void;
+  back?: () => void;
+  onEditDetails?: () => void;
 }
 
-const StepSummary: React.FC<Props> = ({ back }) => {
+const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
   const { booking } = useBooking();
   const [sending, setSending] = useState(false);
 
   const handleSubmit = async () => {
     setSending(true);
     try {
-      // Simulate email sending
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      alert(
-        "Booking request sent successfully! We will contact you within 24 hours."
-      );
+      const response = await fetch('/api/booking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(booking),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert(
+          "Booking request sent successfully! Check your email for confirmation. We will contact you within 24 hours."
+        );
+      } else {
+        throw new Error(result.error || 'Failed to send booking');
+      }
     } catch (error) {
       alert(
         "Error sending booking request. Please try again or contact us directly."
@@ -37,7 +50,7 @@ const StepSummary: React.FC<Props> = ({ back }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 mt-6 max-w-4xl mx-auto">
+    <div>
       <h3 className="text-xl font-semibold text-gray-800 mb-6">
         Step 6: Booking Summary
       </h3>
@@ -80,7 +93,7 @@ const StepSummary: React.FC<Props> = ({ back }) => {
 
       <div className="flex gap-4 justify-center">
         <button
-          onClick={back}
+          onClick={onEditDetails || back}
           className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
         >
           ← Edit Details

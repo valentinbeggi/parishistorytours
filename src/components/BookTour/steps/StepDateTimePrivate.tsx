@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useBooking } from "../BookingContext";
 
 interface Props {
@@ -9,19 +9,19 @@ interface Props {
 
 const StepDateTimePrivate: React.FC<Props> = ({ next, back, active }) => {
   const { booking, setBooking } = useBooking();
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  // Utiliser directement les valeurs du contexte
+  const date = booking.date || "";
+  const time = booking.time || "";
 
   if (!active || booking.tourType !== "private") return null;
 
-  const ready = !!date && !!time;
+  const updateDate = (value: string) => {
+    setBooking({ ...booking, date: value });
+  };
 
-  useEffect(() => {
-    if (ready) {
-      setBooking({ ...booking, date, time });
-      setTimeout(next, 500);
-    }
-  }, [date, time, ready]);
+  const updateTime = (value: string) => {
+    setBooking({ ...booking, time: value });
+  };
 
   const timeOptions = [
     "08:00",
@@ -45,7 +45,7 @@ const StepDateTimePrivate: React.FC<Props> = ({ next, back, active }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 mt-6 max-w-4xl mx-auto">
+    <div>
       <h3 className="text-xl font-semibold text-gray-800 mb-6">
         Step 4: Choose your preferred date and time
       </h3>
@@ -64,7 +64,7 @@ const StepDateTimePrivate: React.FC<Props> = ({ next, back, active }) => {
             className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:border-blue-400 focus:outline-none"
             min={new Date().toISOString().split("T")[0]}
             value={date}
-            onChange={(e) => setDate(e.target.value)}
+            onChange={(e) => updateDate(e.target.value)}
           />
         </div>
 
@@ -79,7 +79,7 @@ const StepDateTimePrivate: React.FC<Props> = ({ next, back, active }) => {
             id="tour-time"
             className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:border-blue-400 focus:outline-none"
             value={time}
-            onChange={(e) => setTime(e.target.value)}
+            onChange={(e) => updateTime(e.target.value)}
           >
             <option value="">Select a time...</option>
             {timeOptions.map((timeValue) => (
@@ -98,14 +98,7 @@ const StepDateTimePrivate: React.FC<Props> = ({ next, back, active }) => {
         </div>
       </div>
 
-      <div className="mt-6 text-center">
-        <button
-          onClick={back}
-          className="text-blue-500 text-sm font-medium hover:text-blue-600 transition cursor-pointer"
-        >
-          ← Back
-        </button>
-      </div>
+      {/* Supprimer le bouton back */}
     </div>
   );
 };

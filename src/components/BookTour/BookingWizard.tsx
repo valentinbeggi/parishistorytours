@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { BookingProvider } from "./BookingContext";
+import ProgressIndicator from "./components/ProgressIndicator";
+import StepWrapper from "./components/StepWrapper";
 import StepTourSelection from "./steps/StepTourSelection";
 import StepParticipants from "./steps/StepParticipants";
 import StepTourType from "./steps/StepTourType";
@@ -28,140 +30,113 @@ const Wizard: React.FC = () => {
     }, 300);
   };
 
-  const goTo = (i: number) => {
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setStep(i);
-      setIsTransitioning(false);
-    }, 300);
+  const renderStep = () => {
+    const stepProps = {
+      isTransitioning,
+      onNext: step < 6 ? next : undefined,
+      onBack: step > 1 ? back : undefined,
+    };
+
+    switch (step) {
+      case 1:
+        return (
+          <StepWrapper
+            {...stepProps}
+            nextLabel="Select Tour"
+            showBack={false}
+            validationKey="tour"
+            validationMessage="Please select a tour"
+          >
+            <StepTourSelection />
+          </StepWrapper>
+        );
+      case 2:
+        return (
+          <StepWrapper
+            {...stepProps}
+            nextLabel="Confirm Participants"
+            validationKey="participants"
+            validationMessage="Please choose the number of participants"
+          >
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              Step 2: Number of participants
+            </h3>
+            <StepParticipants />
+          </StepWrapper>
+        );
+      case 3:
+        return (
+          <StepWrapper
+            {...stepProps}
+            nextLabel="Select Tour Type"
+            validationKey="tourType"
+            validationMessage="Please choose a tour type"
+          >
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              Step 3: Choose your tour type
+            </h3>
+            <StepTourType />
+          </StepWrapper>
+        );
+      case 4:
+        return (
+          <StepWrapper
+            {...stepProps}
+            nextLabel="Set Date/Time"
+            validationKey="dateTime"
+            validationMessage="Please choose a date and time"
+          >
+            <StepCalendarRegular active={true} />
+            <StepDateTimePrivate active={true} />
+          </StepWrapper>
+        );
+      case 5:
+        return (
+          <StepWrapper
+            {...stepProps}
+            nextLabel="Review Booking"
+            validationKey="contact"
+            validationMessage="Please fill in your name and email"
+          >
+            <StepContact />
+          </StepWrapper>
+        );
+      case 6:
+        return (
+          <StepWrapper {...stepProps} showBack={false}>
+            <StepSummary onEditDetails={() => setStep(5)} />
+            <div className="mt-6 flex gap-4 justify-center"></div>
+          </StepWrapper>
+        );
+      default:
+        return null;
+    }
   };
-
-  // Progress indicator component
-  const ProgressIndicator = () => {
-    const steps = [
-      { number: 1, label: "Tour" },
-      { number: 2, label: "Participants" },
-      { number: 3, label: "Type" },
-      { number: 4, label: "Date & Time" },
-      { number: 5, label: "Contact" },
-      { number: 6, label: "Summary" },
-    ];
-
-    return (
-      <div className="mt-8">
-        <div className="flex items-center justify-center">
-          {steps.map((stepItem, index) => (
-            <React.Fragment key={stepItem.number}>
-              {/* Step circle */}
-              <div className="flex flex-col items-center">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors duration-200 ${
-                    step >= stepItem.number
-                      ? "bg-gray-800 text-white"
-                      : "bg-gray-200 text-gray-500"
-                  }`}
-                >
-                  {step > stepItem.number ? (
-                    <svg
-                      className="w-5 h-5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  ) : (
-                    stepItem.number
-                  )}
-                </div>
-                <span
-                  className={`text-xs mt-1 hidden sm:block ${
-                    step >= stepItem.number ? "text-gray-800" : "text-gray-500"
-                  }`}
-                >
-                  {stepItem.label}
-                </span>
-              </div>
-
-              {/* Connector line */}
-              {index < steps.length - 1 && (
-                <div
-                  className={`h-0.5 w-8 sm:w-12 mx-2 transition-colors duration-200 ${
-                    step > stepItem.number ? "bg-gray-800" : "bg-gray-200"
-                  }`}
-                />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  // Step wrapper with transitions
-  const StepWrapper: React.FC<{ children: React.ReactNode }> = ({
-    children,
-  }) => (
-    <div
-      className={`transition-all duration-300 ease-in-out ${
-        isTransitioning
-          ? "opacity-0 transform translate-x-4"
-          : "opacity-100 transform translate-x-0"
-      }`}
-    >
-      {children}
-    </div>
-  );
 
   return (
+    <div className="max-w-4xl mx-auto px-4">
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">
+        Book your tour
+      </h2>
+      <p className="text-center text-gray-600 mb-12 text-lg">
+        Let's organize your visit step by step
+      </p>
+
+      <ProgressIndicator currentStep={step} />
+
+      <div className="min-h-[400px] mt-8">{renderStep()}</div>
+    </div>
+  );
+};
+
+const BookingWizard: React.FC = () => {
+  return (
     <BookingProvider>
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-800">
-          Book your tour
-        </h2>
-        <p className="text-center text-gray-600 mb-12 text-lg">
-          Let's organize your visit step by step
-        </p>
-
-        {step === 1 && (
-          <StepWrapper>
-            <StepTourSelection next={next} />
-          </StepWrapper>
-        )}
-        {step === 2 && (
-          <StepWrapper>
-            <StepParticipants next={next} back={back} />
-          </StepWrapper>
-        )}
-        {step === 3 && (
-          <StepWrapper>
-            <StepTourType next={next} back={back} />
-          </StepWrapper>
-        )}
-        {step === 4 && (
-          <StepWrapper>
-            <StepCalendarRegular next={next} back={back} active />
-            <StepDateTimePrivate next={next} back={back} active />
-          </StepWrapper>
-        )}
-        {step === 5 && (
-          <StepWrapper>
-            <StepContact next={next} back={back} />
-          </StepWrapper>
-        )}
-        {step === 6 && (
-          <StepWrapper>
-            <StepSummary back={() => goTo(1)} />
-          </StepWrapper>
-        )}
-
-        <ProgressIndicator />
-      </div>
+      <Wizard />
     </BookingProvider>
   );
 };
 
-export default Wizard;
+export default BookingWizard;
+
+
