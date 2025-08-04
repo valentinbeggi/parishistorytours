@@ -91,22 +91,20 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
         </div>
       </div>
 
-      <div className="flex gap-4 justify-center">
-        <button
-          onClick={onEditDetails || back}
-          className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-        >
-          ← Edit Details
-        </button>
-      </div>
-
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center gap-4">
         <button
           onClick={handleSubmit}
           disabled={sending}
-          className="px-4 py-2 rounded-md font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 text-sm md:text-base"
+          className="px-4 py-2 rounded-md font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 text-sm md:text-base w-40"
         >
           {sending ? "Sending..." : "Confirm"}
+        </button>
+        
+        <button
+          onClick={onEditDetails || back}
+          className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+        >
+          ← Back to details
         </button>
       </div>
     </div>

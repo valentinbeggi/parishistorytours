@@ -23,7 +23,7 @@ const StepWrapper: React.FC<StepWrapperProps> = ({
   validationMessage
 }) => {
   const { booking } = useBooking();
-  const [showError, setShowError] = useState(false);
+  const [attempted, setAttempted] = useState(false);
 
   const isStepValid = () => {
     if (!validationKey) return true;
@@ -45,11 +45,9 @@ const StepWrapper: React.FC<StepWrapperProps> = ({
   };
 
   const handleNext = () => {
+    setAttempted(true);
     if (isStepValid()) {
-      setShowError(false);
       onNext && onNext();
-    } else {
-      setShowError(true);
     }
   };
 
@@ -73,7 +71,8 @@ const StepWrapper: React.FC<StepWrapperProps> = ({
           </div>
 
           <div className="flex flex-col items-end gap-2">
-            {!isStepValid() && validationMessage && (
+            {/* Afficher le message d'erreur uniquement après une tentative */}
+            {attempted && !isStepValid() && validationMessage && (
               <span className="text-sm text-red-500 text-right">
                 {validationMessage}
               </span>

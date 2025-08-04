@@ -89,9 +89,7 @@ const Wizard: React.FC = () => {
             validationKey="dateTime"
             validationMessage="Please choose a date and time"
           >
-            <h3 className="text-xl font-semibold text-gray-800 mb-6">
-              Step 4: Choose a date
-            </h3>
+
             <StepCalendarRegular active={true} />
             <StepDateTimePrivate active={true} />
           </StepWrapper>
@@ -104,9 +102,6 @@ const Wizard: React.FC = () => {
             validationKey="contact"
             validationMessage="Please fill in your name and email"
           >
-            <h3 className="text-xl font-semibold text-gray-800 mb-6">
-              Step 5: Contact Information
-            </h3>
             <StepContact />
           </StepWrapper>
         );
