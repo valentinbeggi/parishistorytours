@@ -18,10 +18,12 @@ export const POST: APIRoute = async ({ request }) => {
         tour_type: bookingData.tourType,
         date: bookingData.date,
         time: bookingData.time,
+        session_id: bookingData.sessionId, // Pour les tours réguliers
+        price: bookingData.price, // Prix total
         name: bookingData.name,
         email: bookingData.email,
         phone: bookingData.phone,
-        status: 'pending',
+        status: bookingData.status || 'pending',
         created_at: new Date().toISOString()
       }])
       .select()
@@ -35,19 +37,23 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // Envoyer email de confirmation au client
+    // Email de confirmation adapté selon le type de tour
     const clientEmailHtml = `
-      <h2>Booking Confirmation - Paris History Tours</h2>
+      <h2>Booking ${bookingData.tourType === 'regular' ? 'Payment' : 'Confirmation'} - Paris History Tours</h2>
       <p>Dear ${bookingData.name},</p>
-      <p>Thank you for your booking request! Here are the details:</p>
+      <p>Thank you for your booking ${bookingData.tourType === 'regular' ? 'and payment' : 'request'}! Here are the details:</p>
       <ul>
         <li><strong>Tour:</strong> ${bookingData.tour === 'left-bank' ? 'Left Bank Tour' : 'Right Bank Tour'}</li>
         <li><strong>Participants:</strong> ${bookingData.participants} ${bookingData.participants === 1 ? 'person' : 'people'}</li>
         <li><strong>Type:</strong> ${bookingData.tourType === 'regular' ? 'Regular Tour' : 'Private Tour'}</li>
         <li><strong>Date:</strong> ${new Date(bookingData.date).toLocaleDateString()}</li>
         <li><strong>Time:</strong> ${bookingData.time}</li>
+        ${bookingData.price ? `<li><strong>Total Paid:</strong> €${bookingData.price}</li>` : ''}
       </ul>
-      <p>We will confirm availability and contact you within 24 hours.</p>
+      <p>${bookingData.tourType === 'regular' 
+        ? 'Your booking is confirmed! We will send you meeting point details 24 hours before the tour.' 
+        : 'We will confirm availability and contact you within 24 hours.'
+      }</p>
       <p>Best regards,<br>Paris History Tours Team</p>
     `;
 

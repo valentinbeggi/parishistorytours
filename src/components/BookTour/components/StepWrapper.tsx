@@ -36,7 +36,11 @@ const StepWrapper: React.FC<StepWrapperProps> = ({
       case "tourType":
         return booking.tourType && booking.tourType !== "";
       case "dateTime":
-        return booking.date && booking.time && booking.date !== "" && booking.time !== "";
+        if (booking.tourType === "regular") {
+          return booking.sessionId && booking.sessionId !== "";
+        } else {
+          return booking.date && booking.time && booking.date !== "" && booking.time !== "";
+        }
       case "contact":
         return booking.name && booking.email && booking.name !== "" && booking.email !== "";
       default:

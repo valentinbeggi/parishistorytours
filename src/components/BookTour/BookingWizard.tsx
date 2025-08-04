@@ -87,9 +87,8 @@ const Wizard: React.FC = () => {
             {...stepProps}
             nextLabel="Next"
             validationKey="dateTime"
-            validationMessage="Please choose a date and time"
+            validationMessage="Please choose a session"
           >
-
             <StepCalendarRegular active={true} />
             <StepDateTimePrivate active={true} />
           </StepWrapper>
