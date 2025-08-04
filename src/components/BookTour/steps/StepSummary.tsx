@@ -98,12 +98,15 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
         >
           ← Edit Details
         </button>
+      </div>
+
+      <div className="flex justify-center">
         <button
           onClick={handleSubmit}
           disabled={sending}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+          className="px-4 py-2 rounded-md font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:opacity-50 text-sm md:text-base"
         >
-          {sending ? "Sending..." : "Confirm and Ask for Booking"}
+          {sending ? "Sending..." : "Confirm"}
         </button>
       </div>
     </div>

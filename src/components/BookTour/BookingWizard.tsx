@@ -42,11 +42,14 @@ const Wizard: React.FC = () => {
         return (
           <StepWrapper
             {...stepProps}
-            nextLabel="Select Tour"
+            nextLabel="Next"
             showBack={false}
             validationKey="tour"
             validationMessage="Please select a tour"
           >
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              Step 1: Choose your tour
+            </h3>
             <StepTourSelection />
           </StepWrapper>
         );
@@ -54,7 +57,7 @@ const Wizard: React.FC = () => {
         return (
           <StepWrapper
             {...stepProps}
-            nextLabel="Confirm Participants"
+            nextLabel="Next"
             validationKey="participants"
             validationMessage="Please choose the number of participants"
           >
@@ -68,7 +71,7 @@ const Wizard: React.FC = () => {
         return (
           <StepWrapper
             {...stepProps}
-            nextLabel="Select Tour Type"
+            nextLabel="Next"
             validationKey="tourType"
             validationMessage="Please choose a tour type"
           >
@@ -82,10 +85,13 @@ const Wizard: React.FC = () => {
         return (
           <StepWrapper
             {...stepProps}
-            nextLabel="Set Date/Time"
+            nextLabel="Next"
             validationKey="dateTime"
             validationMessage="Please choose a date and time"
           >
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              Step 4: Choose a date
+            </h3>
             <StepCalendarRegular active={true} />
             <StepDateTimePrivate active={true} />
           </StepWrapper>
@@ -94,10 +100,13 @@ const Wizard: React.FC = () => {
         return (
           <StepWrapper
             {...stepProps}
-            nextLabel="Review Booking"
+            nextLabel="Next"
             validationKey="contact"
             validationMessage="Please fill in your name and email"
           >
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              Step 5: Contact Information
+            </h3>
             <StepContact />
           </StepWrapper>
         );
@@ -105,7 +114,6 @@ const Wizard: React.FC = () => {
         return (
           <StepWrapper {...stepProps} showBack={false}>
             <StepSummary onEditDetails={() => setStep(5)} />
-            <div className="mt-6 flex gap-4 justify-center"></div>
           </StepWrapper>
         );
       default:

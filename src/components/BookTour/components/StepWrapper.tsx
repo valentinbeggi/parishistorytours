@@ -65,25 +65,25 @@ const StepWrapper: React.FC<StepWrapperProps> = ({
             {showBack && onBack && (
               <button
                 onClick={onBack}
-                className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 transition-colors text-sm md:text-base"
               >
-                ← Previous Step
+                Back
               </button>
             )}
           </div>
 
           <div className="flex flex-col items-end gap-2">
-            {showError && !isStepValid() && validationMessage && (
+            {!isStepValid() && validationMessage && (
               <span className="text-sm text-red-500 text-right">
                 {validationMessage}
               </span>
             )}
             
-            <div className="flex justify-center flex-1">
+            <div>
               {onNext && (
                 <button
                   onClick={handleNext}
-                  className="px-6 py-2 rounded-lg font-medium transition-colors cursor-pointer bg-blue-600 text-white hover:bg-blue-700"
+                  className="px-4 py-2 rounded-md font-medium transition-colors cursor-pointer bg-blue-600 text-white hover:bg-blue-700 text-sm md:text-base"
                 >
                   {nextLabel}
                 </button>
