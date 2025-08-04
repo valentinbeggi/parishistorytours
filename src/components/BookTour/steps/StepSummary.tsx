@@ -12,67 +12,28 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
 
   const handleSubmit = async () => {
     setSending(true);
-    try {
-      if (booking.tourType === "regular") {
-        // Pour les tours réguliers, rediriger directement vers Stripe
-        const stripeUrl =
-          booking.tour === "left-bank"
-            ? "https://buy.stripe.com/7sI6qKfcI4qrfYscMM"
-            : "https://buy.stripe.com/YOUR_RIGHT_BANK_STRIPE_URL"; // À remplacer par l'URL Stripe du Right Bank
-
-        // Ajouter la quantité à l'URL Stripe
-        const urlWithQuantity = `${stripeUrl}?quantity=${booking.participants}`;
-
-        // Optionnel: Essayer de sauvegarder la réservation, mais continuer même si ça échoue
-        try {
-          await fetch("/api/booking", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              ...booking,
-              status: "pending_payment",
-            }),
-          });
-        } catch (apiError) {
-          console.log("API not available, proceeding to payment:", apiError);
-        }
-
-        // Rediriger vers Stripe avec la quantité
-        window.location.href = urlWithQuantity;
-        return; // Important: sortir de la fonction après la redirection
-      } else {
-        // Pour les tours privés, traitement existant
-        const response = await fetch("/api/booking", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(booking),
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-          alert(
-            "Booking request sent successfully! Check your email for confirmation. We will contact you within 24 hours."
-          );
-        } else {
-          throw new Error(result.error || "Failed to send booking");
-        }
-      }
-    } catch (error) {
-      // Cette erreur ne devrait se produire que pour les tours privés
-      if (booking.tourType !== "regular") {
-        alert(
-          "Error sending booking request. Please try again or contact us directly."
-        );
-        console.error("Booking error:", error);
-      }
-    } finally {
-      setSending(false);
+    
+    if (booking.tourType === "regular") {
+      // Liens séparés selon le nombre de participants (si nécessaire)
+      const paymentLinks: { [key: string]: string } = {
+        "1": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=1",
+        "2": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=2",
+        "3": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=3",
+        "4": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=4"
+      };
+      
+      const url = paymentLinks[String(booking.participants)] || `https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=${booking.participants}`;
+      
+      console.log("Participants:", booking.participants, "URL:", url);
+      window.location.href = url;
+    } else {
+      // Pour les tours privés
+      alert(
+        "Thank you for your private tour request! We will contact you within 24 hours to confirm availability and payment details."
+      );
     }
+    
+    setSending(false);
   };
 
   const formatDate = (dateStr: string) => {
