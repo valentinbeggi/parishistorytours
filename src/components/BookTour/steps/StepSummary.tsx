@@ -27,10 +27,31 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
       console.log("Participants:", booking.participants, "URL:", url);
       window.location.href = url;
     } else {
-      // Pour les tours privés
-      alert(
-        "Thank you for your private tour request! We will contact you within 24 hours to confirm availability and payment details."
-      );
+      // Pour les tours privés, sauvegarder en base ET envoyer email
+      try {
+        const response = await fetch('/api/booking', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(booking),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert(
+            "Thank you for your private tour request! Your request has been saved and we will contact you within 24 hours to confirm availability and payment details."
+          );
+        } else {
+          throw new Error(result.error || 'Failed to submit request');
+        }
+      } catch (error) {
+        alert(
+          "Error submitting your request. Please try again or contact us directly."
+        );
+        console.error("Private tour booking error:", error);
+      }
     }
     
     setSending(false);

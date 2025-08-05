@@ -6,8 +6,38 @@ import { supabase } from '../../lib/supabase';
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: APIRoute = async ({ request }) => {
+  console.log('API booking called');
+  
   try {
     const bookingData = await request.json();
+    console.log('Received booking data:', bookingData);
+    
+    // Test de connexion Supabase
+    const { data: testData, error: testError } = await supabase
+      .from('bookings')
+      .select('count')
+      .limit(1);
+    
+    if (testError) {
+      console.error('Supabase connection error:', testError);
+      return new Response(JSON.stringify({ 
+        error: 'Database connection failed',
+        details: testError.message 
+      }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
+    console.log('Supabase connection OK');
+
+    // Validation des données
+    if (!bookingData.name || !bookingData.email || !bookingData.tour) {
+      return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
     
     // Sauvegarder la réservation en base de données
     const { data: booking, error: dbError } = await supabase
@@ -18,24 +48,28 @@ export const POST: APIRoute = async ({ request }) => {
         tour_type: bookingData.tourType,
         date: bookingData.date,
         time: bookingData.time,
-        session_id: bookingData.sessionId, // Pour les tours réguliers
-        price: bookingData.price, // Prix total
+        session_id: bookingData.sessionId, // null pour les tours privés
+        price: bookingData.price, // en centimes
         name: bookingData.name,
         email: bookingData.email,
-        phone: bookingData.phone,
-        status: bookingData.status || 'pending',
-        created_at: new Date().toISOString()
+        phone: bookingData.phone || null,
+        status: bookingData.tourType === 'regular' ? 'confirmed' : 'pending'
       }])
       .select()
       .single();
 
     if (dbError) {
       console.error('Database error:', dbError);
-      return new Response(JSON.stringify({ error: 'Failed to save booking' }), {
+      return new Response(JSON.stringify({ 
+        error: 'Failed to save booking',
+        details: dbError.message 
+      }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' }
       });
     }
+
+    console.log('Booking saved successfully:', booking.id);
 
     // Email de confirmation adapté selon le type de tour
     const clientEmailHtml = `
@@ -57,13 +91,20 @@ export const POST: APIRoute = async ({ request }) => {
       <p>Best regards,<br>Paris History Tours Team</p>
     `;
 
-    // Email au client
-    await resend.emails.send({
-      from: 'bookings@parishistorytours.com', // Votre domaine vérifié
-      to: bookingData.email,
-      subject: 'Booking Confirmation - Paris History Tours',
-      html: clientEmailHtml,
-    });
+    try {
+      // Email au client
+      await resend.emails.send({
+        from: 'bookings@parishistorytours.com',
+        to: bookingData.email,
+        subject: 'Booking Confirmation - Paris History Tours',
+        html: clientEmailHtml,
+      });
+      
+      console.log('Email sent successfully to:', bookingData.email);
+    } catch (emailError) {
+      console.log('Email failed (DNS validation pending):', emailError);
+      // Ne pas bloquer le processus de réservation pour les erreurs d'email
+    }
 
     // Envoyer email de notification à l'équipe
     const adminEmailHtml = `
@@ -88,7 +129,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     return new Response(JSON.stringify({ 
       success: true, 
-      bookingId: booking.id 
+      bookingId: booking.id,
+      message: bookingData.tourType === 'private' 
+        ? 'Private tour request submitted successfully'
+        : 'Regular tour booking confirmed'
     }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
@@ -96,7 +140,10 @@ export const POST: APIRoute = async ({ request }) => {
 
   } catch (error) {
     console.error('Booking error:', error);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
+    return new Response(JSON.stringify({ 
+      error: 'Internal server error',
+      details: error.message 
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     });
