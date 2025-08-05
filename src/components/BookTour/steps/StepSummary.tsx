@@ -29,7 +29,7 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
     } else {
       // Pour les tours privés, sauvegarder en base ET envoyer email
       try {
-        const response = await fetch('/api/booking', {
+        const response = await fetch('/api/booking', { // Remis sur booking
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
