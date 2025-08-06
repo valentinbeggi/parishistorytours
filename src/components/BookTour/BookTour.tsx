@@ -410,13 +410,3 @@ import BookTour from "../../components/BookTour.astro";
   // Auto-play topics carousel
   setInterval(nextTopic, 5000);
 </script>
-        // Swipe left - next
-        currentTopicIndex = (currentTopicIndex + 1) % totalTopics;
-      }
-      updateTopicsCarousel();
-    }
-  }
-
-  // Auto-play topics carousel
-  setInterval(nextTopic, 5000);
-</script>

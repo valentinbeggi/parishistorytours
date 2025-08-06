@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useBooking } from "../BookingContext";
 
 interface Props {
-  next: () => void;
-  back: () => void;
+  next?: () => void;
+  back?: () => void; // Make back optional
 }
 
 const StepParticipants: React.FC<Props> = ({ next, back }) => {
@@ -26,8 +26,8 @@ const StepParticipants: React.FC<Props> = ({ next, back }) => {
   };
 
   return (
-    <div className="space-y-4">
-      {/* Supprimer le titre dupliqué */}
+    <div>
+
 
       {/* Options 1-4 personnes */}
       <div className="flex gap-3 justify-center">
@@ -64,6 +64,17 @@ const StepParticipants: React.FC<Props> = ({ next, back }) => {
             ))}
           </select>
         </div>
+      </div>
+
+      <div className="flex justify-between mt-8">
+        {back && (
+          <button
+            onClick={back}
+            className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors text-sm"
+          >
+            ← Back
+          </button>
+        )}
       </div>
     </div>
   );

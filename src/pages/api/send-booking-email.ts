@@ -5,6 +5,8 @@ const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const POST: APIRoute = async ({ request }) => {
   console.log('=== Email API Called ===');
+  console.log('API Key present:', !!import.meta.env.RESEND_API_KEY);
+  console.log('API Key starts with re_:', import.meta.env.RESEND_API_KEY?.startsWith('re_'));
   
   try {
     const bookingData = await request.json();
@@ -89,7 +91,8 @@ export const POST: APIRoute = async ({ request }) => {
     console.error('Email error:', error);
     return new Response(JSON.stringify({ 
       error: 'Failed to send emails',
-      details: String(error)
+      details: String(error),
+      hasApiKey: !!import.meta.env.RESEND_API_KEY
     }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }
