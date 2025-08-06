@@ -6,18 +6,16 @@ interface Props {
   next: () => void;
 }
 
-const tours: { id: Tour; label: string; img: string; subtitle: string }[] = [
+const tours: { id: Tour; label: string; img: string }[] = [
   {
     id: "left-bank",
     label: "Left Bank",
     img: "/photos/pantheon_de_Paris.webp",
-    subtitle: "Resistance & Liberation",
   },
   {
     id: "right-bank",
     label: "Right Bank",
     img: "/photos/place_vendome_paris.webp",
-    subtitle: "Occupation & Collaboration",
   },
 ];
 
@@ -32,9 +30,8 @@ const StepTourSelection: React.FC<Props> = ({ next }) => {
 
   return (
     <div className="flex flex-col gap-6">
-
       <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-        {tours.map(({ id, label, img, subtitle }) => {
+        {tours.map(({ id, label, img }) => {
           const isSelected = booking.tour === id;
 
           return (
@@ -64,13 +61,13 @@ const StepTourSelection: React.FC<Props> = ({ next }) => {
                   </span>
                 </div>
               </div>
-              <p
-                className={`text-center mt-3 text-sm transition-colors ${
-                  isSelected ? "text-gray-800 font-medium" : "text-gray-600"
-                }`}
-              >
-                {subtitle}
-              </p>
+              <div className="mt-3 text-center">
+                <p className="text-gray-600 text-sm">
+                  {id === "left-bank"
+                    ? "Discover WW2 on the left side of Paris"
+                    : "Discover WW2 on the right side of Paris"}
+                </p>
+              </div>
             </div>
           );
         })}
