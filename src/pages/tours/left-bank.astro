@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BookTour from "../../components/BookTour.astro";
+import TourMap from "../../components/TourMap.tsx";
 ---
 
 <BaseLayout title="Left Bank Tour - Paris History Tours">
@@ -296,6 +297,19 @@ import BookTour from "../../components/BookTour.astro";
     </div>
   </section>
 
+  <!-- Tour Route Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">
+        Our Route Through Paris
+      </h2>
+      <p class="text-center text-gray-600 mb-12 text-lg">
+        Follow our 2.5km journey through the historic Left Bank
+      </p>
+      <TourMap tour="left-bank" client:visible />
+    </div>
+  </section>
+
   <!-- Gallery Section -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-4">
@@ -408,15 +422,8 @@ import BookTour from "../../components/BookTour.astro";
   }
 
   // Auto-play topics carousel
-  setInterval(nextTopic, 5000);
+  setInterval(nextTopic, 10000); // Changé de 5000 à 10000 (10 secondes)
 </script>
-        // Swipe left - next
-        currentTopicIndex = (currentTopicIndex + 1) % totalTopics;
-      }
-      updateTopicsCarousel();
-    }
-  }
-
   // Auto-play topics carousel
-  setInterval(nextTopic, 5000);
+  setInterval(nextTopic, 10000); // Changé de 5000 à 10000 (10 secondes)
 </script>
