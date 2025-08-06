@@ -14,7 +14,18 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
     setSending(true);
     
     if (booking.tourType === "regular") {
-      // Liens séparés selon le nombre de participants (si nécessaire)
+      // Pour les tours réguliers : envoyer email puis rediriger vers Stripe
+      try {
+        await fetch('/api/send-booking-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(booking),
+        });
+      } catch (emailError) {
+        console.log('Email error (non-blocking):', emailError);
+      }
+      
+      // Redirection vers Stripe
       const paymentLinks: { [key: string]: string } = {
         "1": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=1",
         "2": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=2",
@@ -23,17 +34,13 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
       };
       
       const url = paymentLinks[String(booking.participants)] || `https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=${booking.participants}`;
-      
-      console.log("Participants:", booking.participants, "URL:", url);
       window.location.href = url;
     } else {
-      // Pour les tours privés, sauvegarder en base ET envoyer email
+      // Pour les tours privés : envoyer email de demande
       try {
-        const response = await fetch('/api/booking', { // Remis sur booking
+        const response = await fetch('/api/send-booking-email', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(booking),
         });
 
@@ -41,16 +48,16 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
 
         if (result.success) {
           alert(
-            "Thank you for your private tour request! Your request has been saved and we will contact you within 24 hours to confirm availability and payment details."
+            "Thank you for your private tour request! We've sent you a confirmation email and will contact you within 24 hours to confirm availability and payment details."
           );
         } else {
-          throw new Error(result.error || 'Failed to submit request');
+          throw new Error(result.error || 'Failed to send email');
         }
       } catch (error) {
         alert(
-          "Error submitting your request. Please try again or contact us directly."
+          "Your request has been received, but we couldn't send a confirmation email. We'll contact you directly within 24 hours."
         );
-        console.error("Private tour booking error:", error);
+        console.error("Email error:", error);
       }
     }
     
