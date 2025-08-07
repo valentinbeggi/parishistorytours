@@ -1,0 +1,26 @@
+---
+import { getCurrentLocale, getLocalizedPath } from '../i18n/utils.js';
+
+const currentLocale = getCurrentLocale(Astro.url.pathname);
+const currentPath = Astro.url.pathname;
+const isFrench = currentPath.startsWith('/fr');
+
+const englishUrl = isFrench ? currentPath.replace('/fr', '') || '/' : currentPath;
+const frenchUrl = isFrench ? currentPath : `/fr${currentPath}`;
+---
+
+<div class="flex items-center gap-2">
+  <a 
+    href={englishUrl}
+    class={`px-2 py-1 text-sm rounded transition-colors ${!isFrench ? 'bg-blue-600 text-white' : 'text-gray-600 hover:text-blue-600'}`}
+  >
+    EN
+  </a>
+  <span class="text-gray-400">|</span>
+  <a 
+    href={frenchUrl}
+    class={`px-2 py-1 text-sm rounded transition-colors ${isFrench ? 'bg-blue-600 text-white' : 'text-gray-600 hover:text-blue-600'}`}
+  >
+    FR
+  </a>
+</div>

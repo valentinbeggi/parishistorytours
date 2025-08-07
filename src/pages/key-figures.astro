@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import KeyFiguresStats from '../components/KeyFiguresStats.tsx';
+import CountriesChart from '../components/CountriesChart.tsx';
+import WorldMap from '../components/WorldMap.tsx';
+---
+
+<BaseLayout title="Key Figures - Paris History Tours">
+  <main class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Key Figures
+          </h1>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover the journey behind Paris History Tours - from months of research 
+            to hundreds of participants from around the world.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Building the Tours Section -->
+    <section class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Building the Tours</h2>
+          <p class="text-lg text-gray-600">
+            The extensive research and preparation behind every tour
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-8">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">20+ Books</h3>
+                <p class="text-gray-600">
+                  Extensive research through historical texts, memoirs, and academic sources 
+                  to ensure accuracy and depth in every story told.
+                </p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">6 Months</h3>
+                <p class="text-gray-600">
+                  Dedicated research, route planning, and story crafting to create 
+                  an immersive historical experience through the streets of Paris.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <img 
+              src="/images/research-books.jpg" 
+              alt="Historical research books"
+              class="rounded-lg shadow-xl w-full h-96 object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Delivering the Tour Section -->
+    <section class="py-16 bg-slate-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Delivering the Tour</h2>
+          <p class="text-lg text-gray-600">
+            The impact and reach of Paris History Tours
+          </p>
+        </div>
+
+        <!-- Stats Component -->
+        <KeyFiguresStats client:load />
+
+        <!-- Countries Chart -->
+        <div class="mt-16">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">
+            Top 5 Countries Represented
+          </h3>
+          <div class="bg-white rounded-lg shadow-lg p-8">
+            <CountriesChart client:load />
+          </div>
+        </div>
+
+        <!-- World Map -->
+        <div class="mt-16">
+          <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">
+            Global Reach
+          </h3>
+          <div class="bg-white rounded-lg shadow-lg p-8">
+            <WorldMap client:load />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
