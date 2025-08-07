@@ -5,7 +5,12 @@ import ToursAvailable from "../components/ToursAvailable.astro";
 import Reviews from "../components/Reviews.astro";
 import BookTour from "../components/BookTour.astro";
 import "../styles/global.css";
-import guidePhoto from "/photos_leo/guide-photo.webp";
+
+import { Picture } from "astro:assets";
+
+import guidePhoto     from "../images/guide-photo.webp";
+import pantheon       from "../images/pantheon_de_Paris.webp";
+import placeVendome   from "../images/place_vendome_paris.webp";
 ---
 
 <BaseLayout title="Paris History Tours">
@@ -54,11 +59,17 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 		</div>
 		{/* Partie photo et contenu sur fond clair */}
 		<div class="flex justify-center mb-4 max-w-4xl mx-auto">
-			<img 
-				src={"/photos_leo/guide-photo.webp"} 
-				alt="Guide Paris History Tours" 
-				class="rounded-xl shadow-lg max-w-full h-auto mt-8 mb-8"
-			/>
+			<Picture
+			src={guidePhoto}
+			alt="Guide – Paris History Tours"
+			widths={[320,640,960,1280]}
+			sizes="(max-width:768px) 90vw, 480px"
+			formats={["avif","webp"]} 
+			loading="lazy"
+			decoding="async"
+			quality={80}
+			class="rounded-xl shadow-lg max-w-full h-auto mt-8 mb-8"
+		/>
 		</div>
 		
 		{/* Séparateur ligne */}
@@ -85,9 +96,15 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 						{/* Panthéon */}
 						<div class="min-w-full">
 							<div class="relative">
-								<img 
-									src="/photos/pantheon_de_Paris.webp" 
-									alt="Panthéon de Paris - Memorial to Resistance heroes"
+								<Picture
+									src={pantheon}
+									alt="Panthéon de Paris – Memorial to Resistance heroes"
+									widths={[640,768,1024,1440]}
+									sizes="100vw"
+									formats={["avif","webp"]}
+									loading="lazy"
+									decoding="async"
+									quality={75}
 									class="w-full h-64 md:h-96 object-cover"
 								/>
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
@@ -100,9 +117,15 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 						{/* Place Vendôme */}
 						<div class="min-w-full">
 							<div class="relative">
-								<img 
-									src="/photos/place_vendome_paris.webp" 
-									alt="Place Vendôme - Wartime Paris"
+								<Picture
+									src={placeVendome}
+									alt="Place Vendôme – Wartime Paris"
+									widths={[640,768,1024,1440]}
+									sizes="100vw"
+									formats={["avif","webp"]}
+									loading="lazy"
+									decoding="async"
+									quality={75}
 									class="w-full h-64 md:h-96 object-cover"
 								/>
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
@@ -115,11 +138,17 @@ import guidePhoto from "/photos_leo/guide-photo.webp";
 						{/* Photo du guide */}
 						<div class="min-w-full">
 							<div class="relative">
-								<img 
-									src={"/photos_leo/guide-photo.webp"} 
-									alt="Clément - Your expert guide"
-									class="w-full h-64 md:h-96 object-cover"
-								/>
+								<Picture
+								src={guidePhoto}
+								alt="Clément – Your expert guide"
+								widths={[640,768,1024,1440]}
+								sizes="100vw"
+								formats={["avif","webp"]}
+								loading="lazy"
+								decoding="async"
+								quality={75}
+								class="w-full h-64 md:h-96 object-cover"
+							/>
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
 									<h3 class="text-white text-xl md:text-2xl font-bold mb-2">Meet Clément</h3>
 									<p class="text-white/90 text-sm md:text-base">Your passionate historian and expert guide</p>
