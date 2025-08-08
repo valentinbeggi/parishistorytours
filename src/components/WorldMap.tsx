@@ -1,26 +1,40 @@
-import { useState } from 'react';
-
-// Données temporaires - à remplacer par les données Supabase
-const participantsByCountry = {
-  'US': 125,
-  'DE': 98,
-  'GB': 87,
-  'ES': 76,
-  'CA': 64,
-  'FR': 45,
-  'IT': 32,
-  'AU': 28,
-  'NL': 23,
-  'JP': 19
-};
+import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 
 export default function WorldMap() {
+  const [participantsByCountry, setParticipantsByCountry] = useState<Record<string, number>>({});
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
 
-  const getCountryColor = (countryCode: string) => {
-    const participants = participantsByCountry[countryCode];
-    if (!participants) return '#f3f4f6';
-    
+  useEffect(() => {
+    const fetchWorldData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('data_participants_tour')
+          .select('pays, taille_du_groupe');
+
+        if (error) throw error;
+
+        if (data) {
+          const countryMap: Record<string, number> = {};
+          
+          data.forEach(row => {
+            if (row.pays && row.taille_du_groupe) {
+              const country = row.pays.trim();
+              countryMap[country] = (countryMap[country] || 0) + row.taille_du_groupe;
+            }
+          });
+
+          setParticipantsByCountry(countryMap);
+        }
+      } catch (error) {
+        console.error('Error fetching world data:', error);
+      }
+    };
+
+    fetchWorldData();
+  }, []);
+
+  const getCountryColor = (participants: number) => {
     if (participants >= 100) return '#1e40af';
     if (participants >= 50) return '#3b82f6';
     if (participants >= 25) return '#60a5fa';
@@ -53,7 +67,6 @@ export default function WorldMap() {
         </div>
       </div>
 
-      {/* Simplified world map representation */}
       <div className="bg-blue-50 rounded-lg p-8 min-h-96 flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">🗺️</div>
@@ -61,15 +74,19 @@ export default function WorldMap() {
             Global Participation
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl">
-            {Object.entries(participantsByCountry).map(([countryCode, count]) => (
+            {Object.entries(participantsByCountry)
+              .sort(([,a], [,b]) => b - a)
+              .slice(0, 12)
+              .map(([country, count]) => (
               <div
-                key={countryCode}
+                key={country}
                 className="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                onMouseEnter={() => setHoveredCountry(countryCode)}
+                style={{ backgroundColor: count > 0 ? getCountryColor(count) + '20' : '#f9fafb' }}
+                onMouseEnter={() => setHoveredCountry(country)}
                 onMouseLeave={() => setHoveredCountry(null)}
               >
                 <div className="text-lg font-semibold text-gray-800">
-                  {countryCode}
+                  {country}
                 </div>
                 <div className="text-sm text-gray-600">
                   {count} participants
@@ -78,7 +95,7 @@ export default function WorldMap() {
             ))}
           </div>
           <p className="text-sm text-gray-500 mt-6">
-            * Interactive SVG world map will be implemented with real data from Supabase
+            Data sourced from Supabase database
           </p>
         </div>
       </div>

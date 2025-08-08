@@ -1,17 +1,71 @@
 import { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabase';
 
-const countriesData = [
-  { country: 'USA', participants: 125, flag: '🇺🇸' },
-  { country: 'Germany', participants: 98, flag: '🇩🇪' },
-  { country: 'UK', participants: 87, flag: '🇬🇧' },
-  { country: 'Spain', participants: 76, flag: '🇪🇸' },
-  { country: 'Canada', participants: 64, flag: '🇨🇦' }
-];
+interface CountryData {
+  country: string;
+  participants: number;
+  flag: string;
+}
+
+const countryFlags: Record<string, string> = {
+  'USA': '🇺🇸',
+  'United States': '🇺🇸',
+  'Germany': '🇩🇪',
+  'UK': '🇬🇧',
+  'United Kingdom': '🇬🇧',
+  'Spain': '🇪🇸',
+  'Canada': '🇨🇦',
+  'France': '🇫🇷',
+  'Italy': '🇮🇹',
+  'Australia': '🇦🇺',
+  'Netherlands': '🇳🇱',
+  'Japan': '🇯🇵'
+};
 
 export default function CountriesChart() {
-  const [animatedData, setAnimatedData] = useState(
-    countriesData.map(item => ({ ...item, animatedParticipants: 0 }))
-  );
+  const [countriesData, setCountriesData] = useState<CountryData[]>([]);
+  const [animatedData, setAnimatedData] = useState<CountryData[]>([]);
+
+  useEffect(() => {
+    const fetchCountriesData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('data_participants_tour')
+          .select('pays, taille_du_groupe');
+
+        if (error) throw error;
+
+        if (data) {
+          // Regrouper par pays et calculer le total
+          const countryMap = new Map<string, number>();
+          
+          data.forEach(row => {
+            if (row.pays && row.taille_du_groupe) {
+              const country = row.pays.trim();
+              countryMap.set(country, (countryMap.get(country) || 0) + row.taille_du_groupe);
+            }
+          });
+
+          // Convertir en array et trier par nombre de participants
+          const sortedCountries = Array.from(countryMap.entries())
+            .map(([country, participants]) => ({
+              country,
+              participants,
+              flag: countryFlags[country] || '🌍'
+            }))
+            .sort((a, b) => b.participants - a.participants)
+            .slice(0, 5); // Top 5 pays
+
+          setCountriesData(sortedCountries);
+          setAnimatedData(sortedCountries.map(item => ({ ...item, participants: 0 })));
+        }
+      } catch (error) {
+        console.error('Error fetching countries data:', error);
+      }
+    };
+
+    fetchCountriesData();
+  }, []);
 
   const maxParticipants = Math.max(...countriesData.map(item => item.participants));
 
@@ -27,7 +81,7 @@ export default function CountriesChart() {
         
         setAnimatedData(prev => 
           prev.map((item, i) => 
-            i === index ? { ...item, animatedParticipants: currentValue } : item
+            i === index ? { ...item, participants: currentValue } : item
           )
         );
         
@@ -44,7 +98,7 @@ export default function CountriesChart() {
         animateBar(index, item.participants);
       }, index * 200);
     });
-  }, []);
+  }, [countriesData]);
 
   return (
     <div className="space-y-6">
@@ -60,12 +114,12 @@ export default function CountriesChart() {
               <div
                 className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-1000 ease-out"
                 style={{
-                  width: `${(item.animatedParticipants / maxParticipants) * 100}%`
+                  width: maxParticipants > 0 ? `${(item.participants / maxParticipants) * 100}%` : '0%'
                 }}
               />
             </div>
             <span className="absolute right-0 top-0 mt-2 text-sm font-semibold text-gray-600">
-              {item.animatedParticipants}
+              {item.participants}
             </span>
           </div>
         </div>
