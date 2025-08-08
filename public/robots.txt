@@ -1,0 +1,14 @@
+# Fichier robots.txt pour https://www.parishistorytours.com/
+# Dernière mise à jour : 2025-08-09
+
+# S'applique à tous les robots
+User-agent: *
+
+# Autoriser l'exploration de tout le site...
+Allow: /
+
+# ... sauf la page d'administration
+Disallow: /daguet/admin/dashboard
+
+# Lien vers la sitemap pour accélérer l'indexation
+Sitemap: https://www.parishistorytours.com/sitemap-index.xml
