@@ -33,8 +33,19 @@ const TourMap: React.FC<TourMapProps> = ({ tour }) => {
     { name: "Saint Severin Church", coords: [2.346410, 48.852279] },
   ];
 
+  // Coordonnées des stops principaux Right Bank avec thèmes historiques
   const rightBankStops: Stop[] = [
-    // À définir selon votre parcours Right Bank
+    { name: "Bridge Alexander III", coords: [2.313925, 48.864547], theme: "Introduction & History Quiz" },
+    { name: "Ministry of Foreign Affairs", coords: [2.316339, 48.862828], theme: "The Fall of Paris" },
+    { name: "Concorde Square", coords: [2.321153, 48.865483], theme: "The Resistance" },
+    { name: "Place Vendôme - The Ritz", coords: [2.329531, 48.867756], theme: "Liberation" }
+  ];
+
+  // Points de passage rapides Right Bank (petits arrêts)
+  const rightBankWaypoints = [
+    { name: "Concorde Bridge", coords: [2.319477, 48.863381] },
+    { name: "Musée du Jeu de Paume", coords: [2.324681, 48.865602] },
+    { name: "Rue Saint-Honoré", coords: [2.328747, 48.866584] },
   ];
 
   const stops = tour === 'left-bank' ? leftBankStops : rightBankStops;
@@ -44,10 +55,15 @@ const TourMap: React.FC<TourMapProps> = ({ tour }) => {
 
     mapboxgl.accessToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
 
+    // Calculer le centre en fonction du tour
+    const centerCoords: [number, number] = tour === 'left-bank' 
+      ? [2.3444, 48.8500] // Centre pour Left Bank
+      : [2.3215, 48.8655]; // Centre pour Right Bank
+
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [2.3444, 48.8500],
+      center: centerCoords,
       zoom: 14,
       attributionControl: false
     });
@@ -98,10 +114,45 @@ const TourMap: React.FC<TourMapProps> = ({ tour }) => {
             )
             .addTo(map.current!);
         });
+      } else if (tour === 'right-bank') {
+        rightBankWaypoints.forEach((waypoint, index) => {
+          const el = document.createElement('div');
+          el.className = 'waypoint-marker';
+          el.innerHTML = `
+            <div class="w-4 h-4 bg-gray-500 border-2 border-white rounded-full shadow-md"></div>
+          `;
+
+          new mapboxgl.Marker(el)
+            .setLngLat(waypoint.coords as [number, number])
+            .setPopup(
+              new mapboxgl.Popup({ offset: 15 }).setHTML(`
+                <div class="p-2 text-center">
+                  <h3 class="font-bold text-gray-800 text-sm">${waypoint.name}</h3>
+                  <p class="text-xs text-gray-600">Quick stop</p>
+                </div>
+              `)
+            )
+            .addTo(map.current!);
+        });
       }
 
       // Calculer l'itinéraire piéton réel
       await drawWalkingRoute();
+
+      // Ajuster la vue pour inclure tous les points du tour
+      const bounds = new mapboxgl.LngLatBounds();
+      const waypoints = tour === 'left-bank' ? leftBankWaypoints : rightBankWaypoints;
+      
+      // Ajouter tous les stops principaux aux bounds
+      stops.forEach(stop => bounds.extend(stop.coords as mapboxgl.LngLatLike));
+      // Ajouter tous les waypoints aux bounds
+      waypoints.forEach(waypoint => bounds.extend(waypoint.coords as mapboxgl.LngLatLike));
+      
+      // Ajuster la vue avec un padding approprié
+      map.current!.fitBounds(bounds, { 
+        padding: { top: 50, bottom: 50, left: 50, right: 50 },
+        maxZoom: 15
+      });
 
       // Animation du parcours
       // animateRoute(); // Function not defined, so this is commented out to prevent errors
@@ -136,9 +187,21 @@ const TourMap: React.FC<TourMapProps> = ({ tour }) => {
         allPoints.push(leftBankWaypoints[3].coords); // Saint Severin Church (petit point)
         
         allPoints.push(leftBankStops[3].coords); // Notre-Dame (stop 4)
-      } else {
-        // Pour le right bank tour
-        allPoints.push(...stops.map(stop => stop.coords));
+      } else if (tour === 'right-bank') {
+        // Organisation de l'ordre du parcours Right Bank
+        allPoints.push(rightBankStops[0].coords); // Bridge Alexander III (stop 1)
+        
+        allPoints.push(rightBankStops[1].coords); // Ministry of Foreign Affairs (stop 2)
+        
+        allPoints.push(rightBankWaypoints[0].coords); // Concorde Bridge (petit point)
+        
+        allPoints.push(rightBankStops[2].coords); // Concorde Square (stop 3)
+        
+        allPoints.push(rightBankWaypoints[1].coords); // Musée du Jeu de Paume (petit point)
+        
+        allPoints.push(rightBankWaypoints[2].coords); // Rue Saint-Honoré (petit point)
+        
+        allPoints.push(rightBankStops[3].coords); // Place Vendôme - The Ritz (stop 4)
       }
       
       // Créer la chaîne de coordonnées pour l'API Directions

@@ -1,35 +1,703 @@
 ---
-import Timeline from "../../components/Timeline.tsx";
-import BookingCalendar from "../../components/BookingCalendar.tsx";
-import WhatsAppButton from "../../components/WhatsAppButton.astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Picture } from "astro:assets";
 
-const stops = [
-  { title: "Introduction", img: "/stops/left/1.jpg", description: "Presentation of the tour, and a quick history quiz to put everyone on the same page!" },
-  { title: "Fall",         img: "/stops/left/2.jpg", description: "Discover how Paris fell to the German army in only 35 days of combat..." },
-  { title: "Resistance",   img: "/stops/left/3.jpg", description: "Follow the journey of a French female Resistance fighter..." },
-  { title: "Liberation",   img: "/stops/left/4.jpg", description: "Learn more about the fights that took place in Paris 81 years ago..." },
-];
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BookTour from "../../components/BookTour.astro";
+import TourMap from "../../components/TourMap.tsx";
+import vendome from "../../images/place_vendome_paris.webp";
 ---
 
-<BaseLayout title="right-Bank tour">
-	<section class="px-6 max-w-5xl mx-auto py-20">
-	<h1 class="text-3xl font-bold mb-8">Paris – right-Bank Tour</h1>
+<BaseLayout title="Right Bank Tour - Paris History Tours">
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-700">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0">
+      <Picture
+        src={vendome}
+        alt="Place Vendôme – Historic square in Paris"
+        widths={[640,768,1024,1440]}
+        sizes="100vw"
+        formats={["avif","webp"]}
+        loading="lazy"
+        decoding="async"
+        quality={75}
+        class="w-full h-full object-cover"
+      />
+    </div>
+    <div class="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6">Right Bank Tour</h1>
+      <p class="text-xl md:text-2xl mb-8 opacity-90">
+        Discover Paris under the light of the Second World War
+      </p>
+      <div class="flex flex-col md:flex-row md:flex-wrap md:justify-center gap-4 md:gap-8 text-lg md:text-xl">
+        <div class="flex items-center justify-center gap-3">
+          <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+          </svg>
+          <span class="font-medium">2 hours</span>
+        </div>
+        <div class="flex items-center justify-center gap-3">
+          <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+          </svg>
+          <span class="font-medium">2.5 km walking</span>
+        </div>
+        <div class="flex items-center justify-center gap-3">
+          <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="font-medium">4 historic stops</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<div class="grid lg:grid-cols-[2fr_1fr] gap-16">
-		<Timeline stops={stops} client:load />
+  <!-- Introduction Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">
+        A Journey Through Wartime Paris
+      </h2>
+      <div class="text-center">
+        <blockquote class="text-2xl md:text-3xl font-medium text-gray-700 italic mb-6">
+          "Paris, Paris outraged! Paris broken! Paris martyred! But Paris liberated!"
+        </blockquote>
+        <cite class="text-lg text-gray-600">
+          — Charles de Gaulle, 25th August 1944
+        </cite>
+      </div>
+    </div>
+  </section>
 
-		<aside class="space-y-6">
-		<div class="p-6 bg-gray-50 rounded-lg text-sm leading-6">
-			<p><strong>Duration:</strong> 2 h</p>
-			<p><strong>Distance:</strong> 2.5 km</p>
-			<p><strong>Stops:</strong> 4</p>
-		</div>
+  <!-- Three Topics Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-800">
+        Three Historical Themes on WW2
+      </h3>
+      
+      <!-- Desktop Version -->
+      <div class="hidden md:grid md:grid-cols-3 gap-8">
+        <!-- The Fall -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-48 relative">
+            <img 
+              src="/photos/fall_of_paris_ww2_1940.webp" 
+              alt="Fall of Paris 1940" 
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <h3 class="text-2xl font-bold text-white">The Fall of Paris</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 leading-relaxed">
+              How did the German army reach Paris, the French Capital, in only 35 days of combat? What happened in the city during these 35 crucial days?
+            </p>
+          </div>
+        </div>
 
-		<BookingCalendar tour="right-bank" client:visible/>
+        <!-- The Resistance -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-48 relative">
+            <img 
+              src="/photos/resistance_ww2_paris.webp" 
+              alt="Resistance in Paris" 
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <h3 class="text-2xl font-bold text-white">The Resistance</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 leading-relaxed">
+              How did the Resistance start in the city? We will follow the steps of an early resistance fighter who was part of the first Resistance network in the town, called Musée de l'Homme.
+            </p>
+          </div>
+        </div>
 
-		<WhatsAppButton />
-		</aside>
-	</div>
-	</section>
+        <!-- Liberation -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="h-48 relative">
+            <img 
+              src="/photos/paris_ww2_liberation_1944_de_gaulle.webp" 
+              alt="Liberation of Paris 1944" 
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <h3 class="text-2xl font-bold text-white">Liberation</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 leading-relaxed">
+              How did the Allies finally free Paris after four years of occupation? We will talk about the fights that took place in the city in August 1944, and you will see how closely Paris came to being greatly damaged.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Version with Swipe Carousel -->
+      <div class="md:hidden">
+        <div class="relative max-w-sm mx-auto">
+          <div class="overflow-hidden rounded-xl">
+            <div class="flex transition-transform duration-300 ease-in-out" id="topics-carousel">
+              <!-- The Fall -->
+              <div class="min-w-full">
+                <div class="h-48 relative">
+                  <img 
+                    src="/photos/fall_of_paris_ww2_1940.webp" 
+                    alt="Fall of Paris 1940" 
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <h3 class="text-2xl font-bold text-white">The Fall of Paris</h3>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <p class="text-gray-700 leading-relaxed">
+                    How did the German army reach Paris, the French Capital, in only 35 days of combat? What happened in the city during these 35 crucial days?
+                  </p>
+                </div>
+              </div>
+
+              <!-- The Resistance -->
+              <div class="min-w-full">
+                <div class="h-48 relative">
+                  <img 
+                    src="/photos/resistance_ww2_paris.webp" 
+                    alt="Resistance in Paris" 
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <h3 class="text-2xl font-bold text-white">The Resistance</h3>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <p class="text-gray-700 leading-relaxed">
+                    How did the Resistance start in the city? We will follow the steps of an early resistance fighter who was part of the first Resistance network in the town, called Musée de l'Homme.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Liberation -->
+              <div class="min-w-full">
+                <div class="h-48 relative">
+                  <img 
+                    src="/photos/paris_ww2_liberation_1944_de_gaulle.webp" 
+                    alt="Liberation of Paris 1944" 
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <h3 class="text-2xl font-bold text-white">Liberation</h3>
+                  </div>
+                </div>
+                <div class="p-6">
+                  <p class="text-gray-700 leading-relaxed">
+                    How did the Allies finally free Paris after four years of occupation? We will talk about the fights that took place in the city in August 1944, and you will see how closely Paris came to being greatly damaged.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-center mt-4 space-x-2" id="topics-indicators">
+            <button class="w-3 h-3 rounded-full bg-gray-800 transition-all duration-200" data-index="0"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="2"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tour Stops Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+        Our 4 Historic Stops
+      </h2>
+      
+      <!-- Desktop Version - Grid normale -->
+      <div class="hidden md:block">
+        <!-- Stop 1: Bridge Alexander III -->
+        <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-gray-600 text-white rounded-full flex items-center justify-center text-xl font-bold">1</div>
+              <h3 class="text-2xl font-bold text-gray-800">Bridge Alexander III - Introduction</h3>
+            </div>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Begin your journey at this iconic bridge with a presentation of the tour and a quick history quiz to put everyone on the same page! Discover how Paris looked on the eve of the German invasion and see the first signs of the war that still remain in the city to this day.
+            </p>
+          </div>
+          <div class="relative">
+            <img 
+              src="/photos/left_bank/Paris_WW2_bullet_holes_2.webp" 
+              alt="Bridge Alexander III area" 
+              class="rounded-lg shadow-lg w-full h-64 object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Stop 2: Ministry of Foreign Affairs -->
+        <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+          <div class="md:order-2">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-gray-600 text-white rounded-full flex items-center justify-center text-xl font-bold">2</div>
+              <h3 class="text-2xl font-bold text-gray-800">Ministry of Foreign Affairs - The Fall</h3>
+            </div>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Walk through this important government district and discover how Paris fell to the German army in only 35 days of combat. Learn about the crucial 35 days that changed the city forever and how the Nazis transformed these symbols of French power.
+            </p>
+          </div>
+          <div class="md:order-1 relative">
+            <img 
+              src="/photos/left_bank/luxembourg_palace_paris.webp"
+              alt="Ministry of Foreign Affairs during occupation" 
+              class="rounded-lg shadow-lg w-full h-64 object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Stop 3: Concorde Square -->
+        <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-gray-600 text-white rounded-full flex items-center justify-center text-xl font-bold">3</div>
+              <h3 class="text-2xl font-bold text-gray-800">Concorde Square - The Resistance</h3>
+            </div>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              At this historic square, discover the story of brave French Resistance fighters who operated in the heart of occupied Paris. Learn about the early resistance movements in the city and how these courageous individuals risked everything to fight against the occupation.
+            </p>
+          </div>
+          <div class="relative">
+            <img 
+              src="/photos/left_bank/Paris_WW2_resistance_2.webp" 
+              alt="Resistance activities at Concorde Square" 
+              class="rounded-lg shadow-lg w-full h-64 object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Stop 4: Place Vendôme - The Ritz -->
+        <div class="grid md:grid-cols-2 gap-8 items-center mb-16">
+          <div class="md:order-2">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-12 h-12 bg-gray-600 text-white rounded-full flex items-center justify-center text-xl font-bold">4</div>
+              <h3 class="text-2xl font-bold text-gray-800">Place Vendôme - The Ritz - Liberation</h3>
+            </div>
+            <p class="text-lg text-gray-700 leading-relaxed">
+              Conclude our tour at this iconic square and the famous Ritz hotel, witness to the liberation of Paris in August 1944. Learn more about the fights that took place in Paris 81 years ago and discover how closely Paris came to being greatly damaged.
+            </p>
+          </div>
+          <div class="md:order-1 relative">
+            <img 
+              src="/photos/left_bank/Paris_WW2_liberation_barricades.webp" 
+              alt="Liberation at Place Vendôme" 
+              class="rounded-lg shadow-lg w-full h-64 object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Version - Carrousel -->
+      <div class="md:hidden">
+        <div class="relative max-w-sm mx-auto">
+          <div class="overflow-hidden rounded-xl">
+            <div class="flex transition-transform duration-300 ease-in-out" id="stops-carousel">
+              <!-- Stop 1 -->
+              <div class="min-w-full">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <img 
+                    src="/photos/left_bank/Paris_WW2_bullet_holes_2.webp" 
+                    alt="Bridge Alexander III area" 
+                    class="w-full h-48 object-cover"
+                  />
+                  <div class="p-6">
+                    <div class="flex items-center gap-3 mb-3">
+                      <div class="w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                      <h3 class="text-lg font-bold text-gray-800">Bridge Alexander III</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                      Begin your journey with a presentation and history quiz. See the first signs of the war that still remain in the city to this day.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stop 2 -->
+              <div class="min-w-full">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <img 
+                    src="/photos/left_bank/luxembourg_palace_paris.webp"
+                    alt="Ministry of Foreign Affairs" 
+                    class="w-full h-48 object-cover"
+                  />
+                  <div class="p-6">
+                    <div class="flex items-center gap-3 mb-3">
+                      <div class="w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                      <h3 class="text-lg font-bold text-gray-800">Ministry of Foreign Affairs</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                      Discover how Paris fell in 35 days and how the Nazis transformed these symbols of French power.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stop 3 -->
+              <div class="min-w-full">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <img 
+                    src="/photos/left_bank/Paris_WW2_resistance_2.webp" 
+                    alt="Concorde Square" 
+                    class="w-full h-48 object-cover"
+                  />
+                  <div class="p-6">
+                    <div class="flex items-center gap-3 mb-3">
+                      <div class="w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                      <h3 class="text-lg font-bold text-gray-800">Concorde Square</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                      Learn about brave French Resistance fighters who operated in the heart of occupied Paris.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stop 4 -->
+              <div class="min-w-full">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <img 
+                    src="/photos/left_bank/Paris_WW2_liberation_barricades.webp" 
+                    alt="Place Vendôme - The Ritz" 
+                    class="w-full h-48 object-cover"
+                  />
+                  <div class="p-6">
+                    <div class="flex items-center gap-3 mb-3">
+                      <div class="w-8 h-8 bg-gray-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</div>
+                      <h3 class="text-lg font-bold text-gray-800">Place Vendôme - The Ritz</h3>
+                    </div>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                      Conclude at this iconic square and the famous Ritz hotel, witness to liberation in August 1944.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button id="prev-stops" class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200">
+            <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button id="next-stops" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-200">
+            <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+          <div class="flex justify-center mt-4 space-x-2" id="stops-indicators">
+            <button class="w-3 h-3 rounded-full bg-gray-800 transition-all duration-200" data-index="0"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="2"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="3"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tour Route Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">
+        Our Route Through Paris
+      </h2>
+      <TourMap tour="right-bank" client:visible />
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+        Experience the History
+      </h2>
+      
+      <!-- Desktop Version - Grid normale -->
+      <div class="hidden md:grid md:grid-cols-4 gap-4">
+        <img src="/photos/left_bank/Paris_WW2_bullet_holes_2.webp" alt="Historical traces from the war" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+        <img src="/photos/left_bank/Paris_WW2_german_attack.webp" alt="German occupation of Paris" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+        <img src="/photos/left_bank/Paris_ww2_group_photo.webp" alt="Tour group photo" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+        <img src="/photos/left_bank/Paris_WW2_guide.webp" alt="Your guide Clément" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+        <img src="/photos/left_bank/Paris_WW2_last_stop.webp" alt="Final stop of the tour" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+        <img src="/photos/left_bank/Paris_WW2_resistance.webp" alt="Resistance memorial" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+        <img src="/photos/left_bank/Paris_WW2_tour_guided_group_photo_2.webp" alt="Another group photo" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+        <img src="/photos/left_bank/Paris_WW2_tour_guided_group_photo_3.webp" alt="Group enjoying the tour" class="rounded-lg shadow-md w-full h-48 object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+
+      <!-- Mobile Version - Carrousel -->
+      <div class="md:hidden">
+        <div class="relative max-w-sm mx-auto">
+          <div class="overflow-hidden rounded-xl">
+            <div class="flex transition-transform duration-300 ease-in-out" id="gallery-carousel">
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_WW2_bullet_holes_2.webp" alt="Historical traces from the war" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_WW2_german_attack.webp" alt="German occupation of Paris" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_ww2_group_photo.webp" alt="Tour group photo" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_WW2_guide.webp" alt="Your guide Clément" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_WW2_last_stop.webp" alt="Final stop of the tour" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_WW2_resistance.webp" alt="Resistance memorial" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_WW2_tour_guided_group_photo_2.webp" alt="Another group photo" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+              <div class="min-w-full">
+                <img src="/photos/left_bank/Paris_WW2_tour_guided_group_photo_3.webp" alt="Group enjoying the tour" class="rounded-lg shadow-md w-full h-64 object-cover" />
+              </div>
+            </div>
+          </div>
+          
+          <!-- ...existing buttons... -->
+          
+          <!-- Indicateurs -->
+          <div class="flex justify-center mt-4 space-x-2" id="gallery-indicators">
+            <button class="w-3 h-3 rounded-full bg-gray-800 transition-all duration-200" data-index="0"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="1"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="2"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="3"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="4"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="5"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="6"></button>
+            <button class="w-3 h-3 rounded-full bg-gray-300 transition-all duration-200" data-index="7"></button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 max-w-4x1 mx-auto">
+        <BookTour tourFilter="right-bank" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <!-- About -->
+        <div>
+          <h3 class="text-xl font-bold mb-4">Paris History Tours</h3>
+          <p class="text-gray-300 mb-4">
+            Discover the hidden stories of Paris during World War II through our expert-guided walking tours.
+          </p>
+          <p class="text-gray-400 text-sm">
+            By Clément Daguet
+          </p>
+        </div>
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Tours</h4>
+          <ul class="space-y-2">
+            <li><a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+            <li><a href="/tours/left-bank" class="text-gray-300 hover:text-white transition-colors">Left Bank Tour</a></li>
+            <li><a href="/tours/right-bank" class="text-gray-300 hover:text-white transition-colors">Right Bank Tour</a></li>
+          </ul>
+        </div>
+        <!-- Contact -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Contact</h4>
+          <div class="space-y-3">
+            <a href="https://wa.me/33620622480" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.787"/>
+              </svg>
+              WhatsApp
+            </a>
+            <a href="mailto:clemdaguetschott@gmail.com" class="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              Email
+            </a>
+            <a href="https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8" target="_blank" class="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+        <p>&copy; {new Date().getFullYear()} Paris History Tours. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 </BaseLayout>
+
+<!-- Copy/paste the same scripts as in left-bank.astro for carousels and interactivity -->
+<script>
+  // Mobile topics carousel functionality
+  let currentTopicIndex = 0;
+  const totalTopics = 3;
+  const topicsCarousel = document.getElementById('topics-carousel');
+  const topicsIndicators = document.querySelectorAll('#topics-indicators button');
+
+  function updateTopicsCarousel() {
+    const offset = -currentTopicIndex * 100;
+    if (topicsCarousel) {
+      topicsCarousel.style.transform = `translateX(${offset}%)`;
+    }
+    
+    topicsIndicators.forEach((indicator, index) => {
+      indicator.classList.toggle('bg-gray-800', index === currentTopicIndex);
+      indicator.classList.toggle('bg-gray-300', index !== currentTopicIndex);
+    });
+  }
+
+  function nextTopic() {
+    currentTopicIndex = (currentTopicIndex + 1) % totalTopics;
+    updateTopicsCarousel();
+  }
+
+  // Indicators click
+  topicsIndicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      currentTopicIndex = index;
+      updateTopicsCarousel();
+    });
+  });
+
+  // Touch/Swipe support for topics
+  let topicsTouchStartX = 0;
+  let topicsTouchEndX = 0;
+  const minSwipeDistance = 50;
+
+  if (topicsCarousel) {
+    topicsCarousel.addEventListener('touchstart', (e) => {
+      topicsTouchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    topicsCarousel.addEventListener('touchend', (e) => {
+      topicsTouchEndX = e.changedTouches[0].screenX;
+      handleTopicsSwipe();
+    }, { passive: true });
+  }
+
+  function handleTopicsSwipe() {
+    const deltaX = topicsTouchEndX - topicsTouchStartX;
+    
+    if (Math.abs(deltaX) > minSwipeDistance) {
+      if (deltaX > 0) {
+        currentTopicIndex = (currentTopicIndex - 1 + totalTopics) % totalTopics;
+      } else {
+        currentTopicIndex = (currentTopicIndex + 1) % totalTopics;
+      }
+      updateTopicsCarousel();
+    }
+  }
+
+  // Auto-play topics carousel
+  setInterval(nextTopic, 10000);
+
+  // Stops carousel functionality (mobile)
+  let currentStopIndex = 0;
+  const totalStops = 4;
+  const stopsCarousel = document.getElementById('stops-carousel');
+  const stopsIndicators = document.querySelectorAll('#stops-indicators button');
+  const prevStopsBtn = document.getElementById('prev-stops');
+  const nextStopsBtn = document.getElementById('next-stops');
+
+  function updateStopsCarousel() {
+    const offset = -currentStopIndex * 100;
+    if (stopsCarousel) {
+      stopsCarousel.style.transform = `translateX(${offset}%)`;
+    }
+    
+    stopsIndicators.forEach((indicator, index) => {
+      indicator.classList.toggle('bg-gray-800', index === currentStopIndex);
+      indicator.classList.toggle('bg-gray-300', index !== currentStopIndex);
+    });
+  }
+
+  function nextStop() {
+    currentStopIndex = (currentStopIndex + 1) % totalStops;
+    updateStopsCarousel();
+  }
+
+  function prevStop() {
+    currentStopIndex = (currentStopIndex - 1 + totalStops) % totalStops;
+    updateStopsCarousel();
+  }
+
+  if (nextStopsBtn) {
+    nextStopsBtn.addEventListener('click', nextStop);
+  }
+  if (prevStopsBtn) {
+    prevStopsBtn.addEventListener('click', prevStop);
+  }
+
+  stopsIndicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      currentStopIndex = index;
+      updateStopsCarousel();
+    });
+  });
+
+  // Gallery carousel functionality
+  let currentGalleryIndex = 0;
+  const totalGalleryImages = 8;
+  const galleryCarousel = document.getElementById('gallery-carousel');
+  const galleryIndicators = document.querySelectorAll('#gallery-indicators button');
+  const prevGalleryBtn = document.getElementById('prev-gallery');
+  const nextGalleryBtn = document.getElementById('next-gallery');
+
+  function updateGalleryCarousel() {
+    const offset = -currentGalleryIndex * 100;
+    if (galleryCarousel) {
+      galleryCarousel.style.transform = `translateX(${offset}%)`;
+    }
+    
+    galleryIndicators.forEach((indicator, index) => {
+      indicator.classList.toggle('bg-gray-800', index === currentGalleryIndex);
+      indicator.classList.toggle('bg-gray-300', index !== currentGalleryIndex);
+    });
+  }
+
+  function nextGalleryImage() {
+    currentGalleryIndex = (currentGalleryIndex + 1) % totalGalleryImages;
+    updateGalleryCarousel();
+  }
+
+  function prevGalleryImage() {
+    currentGalleryIndex = (currentGalleryIndex - 1 + totalGalleryImages) % totalGalleryImages;
+    updateGalleryCarousel();
+  }
+
+  if (nextGalleryBtn) {
+    nextGalleryBtn.addEventListener('click', nextGalleryImage);
+  }
+  if (prevGalleryBtn) {
+    prevGalleryBtn.addEventListener('click', prevGalleryImage);
+  }
+
+  galleryIndicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      currentGalleryIndex = index;
+      updateGalleryCarousel();
+    });
+  });
+
+  // Auto-play gallery
+  setInterval(nextGalleryImage, 6000);
+</script>
