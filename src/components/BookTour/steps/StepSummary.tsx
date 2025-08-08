@@ -12,35 +12,54 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
 
   const handleSubmit = async () => {
     setSending(true);
-    
+
     if (booking.tourType === "regular") {
       // Pour les tours réguliers : envoyer email puis rediriger vers Stripe
       try {
-        await fetch('/api/send-booking-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        await fetch("/api/send-booking-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(booking),
         });
       } catch (emailError) {
-        console.log('Email error (non-blocking):', emailError);
+        console.log("Email error (non-blocking):", emailError);
       }
-      
-      // Redirection vers Stripe
-      const paymentLinks: { [key: string]: string } = {
-        "1": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=1",
-        "2": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=2",
-        "3": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=3",
-        "4": "https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=4"
-      };
-      
-      const url = paymentLinks[String(booking.participants)] || `https://buy.stripe.com/aFacN6aWq5on3IM4Xjfbq02?quantity=${booking.participants}`;
-      window.location.href = url;
+
+      // Use your checkout API instead of hardcoded links
+      try {
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            slotId: booking.sessionId,
+            participants: booking.participants,
+            email: booking.email,
+            name: booking.name,
+            phone: booking.phone || "", // Optional field
+          }),
+        });
+
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error(message || "Failed to create checkout session.");
+        }
+
+        const { url } = await res.json();
+        if (!url) {
+          throw new Error("No redirect URL provided.");
+        }
+
+        window.location.href = url; // Stripe Checkout redirect
+      } catch (error) {
+        alert("Failed to process payment. Please try again.");
+        console.error("Checkout error:", error);
+      }
     } else {
       // Pour les tours privés : envoyer email de demande
       try {
-        const response = await fetch('/api/send-booking-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const response = await fetch("/api/send-booking-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(booking),
         });
 
@@ -51,7 +70,7 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
             "Thank you for your private tour request! We've sent you a confirmation email and will contact you within 24 hours to confirm availability and payment details."
           );
         } else {
-          throw new Error(result.error || 'Failed to send email');
+          throw new Error(result.error || "Failed to send email");
         }
       } catch (error) {
         alert(
@@ -60,7 +79,7 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
         console.error("Email error:", error);
       }
     }
-    
+
     setSending(false);
   };
 
@@ -134,8 +153,8 @@ const StepSummary: React.FC<Props> = ({ back, onEditDetails }) => {
           {sending
             ? "Processing..."
             : booking.tourType === "regular"
-            ? "Pay Now"
-            : "Confirm"}
+              ? "Pay Now"
+              : "Confirm"}
         </button>
 
         <button
