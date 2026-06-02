@@ -1,6 +1,9 @@
 // Server endpoint that fetches Google Place Details (reviews) and returns a small normalized payload.
 import type { APIRoute } from 'astro';
 
+const CACHE_TTL_MS = 15 * 24 * 60 * 60 * 1000; // 15 days
+let cached: { at: number; body: string } | null = null;
+
 export const GET: APIRoute = async ({ request }) => {
   try {
   const API_KEY = import.meta.env.GOOGLE_PLACES_API_KEY;
@@ -10,9 +13,12 @@ export const GET: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ error: 'Missing configuration' }), { status: 500 });
     }
 
+    if (cached && Date.now() - cached.at < CACHE_TTL_MS) {
+      return new Response(cached.body, { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }
+
   // Use the newer Places API v1 endpoint (works with places.googleapis.com)
-    // Request reviews (displayName). Do not request user_ratings_total here — v1 may not support it and will return 400.
-    const url = `https://places.googleapis.com/v1/places/${encodeURIComponent(PLACE_ID)}?fields=reviews,displayName&key=${encodeURIComponent(
+    const url = `https://places.googleapis.com/v1/places/${encodeURIComponent(PLACE_ID)}?fields=reviews,displayName,rating,userRatingCount&key=${encodeURIComponent(
       API_KEY
     )}`;
 
@@ -67,35 +73,19 @@ export const GET: APIRoute = async ({ request }) => {
         profile_photo_url: profile,
       };
     });
-    // Try to extract overall rating and total reviews from known fields (v1 may not expose these)
+    // Extract overall rating and total reviews from v1 fields (rating / userRatingCount)
     let overallRating: number | null = null;
     let totalReviews: number | null = null;
     if (typeof data.rating === 'number') overallRating = data.rating;
-    if (data.user_ratings_total) totalReviews = Number(data.user_ratings_total);
+    if (data.userRatingCount) totalReviews = Number(data.userRatingCount);
     if (data.result) {
       if (typeof data.result.rating === 'number') overallRating = data.result.rating;
       if (data.result.user_ratings_total) totalReviews = Number(data.result.user_ratings_total);
     }
 
-    // If v1 didn't provide rating/total, try the legacy Place Details endpoint server-side to get metadata
-    if ((overallRating === null || totalReviews === null) && API_KEY && PLACE_ID) {
-      try {
-        const legacyUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(PLACE_ID)}&fields=rating,user_ratings_total&key=${encodeURIComponent(API_KEY)}`;
-        const legacyRes = await fetch(legacyUrl);
-        const legacyText = await legacyRes.text();
-        if (legacyRes.ok) {
-          const legacy = JSON.parse(legacyText);
-          if (legacy && legacy.result) {
-            if (typeof legacy.result.rating === 'number') overallRating = legacy.result.rating;
-            if (legacy.result.user_ratings_total) totalReviews = Number(legacy.result.user_ratings_total);
-          }
-        }
-      } catch (e) {
-        // Legacy fallback failed silently — v1 data is still returned
-      }
-    }
-
-    return new Response(JSON.stringify({ reviews, total: totalReviews, average_rating: overallRating }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    const body = JSON.stringify({ reviews, total: totalReviews, average_rating: overallRating });
+    cached = { at: Date.now(), body };
+    return new Response(body, { status: 200, headers: { 'Content-Type': 'application/json' } });
   } catch (err: any) {
     console.error('Failed to fetch google reviews');
     return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500 });

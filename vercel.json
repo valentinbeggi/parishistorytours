@@ -2,6 +2,13 @@
   "framework": null,
   "headers": [
     {
+      "source": "/api/google-reviews",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
+        { "key": "CDN-Cache-Control", "value": "public, s-maxage=1296000, stale-while-revalidate=2592000" }
+      ]
+    },
+    {
       "source": "/api/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" },
