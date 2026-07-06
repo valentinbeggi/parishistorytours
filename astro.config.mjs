@@ -4,6 +4,33 @@ import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
+import { readFileSync, readdirSync } from "node:fs";
+
+// Minimal frontmatter read of the blog posts (lang + dates), used for:
+// 1. 301 redirects from the legacy duplicate URLs (every article used to be
+//    served under BOTH /blog/ and /fr/blog/) to their canonical locale.
+// 2. <lastmod> in the sitemap.
+const blogMeta = readdirSync("./src/content/blog")
+  .filter((f) => f.endsWith(".md"))
+  .map((f) => {
+    const fm = readFileSync(`./src/content/blog/${f}`, "utf8").split("---")[1] ?? "";
+    const get = (key) => fm.match(new RegExp(`^${key}:\\s*\"?([^\"\\n]+)\"?`, "m"))?.[1]?.trim();
+    return {
+      slug: f.replace(/\.md$/, ""),
+      lang: get("lang"),
+      lastmod: get("updatedDate") || get("publishDate"),
+    };
+  });
+
+const blogRedirects = Object.fromEntries(
+  blogMeta.map(({ slug, lang }) =>
+    lang === "fr"
+      ? [`/blog/${slug}`, { status: 301, destination: `/fr/blog/${slug}` }]
+      : [`/fr/blog/${slug}`, { status: 301, destination: `/blog/${slug}` }]
+  )
+);
+
+const blogLastmod = new Map(blogMeta.map((m) => [m.slug, m.lastmod]));
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,10 +57,17 @@ export default defineConfig({
         } else {
           item.priority = 0.7;
         }
+        const slugMatch = item.url.match(/\/blog\/([^/]+)\/?$/);
+        const lastmod = slugMatch && blogLastmod.get(slugMatch[1]);
+        if (lastmod) {
+          item.lastmod = new Date(lastmod).toISOString();
+        }
         return item;
       }
     }),
   ],
+
+  redirects: blogRedirects,
 
   // Needed for API routes later
   output: "server",

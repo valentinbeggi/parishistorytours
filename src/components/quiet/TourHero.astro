@@ -22,6 +22,7 @@ const { image, alt, kicker, title, subtitle, objectPosition } = Astro.props;
     widths={[640, 960, 1280, 1800, 2400]}
     sizes="100vw"
     formats={["avif", "webp"]}
+    fallbackFormat="webp"
     loading="eager"
     quality={82}
     class="qtourhero__img"

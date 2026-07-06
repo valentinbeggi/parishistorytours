@@ -4,6 +4,7 @@ description: "À l'automne 1940, alors que la France était sous le choc, Agnès
 publishDate: 2026-03-21
 author: "Clement Daguet-Schott"
 lang: fr
+translationKey: agnes-humbert
 tags: ["Résistance française", "Agnès Humbert", "Musée de l'Homme", "Paris Seconde Guerre mondiale", "Occupation de Paris"]
 image: "/photos/musee_de_lhomme_paris.webp"
 imageAlt: "Le Musée de l'Homme au Palais de Chaillot à Paris, berceau de l'un des premiers réseaux de la Résistance française"

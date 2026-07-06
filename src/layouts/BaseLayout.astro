@@ -3,6 +3,8 @@ import "../styles/global.css";
 import Footer from "../components/Footer.astro";
 import QuietFooter from "../components/quiet/Footer.astro";
 import { useTranslations } from '../i18n/utils';
+import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import playfairWoff2 from '@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url';
 
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
@@ -10,11 +12,14 @@ const t = useTranslations(lang);
 const {
   title = "Paris History Tours",
   description = "WWII walking tours in Paris: Right Bank and Left Bank routes exploring the Fall, Resistance, and Liberation.",
-  ogImage = "/photos/left_bank/Paris_WW2_guide.webp",
+  ogImage = "/photos/og-default.jpg",
   ogType = "website",
   noindex = false,
   preloadImages = [] as Array<string | { srcset: string; sizes: string }>,
   theme = 'legacy' as 'legacy' | 'quiet',
+  // Override the default same-path hreflang mapping when the translated page
+  // lives at a different slug (blog articles). `null` means no alternate exists.
+  alternates = undefined as { en?: string | null; fr?: string | null } | undefined,
 } = Astro.props;
 
 const isQuiet = theme === 'quiet';
@@ -22,35 +27,34 @@ const isQuiet = theme === 'quiet';
 const origin = Astro.url.origin;
 const pathname = Astro.url.pathname;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${origin}${ogImage}`;
+// Normalize to trailing-slash URLs so canonicals match the sitemap
+// (prerendered pages are built as directories, i.e. /path/).
+const norm = (p: string) => (p === '/' || p.endsWith('/') ? p : `${p}/`);
 // Compute base path (without /fr prefix) for hreflang - works with both direct and rewritten URLs
 const basePath = pathname.startsWith('/fr') ? (pathname.replace(/^\/fr/, '') || '/') : pathname;
-const enPath = basePath;
-const frPath = basePath === '/' ? '/fr' : `/fr${basePath}`;
-const canonicalUrl = lang === 'fr' ? `${origin}${frPath}` : `${origin}${enPath}`;
+const enPath = alternates ? alternates.en ?? null : basePath;
+const frPath = alternates ? alternates.fr ?? null : (basePath === '/' ? '/fr' : `/fr${basePath}`);
+const enUrl = enPath ? `${origin}${norm(enPath)}` : null;
+const frUrl = frPath ? `${origin}${norm(frPath)}` : null;
+const xDefaultUrl = enUrl ?? frUrl;
+const canonicalUrl = (lang === 'fr' ? frUrl : enUrl) ?? `${origin}${norm(pathname)}`;
 ---
 <!DOCTYPE html>
 <html lang={lang}>
   <head>
-    <!-- Google Tag Manager + gtag — deferred to reduce unused JS on initial load -->
+    <!-- Google Tag Manager — deferred to reduce unused JS on initial load.
+         GA4 (G-26695P8H33) is loaded by the GTM container itself; loading
+         gtag.js directly here would download it a second time. -->
 <script>
+  // @ts-nocheck
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
 
   function loadAnalytics() {
-    // GTM
-    dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     var j = document.createElement('script');
     j.async = true;
     j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-K6M2KKL7';
     document.head.appendChild(j);
-
-    // gtag
-    var g = document.createElement('script');
-    g.async = true;
-    g.src = 'https://www.googletagmanager.com/gtag/js?id=G-26695P8H33';
-    document.head.appendChild(g);
-    gtag('js', new Date());
-    gtag('config', 'G-26695P8H33');
   }
 
   // Load analytics after page is idle (3.5s delay)
@@ -67,9 +71,9 @@ const canonicalUrl = lang === 'fr' ? `${origin}${frPath}` : `${origin}${enPath}`
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="en" href={`${origin}${enPath}`} />
-    <link rel="alternate" hreflang="fr" href={`${origin}${frPath}`} />
-    <link rel="alternate" hreflang="x-default" href={`${origin}${enPath}`} />
+    {enUrl && <link rel="alternate" hreflang="en" href={enUrl} />}
+    {frUrl && <link rel="alternate" hreflang="fr" href={frUrl} />}
+    {xDefaultUrl && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
     <!-- Favicon and icons -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -102,8 +106,16 @@ const canonicalUrl = lang === 'fr' ? `${origin}${frPath}` : `${origin}${enPath}`
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://js.stripe.com" />
     <link rel="dns-prefetch" href="https://js.stripe.com" />
-    <!-- Self-hosted Montserrat — preload latin subset -->
-    <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Preload the fonts the active theme actually renders above the fold:
+         quiet = Inter + Playfair Display (Fontsource), legacy = Montserrat -->
+    {isQuiet ? (
+      <>
+        <link rel="preload" href={interWoff2} as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href={playfairWoff2} as="font" type="font/woff2" crossorigin />
+      </>
+    ) : (
+      <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
+    )}
     {preloadImages.map((img) =>
       typeof img === 'string'
         ? <link rel="preload" as="image" href={img} />

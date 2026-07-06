@@ -4,6 +4,7 @@ import "../styles/global.css";
 import { useTranslations } from '../i18n/utils';
 
 import JsonLd from "../components/JsonLd.astro";
+import { GOOGLE_REVIEWS } from "../data/site";
 
 // Quiet chrome + sections
 import TopBar from "../components/quiet/TopBar.astro";
@@ -75,9 +76,7 @@ const langPrefix = isDefaultLang ? '' : '/fr';
     "priceRange": "$$",
     "aggregateRating": {
       "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "bestRating": "5",
-      "ratingCount": "42"
+      ...GOOGLE_REVIEWS
     },
     "founder": {
       "@type": "Person",

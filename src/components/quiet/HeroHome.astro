@@ -37,15 +37,15 @@ const stats = [
 
     <div class="qhero__media">
       <figure class="qhero__media-main">
-        <Picture src={notreDame} alt={t('quiet.home.hero.mediaMainAlt')} widths={[640, 960, 1280]} sizes="(max-width:900px) 100vw, 50vw" formats={["avif","webp"]} quality={82} loading="eager" class="qhero__img" />
+        <Picture src={notreDame} alt={t('quiet.home.hero.mediaMainAlt')} widths={[640, 960, 1280]} sizes="(max-width:900px) 100vw, 50vw" formats={["avif","webp"]} fallbackFormat="webp" quality={80} loading="eager" class="qhero__img" />
         <figcaption><b>{t('quiet.home.hero.mediaMainLabel')}</b>{t('quiet.home.hero.mediaMainCaption')}</figcaption>
       </figure>
       <figure class="qhero__media-side">
-        <Picture src={bridge} alt={t('quiet.home.hero.mediaSideAAlt')} widths={[400, 640, 800]} sizes="(max-width:900px) 50vw, 25vw" formats={["avif","webp"]} quality={80} loading="lazy" class="qhero__img" />
+        <Picture src={bridge} alt={t('quiet.home.hero.mediaSideAAlt')} widths={[400, 640, 800]} sizes="(max-width:900px) 50vw, 25vw" formats={["avif","webp"]} fallbackFormat="webp" quality={80} loading="lazy" class="qhero__img" />
         <figcaption><b>{t('quiet.home.hero.mediaSideALabel')}</b>{t('quiet.home.hero.mediaSideACaption')}</figcaption>
       </figure>
       <figure class="qhero__media-side">
-        <Picture src={vendome} alt={t('quiet.home.hero.mediaSideBAlt')} widths={[400, 640, 800]} sizes="(max-width:900px) 50vw, 25vw" formats={["avif","webp"]} quality={80} loading="lazy" class="qhero__img" />
+        <Picture src={vendome} alt={t('quiet.home.hero.mediaSideBAlt')} widths={[400, 640, 800]} sizes="(max-width:900px) 50vw, 25vw" formats={["avif","webp"]} fallbackFormat="webp" quality={80} loading="lazy" class="qhero__img" />
         <figcaption><b>{t('quiet.home.hero.mediaSideBLabel')}</b>{t('quiet.home.hero.mediaSideBCaption')}</figcaption>
       </figure>
     </div>

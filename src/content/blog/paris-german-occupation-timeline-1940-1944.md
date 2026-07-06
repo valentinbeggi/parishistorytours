@@ -4,6 +4,7 @@ description: "A detailed chronological timeline of Paris under Nazi occupation f
 publishDate: 2026-04-06
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: occupation-timeline
 tags: ["Paris Occupation", "WWII Timeline", "German Occupation 1940-1944", "Paris WWII History", "Liberation of Paris"]
 image: "/photos/resistance_ww2_paris.webp"
 imageAlt: "A street in occupied Paris during World War II, a period that transformed the city from 1940 to 1944"

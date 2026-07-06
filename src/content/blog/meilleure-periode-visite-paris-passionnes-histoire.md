@@ -4,6 +4,7 @@ description: "Saison par saison, découvrez quand visiter Paris pour ses sites W
 publishDate: 2026-04-06
 author: "Clément Daguet-Schott"
 lang: fr
+translationKey: best-time-visit
 tags: ["Visiter Paris", "Seconde Guerre mondiale", "Visites guidées", "Saisons Paris", "Tourisme historique"]
 image: "/photos/right_bank/bridge_alexander_third_paris.webp"
 imageAlt: "Le Pont Alexandre III à Paris, étape incontournable des visites guidées sur la Seconde Guerre mondiale"

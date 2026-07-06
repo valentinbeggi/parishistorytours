@@ -4,6 +4,7 @@ description: "Comment le Palais du Luxembourg est devenu le quartier général d
 publishDate: 2026-04-06
 author: "Clément Daguet-Schott"
 lang: fr
+translationKey: luxembourg-luftwaffe
 tags: ["Palais du Luxembourg", "Luftwaffe", "Seconde Guerre mondiale", "Occupation de Paris", "Rive Gauche"]
 image: "/photos/left_bank/luxembourg_palace_paris.webp"
 imageAlt: "Le Palais du Luxembourg à Paris, siège du Sénat français et ancien quartier général de la Luftwaffe pendant la Seconde Guerre mondiale"

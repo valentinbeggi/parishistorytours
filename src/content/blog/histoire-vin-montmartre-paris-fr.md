@@ -4,6 +4,7 @@ description: "Des vignes romaines à la Fête des Vendanges, découvrez l'histoi
 publishDate: 2026-04-11
 author: "Clement Daguet-Schott"
 lang: fr
+translationKey: montmartre-wine
 tags: ["Montmartre", "Histoire du vin Paris", "Clos Montmartre", "Gastronomie Paris", "Histoire de Paris"]
 image: "/photos/clos_montmartre_vineyard_paris.webp"
 imageAlt: "Le vignoble du Clos Montmartre sur les pentes de la butte Montmartre à Paris"
@@ -113,9 +114,9 @@ Mais aucun ne porte l'histoire, le symbolisme ni le récit de celui de Montmartr
 
 L'histoire du vin à Montmartre illustre parfaitement ce qui fait de Paris une ville si riche pour ceux qui regardent au-delà des monuments évidents. Chaque rue, chaque immeuble, chaque jardin caché a une histoire — et souvent, cette histoire remonte à des siècles.
 
-Nous développons actuellement un nouveau **tour Gastronomie & Vin de Paris** qui explorera les traditions culinaires et l'histoire gastronomique de la ville, notamment des quartiers comme Montmartre où la nourriture et la boisson façonnent la culture locale depuis plus de mille ans.
+Si cette histoire vous a donné soif, bonne nouvelle : notre [**Nourritour — visite food & wine de Paris**](/fr/tours/food-wine) est désormais en ligne. Trois heures à travers les passages couverts et la rue des Martyrs, quatre artisans (madeleines, fromage, charcuterie, vin), puis une dégustation assise de quatre planches qui traversent les régions viticoles de France.
 
-Restez à l'écoute — et en attendant, si vous visitez Paris, faites un détour par le coin de la **rue des Saules** et de la **rue Saint-Vincent** dans le 18e arrondissement. Le vignoble est fermé au public, mais vous pouvez admirer les vignes à travers les grilles et imaginer une époque où tout Paris était un pays de vignobles.
+Et si vous visitez Paris, faites un détour par le coin de la **rue des Saules** et de la **rue Saint-Vincent** dans le 18e arrondissement. Le vignoble est fermé au public, mais vous pouvez admirer les vignes à travers les grilles et imaginer une époque où tout Paris était un pays de vignobles.
 
 *Explorez les histoires cachées de Paris — [Réservez une visite guidée privée](/#book-tour).*
 

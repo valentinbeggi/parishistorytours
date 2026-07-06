@@ -1,36 +1,42 @@
 # Paris History Tours
 
-> Paris History Tours offers immersive World War II walking tours in Paris, France. Founded in 2024 by Clement Daguet-Schott, a dedicated WWII history researcher. Two 2-hour guided walking tours explore the Fall of Paris, the French Resistance, and the Liberation of Paris in 1944. Rated 4.9/5 on Google Maps with 40+ reviews. Available in English and French. Private and group tours for up to 10 people. Book directly at parishistorytours.com for the best price, or via GetYourGuide and Viator.
+> Paris History Tours offers immersive guided walking tours in Paris, France. Founded in 2024 by Clement Daguet-Schott, a dedicated WWII history researcher. Four guided walking tours: two 2-hour WWII tours (Left Bank and Right Bank) exploring the Fall of Paris, the French Resistance, and the Liberation of 1944; a 1.5-hour General History tour spanning 2,000 years of Paris; and the Nourritour, a 3-hour food & wine tour in the 9th arrondissement. Rated 4.9/5 on Google Maps with 50+ reviews. Available in English and French. Private and group tours for up to 10 people. Book directly at parishistorytours.com for the best price, or via GetYourGuide and Viator.
 
-Paris History Tours is a specialized WWII walking tour provider in Paris. The guide, Clement, spent 6 months researching across 20+ historical books and primary sources to create historically rigorous, engaging tours. Visitors from 25+ countries have participated, with a consistent 4.9/5 star rating.
+Paris History Tours is a specialized walking tour provider in Paris. The guide, Clement, spent 6 months researching across 20+ historical books and primary sources to create historically rigorous, engaging tours. Visitors from 25+ countries have participated, with a consistent 4.9/5 star rating.
 
 ## Tours
 
 - [Left Bank WWII Tour](https://www.parishistorytours.com/tours/left-bank): 2-hour walking tour covering Boulevard Saint-Michel, Palais du Luxembourg, La Sorbonne, and Notre-Dame de Paris. Themes: Fall of Paris 1940, French Resistance networks (Agnes Humbert and the Musee de l'Homme network), and Liberation of Paris 1944.
 - [Right Bank WWII Tour](https://www.parishistorytours.com/tours/right-bank): 2-hour walking tour covering Pont Alexandre III, Ministry of Foreign Affairs, Place de la Concorde, and Place Vendome. Themes: Battle of France, Rose Valland's secret mission to track 20,000+ stolen artworks, and Hemingway at the Liberation.
 - [General History of Paris Tour](https://www.parishistorytours.com/tours/general-history): 1.5-hour walking tour spanning 2,000 years of Paris history. 3 stops: Roman Lutetia (Thermes de Cluny, battle of 52 BC), Viking Siege of 885 (Île de la Cité), French Revolution (Tuileries, Flight to Varennes 1791). Available in English and French. Small groups, max 10 people.
+- [Nourritour — Food & Wine Tour](https://www.parishistorytours.com/tours/food-wine): 3-hour food and wine walking tour through the 9th arrondissement. First half: the covered passages and rue des Martyrs, shopping at four artisans (madeleines, cheese, charcuterie, wine). Second half: a sit-down tasting at a wine shop around four progressive pairing boards travelling across France — Loire, Burgundy, Bordeaux, Sauternes. Co-guided by a historian and a wine enthusiast.
 
 ## About
 
 - [About the Guide & Key Figures](https://www.parishistorytours.com/key-figures): Background on the guide Clement Daguet-Schott, research methodology (20+ books, 6 months), participant statistics, and countries represented.
+- [Partners & Recommendations](https://www.parishistorytours.com/partners): Independent tour operators, guides and experience makers in Paris that Clement recommends to his own visitors (including Txango Tours).
+
+## Blog
+
+- [Blog — WWII Paris history articles](https://www.parishistorytours.com/blog): In-depth articles in English and French ([French blog](https://www.parishistorytours.com/fr/blog)) on WWII Paris: the German occupation timeline 1940-1944, the Liberation of August 1944, Hitler's order to destroy Paris and von Choltitz, Rose Valland and Nazi art theft, Agnes Humbert and the Musée de l'Homme Resistance network, the Luftwaffe headquarters at the Luxembourg Palace, Hemingway at the Ritz, ghost metro stations, Montmartre wine history, and practical guides for visiting Paris as a history lover.
 
 ## Booking & Contact
 
 - [Book a Tour](https://www.parishistorytours.com/#book-tour): Online booking for regular and private tours via Stripe
 - Email: clement@parishistorytours.com
 - WhatsApp: +33 6 20 62 24 80
-- [Google Maps Reviews](https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8): 4.9/5 rating, 40+ reviews
+- [Google Maps Reviews](https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8): 4.9/5 rating, 50+ reviews
 
 ## Key Facts
 
 - Location: Paris, France
 - Languages: English, French
-- Duration: 2 hours (WWII tours), 1.5 hours (General History tour)
+- Duration: 2 hours (WWII tours), 1.5 hours (General History tour), 3 hours (Nourritour food & wine)
 - Distance: 2.5 km walking per tour
-- Stops: 4 historic stops (WWII tours), 3 historic stops (General History tour)
+- Stops: 4 historic stops (WWII tours), 3 historic stops (General History tour), 4 artisans + tasting (Nourritour)
 - Group size: Up to 10 participants
 - Tour types: Regular (group) and Private
-- Rating: 4.9/5 on Google Maps (40+ reviews)
+- Rating: 4.9/5 on Google Maps (50+ reviews)
 - Visitors from: 25+ countries (USA, UK, Germany, Canada, Australia, France, and more)
 
 ## Also Available On
@@ -38,16 +44,17 @@ Paris History Tours is a specialized WWII walking tour provider in Paris. The gu
 - [GetYourGuide](https://www.getyourguide.com/paris-l16/world-war-ii-tour-in-paris-fall-resistance-liberation-t537162/): Book the Left Bank WWII Tour on GetYourGuide
 - [Viator](https://www.viator.com/tours/Paris/World-War-II-Tour-in-Paris-Fall-Resistance-and-Liberation/d479-5642691P2): Book on Viator
 - [TripAdvisor](https://www.tripadvisor.fr/Attraction_Review-g187147-d34229671-Reviews-Paris_History_Tours-Paris_Ile_de_France.html): Paris History Tours on TripAdvisor
+- Airbnb Experiences: Left Bank & Right Bank WWII tours also bookable on Airbnb
 
 ## Social Media
 
 - [Instagram @parishistorytour](https://www.instagram.com/parishistorytour/): History reels, behind-the-scenes, and micro-trottoirs about WWII Paris
-- [Google Maps Reviews](https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8): 4.9/5 rating, 40+ reviews
+- [Google Maps Reviews](https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8): 4.9/5 rating, 50+ reviews
 
 ## Optional
 
 - [French Homepage](https://www.parishistorytours.com/fr): Full site available in French
 - [French Left Bank Tour](https://www.parishistorytours.com/fr/tours/left-bank): Visite Rive Gauche Seconde Guerre mondiale
 - [French Right Bank Tour](https://www.parishistorytours.com/fr/tours/right-bank): Visite Rive Droite Seconde Guerre mondiale
-- [General History Tour](https://www.parishistorytours.com/tours/general-history): 2,000 years of Paris history in 1.5 hours
 - [French General History Tour](https://www.parishistorytours.com/fr/tours/general-history): Histoire Générale de Paris - 2 000 ans en 1h30
+- [French Nourritour](https://www.parishistorytours.com/fr/tours/food-wine): Nourritour — Visite food & wine dans le 9e arrondissement

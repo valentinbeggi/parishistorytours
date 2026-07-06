@@ -4,6 +4,7 @@ description: "From Roman vines to the annual Fête des Vendanges, discover the f
 publishDate: 2026-04-11
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: montmartre-wine
 tags: ["Montmartre", "Wine History Paris", "Clos Montmartre", "Food and Wine Paris", "Paris History"]
 image: "/photos/clos_montmartre_vineyard_paris.webp"
 imageAlt: "The Clos Montmartre vineyard on the slopes of Montmartre hill in Paris"
@@ -113,9 +114,9 @@ But none carries the history, the symbolism, or the story quite like Montmartre'
 
 The story of wine in Montmartre is a perfect example of what makes Paris such a rich city for those who look beyond the obvious landmarks. Every street, every building, every hidden garden has a story — and often, that story stretches back centuries.
 
-We're currently developing a new **Food & Wine tour of Paris** that will explore the culinary traditions and gastronomic history of the city, including neighborhoods like Montmartre where food and drink have shaped local culture for over a thousand years.
+If this story made you thirsty, good news: our [**Nourritour — Food & Wine tour of Paris**](/tours/food-wine) is now running. Three hours through the covered passages and the rue des Martyrs, four artisans (madeleines, cheese, charcuterie, wine), and a sit-down tasting of four pairing boards travelling across France's wine regions.
 
-Stay tuned — and in the meantime, if you're visiting Paris, take a detour to the corner of **Rue des Saules** and **Rue Saint-Vincent** in the 18th arrondissement. The vineyard is closed to the public, but you can admire the vines through the railings and imagine a time when all of Paris was wine country.
+And if you're visiting Paris, take a detour to the corner of **Rue des Saules** and **Rue Saint-Vincent** in the 18th arrondissement. The vineyard is closed to the public, but you can admire the vines through the railings and imagine a time when all of Paris was wine country.
 
 *Explore the hidden stories of Paris — [Book a private walking tour](/#book-tour).*
 

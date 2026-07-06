@@ -4,6 +4,7 @@ description: "The week that freed Paris: from the insurrection of August 19 to L
 publishDate: 2026-03-21
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: liberation-paris-1944
 tags: ["Liberation of Paris", "August 1944", "2nd Armored Division", "Charles de Gaulle", "WWII Paris"]
 image: "/photos/left_bank/notre-dame-de-paris.webp"
 imageAlt: "Notre-Dame de Paris, witness to the Liberation of Paris in August 1944"

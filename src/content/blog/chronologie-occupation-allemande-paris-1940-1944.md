@@ -4,6 +4,7 @@ description: "Chronologie détaillée de Paris sous l'Occupation nazie, de juin 
 publishDate: 2026-04-06
 author: "Clément Daguet-Schott"
 lang: fr
+translationKey: occupation-timeline
 tags: ["Occupation de Paris", "Chronologie Seconde Guerre mondiale", "Paris 1940-1944", "Libération de Paris", "Histoire de Paris"]
 image: "/photos/resistance_ww2_paris.webp"
 imageAlt: "Une rue de Paris sous l'Occupation allemande pendant la Seconde Guerre mondiale, une période qui a transformé la ville de 1940 à 1944"

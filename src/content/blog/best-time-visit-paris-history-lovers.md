@@ -4,6 +4,7 @@ description: "When should you visit Paris for WWII history? Season-by-season gui
 publishDate: 2026-04-06
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: best-time-visit
 tags: ["Paris Travel Tips", "WWII Paris", "Walking Tours", "Paris Seasons", "History Travel"]
 image: "/photos/right_bank/bridge_alexander_third_paris.webp"
 imageAlt: "Pont Alexandre III in Paris, one of the landmarks covered on WWII walking tours"

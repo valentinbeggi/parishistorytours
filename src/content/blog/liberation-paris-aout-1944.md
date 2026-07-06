@@ -4,6 +4,7 @@ description: "La semaine qui a libéré Paris : de l'insurrection du 19 août à
 publishDate: 2026-03-21
 author: "Clement Daguet-Schott"
 lang: fr
+translationKey: liberation-paris-1944
 tags: ["Libération de Paris", "Août 1944", "2e Division blindée", "Charles de Gaulle", "Paris Seconde Guerre mondiale"]
 image: "/photos/left_bank/notre-dame-de-paris.webp"
 imageAlt: "Notre-Dame de Paris, témoin de la Libération de Paris en août 1944"

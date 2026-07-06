@@ -4,6 +4,7 @@ description: "Seven Paris metro stations were sealed shut in 1939 and never reop
 publishDate: 2026-04-05
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: ghost-metro-stations
 tags: ["Paris Metro", "Ghost Stations", "World War II", "Paris History", "French Occupation"]
 image: "/photos/ghost_station_saint_martin_paris_metro.webp"
 imageAlt: "The abandoned Saint-Martin ghost station in the Paris Metro, sealed since World War II"

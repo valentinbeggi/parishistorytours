@@ -2,16 +2,11 @@
 // This catch-all route handles all /fr/* paths and routes them to the same content
 // as the English versions, but with French translations
 
-import { getCollection } from 'astro:content';
-
 export const prerender = true;
 
+// Note: individual blog articles are NOT handled here — French articles have
+// their own dedicated route at src/pages/fr/blog/[...slug].astro.
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  const blogPaths = posts.map((post) => ({
-    params: { slug: `blog/${post.id}` },
-  }));
-
   return [
     // Homepage
     { params: { slug: undefined } },
@@ -27,9 +22,8 @@ export async function getStaticPaths() {
     { params: { slug: 'partners' } },
     { params: { slug: 'success' } },
 
-    // Blog
+    // Blog index
     { params: { slug: 'blog' } },
-    ...blogPaths,
   ];
 }
 

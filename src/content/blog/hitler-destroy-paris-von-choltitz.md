@@ -4,6 +4,7 @@ description: "In August 1944, Hitler ordered Paris destroyed — bridges mined, 
 publishDate: 2026-03-21
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: hitler-destroy-paris
 tags: ["Von Choltitz", "Destruction of Paris", "Hitler", "Raoul Nordling", "WWII Paris"]
 image: "/photos/right_bank/bridge_alexander_third_paris.webp"
 imageAlt: "Pont Alexandre III in Paris, one of the bridges Hitler ordered destroyed in August 1944"

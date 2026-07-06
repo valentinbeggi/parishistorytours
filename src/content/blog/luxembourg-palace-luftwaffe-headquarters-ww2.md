@@ -4,6 +4,7 @@ description: "How the Luxembourg Palace became the Luftwaffe's Western Front HQ 
 publishDate: 2026-04-06
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: luxembourg-luftwaffe
 tags: ["Luxembourg Palace", "Luftwaffe", "World War II", "Paris Occupation", "Left Bank"]
 image: "/photos/left_bank/luxembourg_palace_paris.webp"
 imageAlt: "The Luxembourg Palace in Paris, home of the French Senate and former Luftwaffe headquarters during WWII"

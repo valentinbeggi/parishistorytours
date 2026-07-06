@@ -4,6 +4,7 @@ description: "How a quiet museum curator secretly catalogued over 20,000 artwork
 publishDate: 2025-02-14
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: rose-valland
 tags: ["Rose Valland", "Nazi art theft", "French Resistance", "WWII Paris", "Jeu de Paume"]
 image: "/photos/museu_jeu_de_paume_paris.webp"
 imageAlt: "Musée du Jeu de Paume in Paris – wartime storage for Nazi-stolen artwork"

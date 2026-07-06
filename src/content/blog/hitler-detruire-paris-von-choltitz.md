@@ -4,6 +4,7 @@ description: "En août 1944, Hitler ordonna la destruction de Paris — ponts mi
 publishDate: 2026-03-21
 author: "Clement Daguet-Schott"
 lang: fr
+translationKey: hitler-destroy-paris
 tags: ["Von Choltitz", "Destruction de Paris", "Hitler", "Raoul Nordling", "Paris Seconde Guerre mondiale"]
 image: "/photos/right_bank/bridge_alexander_third_paris.webp"
 imageAlt: "Pont Alexandre III à Paris, l'un des ponts qu'Hitler ordonna de détruire en août 1944"

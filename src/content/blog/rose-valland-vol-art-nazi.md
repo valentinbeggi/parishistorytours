@@ -4,6 +4,7 @@ description: "Comment une discrète conservatrice de musée a secrètement catal
 publishDate: 2025-02-14
 author: "Clement Daguet-Schott"
 lang: fr
+translationKey: rose-valland
 tags: ["Rose Valland", "Vol d'art nazi", "Résistance française", "Paris Seconde Guerre mondiale", "Jeu de Paume"]
 image: "/photos/museu_jeu_de_paume_paris.webp"
 imageAlt: "Musée du Jeu de Paume à Paris – entrepôt d'œuvres d'art volées par les nazis"

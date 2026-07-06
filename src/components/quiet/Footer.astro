@@ -23,7 +23,7 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="quiet-footer__col">
-        <h4>{t('quiet.footer.toursHeading')}</h4>
+        <p class="quiet-footer__heading">{t('quiet.footer.toursHeading')}</p>
         <ul>
           <li><a href={`${langPrefix}/tours/left-bank`}>{t('quiet.footer.leftBank')}</a></li>
           <li><a href={`${langPrefix}/tours/right-bank`}>{t('quiet.footer.rightBank')}</a></li>
@@ -34,7 +34,7 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="quiet-footer__col">
-        <h4>{t('quiet.footer.infoHeading')}</h4>
+        <p class="quiet-footer__heading">{t('quiet.footer.infoHeading')}</p>
         <ul>
           <li><a href={`${langPrefix}/key-figures`}>{t('quiet.footer.aboutLink')}</a></li>
           <li><a href={`${langPrefix}/#faq`}>{t('quiet.footer.faqLink')}</a></li>
@@ -44,7 +44,7 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="quiet-footer__col">
-        <h4>{t('quiet.footer.contactHeading')}</h4>
+        <p class="quiet-footer__heading">{t('quiet.footer.contactHeading')}</p>
         <ul>
           <li><a href="https://wa.me/+33620622480" rel="noopener">{t('quiet.footer.whatsapp')}</a></li>
           <li><a href="mailto:clement@parishistorytours.com">{t('quiet.footer.email')}</a></li>
@@ -119,7 +119,7 @@ const year = new Date().getFullYear();
     max-width: 320px;
   }
 
-  .quiet-footer__col h4 {
+  .quiet-footer__col .quiet-footer__heading {
     font-family: var(--font-sans);
     font-size: 11px;
     font-weight: 600;

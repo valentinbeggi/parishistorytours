@@ -4,6 +4,7 @@ description: "Le 25 août 1944, Ernest Hemingway prétendait avoir « libéré �
 publishDate: 2025-02-20
 author: "Clement Daguet-Schott"
 lang: fr
+translationKey: hemingway-ritz
 tags: ["Ernest Hemingway", "Libération de Paris", "Hôtel Ritz", "Place Vendôme", "Paris Seconde Guerre mondiale"]
 image: "/photos/right_bank/Ernest-Hemingway.webp"
 imageAlt: "Ernest Hemingway pendant la Libération de Paris, 1944"

@@ -4,6 +4,7 @@ description: "In autumn 1940, while most of France was still in shock, Agnes Hum
 publishDate: 2026-03-21
 author: "Clement Daguet-Schott"
 lang: en
+translationKey: agnes-humbert
 tags: ["French Resistance", "Agnes Humbert", "Musée de l'Homme", "WWII Paris", "Occupation of Paris"]
 image: "/photos/musee_de_lhomme_paris.webp"
 imageAlt: "The Musée de l'Homme at the Palais de Chaillot in Paris, birthplace of one of the first French Resistance networks"

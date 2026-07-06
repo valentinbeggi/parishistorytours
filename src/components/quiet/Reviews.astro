@@ -51,7 +51,7 @@ const fractional = (averageRating ?? 4.9) - fullStars;
         <h2 class="qreviews__title">{t('quiet.home.reviews.title')}</h2>
       </header>
 
-      <div class="qreviews__summary" aria-label={`Average rating ${displayRating} out of 5 based on ${displayTotal} reviews`}>
+      <div class="qreviews__summary" role="img" aria-label={`Average rating ${displayRating} out of 5 based on ${displayTotal} reviews`}>
         <span class="qreviews__rating">{displayRating}</span>
         <span class="qreviews__summary-stars" aria-hidden="true">
           {Array.from({ length: 5 }).map((_, i) => {
@@ -73,7 +73,7 @@ const fractional = (averageRating ?? 4.9) - fullStars;
             <blockquote class="qreviews__quote">
               "{r.text.length > 220 ? r.text.slice(0, 217).trimEnd() + '…' : r.text}"
             </blockquote>
-            <div class="qreviews__stars" aria-label={`Rating ${r.rating ?? ''} of 5`}>
+            <div class="qreviews__stars" role="img" aria-label={`Rating ${r.rating ?? ''} of 5`}>
               {Array.from({ length: 5 }).map(() => <span aria-hidden="true">★</span>)}
             </div>
             <figcaption>

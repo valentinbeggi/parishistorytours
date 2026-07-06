@@ -4,6 +4,7 @@ description: "Sept stations de métro fermées depuis 1939 dorment sous les rues
 publishDate: 2026-04-05
 author: "Clement Daguet-Schott"
 lang: fr
+translationKey: ghost-metro-stations
 tags: ["Métro Paris", "Stations fantômes", "Seconde Guerre mondiale", "Histoire de Paris", "Occupation"]
 image: "/photos/ghost_station_saint_martin_paris_metro.webp"
 imageAlt: "La station fantôme Saint-Martin dans le métro parisien, fermée depuis la Seconde Guerre mondiale"

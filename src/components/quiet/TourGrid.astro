@@ -92,9 +92,12 @@ const reserveCta = t('quiet.home.tours.reserveCta');
             <Picture
               src={card.img}
               alt={card.alt}
+              width={960}
+              height={Math.round((960 / card.img.width) * card.img.height)}
               widths={[480, 720, 960]}
               sizes="(max-width:900px) 100vw, 33vw"
               formats={["avif", "webp"]}
+              fallbackFormat="webp"
               quality={80}
               loading="lazy"
             />
