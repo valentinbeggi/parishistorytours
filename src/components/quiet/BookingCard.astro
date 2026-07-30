@@ -22,9 +22,9 @@ const duration =
 // The real price is fetched on the client at runtime so a Stripe change is
 // reflected immediately without redeploying.
 const fallbackPrice =
-  variant === 'general'  ? '45 €' :
-  variant === 'foodWine' ? '95 €' :
-                           '49 €';
+  variant === 'general'  ? '59 €' :
+  variant === 'foodWine' ? '119 €' :
+                           '59 €';
 
 // Partner row — filter out missing URLs
 const partnerItems = [
@@ -98,7 +98,7 @@ const partnerItems = [
 <script>
   // Refresh any element marked [data-stripe-price="<tour-slug>"] with the live
   // Stripe price for that tour. If the existing text already contains a number
-  // (e.g. "From €49"), only that number is swapped — surrounding labels stay.
+  // (e.g. "From €59"), only that number is swapped — surrounding labels stay.
   document.querySelectorAll<HTMLElement>('[data-stripe-price]').forEach(async (el) => {
     const tour = el.dataset.stripePrice;
     if (!tour) return;

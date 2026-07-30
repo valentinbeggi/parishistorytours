@@ -591,7 +591,7 @@ export const fr = {
         },
         {
           question: "Combien coûte la visite Rive Gauche ?",
-          answer: "À partir de 49 € par personne pour la visite en groupe (10 participants maximum). Des visites privées, réservées à votre groupe, sont aussi disponibles avec des dates et horaires flexibles."
+          answer: "À partir de 59 € par personne pour la visite en groupe (10 participants maximum). Des visites privées, réservées à votre groupe, sont aussi disponibles avec des dates et horaires flexibles."
         },
         {
           question: "La visite Rive Gauche convient-elle pour une première venue à Paris ?",
@@ -613,7 +613,7 @@ export const fr = {
         },
         {
           question: "Combien coûte la visite Rive Droite ?",
-          answer: "À partir de 49 € par personne pour la visite en groupe (10 participants maximum). Des visites privées, réservées à votre groupe, sont aussi disponibles avec des dates et horaires flexibles."
+          answer: "À partir de 59 € par personne pour la visite en groupe (10 participants maximum). Des visites privées, réservées à votre groupe, sont aussi disponibles avec des dates et horaires flexibles."
         },
         {
           question: "Dois-je choisir la visite Rive Gauche ou Rive Droite ?",
@@ -635,7 +635,7 @@ export const fr = {
         },
         {
           question: "Combien coûte la visite Histoire Générale ?",
-          answer: "À partir de 45 € par personne pour la visite en groupe (10 participants maximum). Des visites privées sont aussi disponibles."
+          answer: "À partir de 59 € par personne pour la visite en groupe (10 participants maximum). Des visites privées sont aussi disponibles."
         },
         {
           question: "Est-ce une bonne introduction à Paris ?",
@@ -657,7 +657,7 @@ export const fr = {
         },
         {
           question: "Combien coûte le Nourritour ?",
-          answer: "À partir de 95 € par personne, dégustations comprises. La taille du groupe est limitée pour garder les visites d'artisans et la dégustation conviviales."
+          answer: "À partir de 119 € par personne, dégustations comprises. La taille du groupe est limitée pour garder les visites d'artisans et la dégustation conviviales."
         },
         {
           question: "Qui guide le Nourritour ?",
@@ -778,14 +778,14 @@ export const fr = {
       menuLabel: "Menu"
     },
     mobileBooking: {
-      priceFrom: "À partir de 49 €",
+      priceFrom: "À partir de 59 €",
       meta: "Petit groupe · Visite de 2 h",
       cta: "Réserver",
-      priceWW2: "À partir de 49 €",
+      priceWW2: "À partir de 59 €",
       metaWW2: "Petit groupe · Visite de 2 h",
-      priceGeneral: "À partir de 45 €",
+      priceGeneral: "À partir de 59 €",
       metaGeneral: "Petit groupe · Visite de 1 h 30",
-      priceFoodWine: "À partir de 95 €",
+      priceFoodWine: "À partir de 119 €",
       metaFoodWine: "Petit groupe · Dégustation de 3 h"
     },
     footer: {

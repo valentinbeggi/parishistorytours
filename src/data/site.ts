@@ -10,8 +10,8 @@ export const GOOGLE_REVIEWS = {
 // Public starting prices (EUR), as displayed in the booking UI ("From €…").
 // Keep in sync with the active Stripe prices.
 export const TOUR_PRICES: Record<string, string> = {
-  "left-bank": "49",
-  "right-bank": "49",
-  "general-history": "45",
-  "food-wine": "95",
+  "left-bank": "59",
+  "right-bank": "59",
+  "general-history": "59",
+  "food-wine": "119",
 };

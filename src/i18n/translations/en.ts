@@ -591,7 +591,7 @@ export const en = {
         },
         {
           question: "How much does the Left Bank WWII tour cost?",
-          answer: "From €49 per person for the group tour (maximum 10 participants). Private tours for your group only are also available, with flexible dates and times."
+          answer: "From €59 per person for the group tour (maximum 10 participants). Private tours for your group only are also available, with flexible dates and times."
         },
         {
           question: "Is the Left Bank tour a good choice for a first visit to Paris?",
@@ -613,7 +613,7 @@ export const en = {
         },
         {
           question: "How much does the Right Bank WWII tour cost?",
-          answer: "From €49 per person for the group tour (maximum 10 participants). Private tours for your group only are also available, with flexible dates and times."
+          answer: "From €59 per person for the group tour (maximum 10 participants). Private tours for your group only are also available, with flexible dates and times."
         },
         {
           question: "Should I choose the Left Bank or the Right Bank tour?",
@@ -635,7 +635,7 @@ export const en = {
         },
         {
           question: "How much does the General History tour cost?",
-          answer: "From €45 per person for the group tour (maximum 10 participants). Private tours are also available."
+          answer: "From €59 per person for the group tour (maximum 10 participants). Private tours are also available."
         },
         {
           question: "Is the General History tour a good introduction to Paris?",
@@ -657,7 +657,7 @@ export const en = {
         },
         {
           question: "How much does the Nourritour cost?",
-          answer: "From €95 per person, tastings included. Group size is limited to keep the artisan visits and the tasting personal."
+          answer: "From €119 per person, tastings included. Group size is limited to keep the artisan visits and the tasting personal."
         },
         {
           question: "Who guides the Nourritour?",
@@ -778,14 +778,14 @@ export const en = {
       menuLabel: "Menu"
     },
     mobileBooking: {
-      priceFrom: "From €49",
+      priceFrom: "From €59",
       meta: "Small group · 2h walk",
       cta: "Book a Tour",
-      priceWW2: "From €49",
+      priceWW2: "From €59",
       metaWW2: "Small group · 2h walk",
-      priceGeneral: "From €45",
+      priceGeneral: "From €59",
       metaGeneral: "Small group · 1h30 walk",
-      priceFoodWine: "From €95",
+      priceFoodWine: "From €119",
       metaFoodWine: "Small group · 3h tasting"
     },
     footer: {
