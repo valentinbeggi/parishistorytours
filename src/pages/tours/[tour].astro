@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets';
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import JsonLd from "../../components/JsonLd.astro";
-import { GOOGLE_REVIEWS } from "../../data/site";
+import { GOOGLE_REVIEWS, TOUR_PRICES } from "../../data/site";
 import { useTranslations } from '../../i18n/utils';
 import { tours } from '../../data/tours';
 
@@ -161,7 +161,7 @@ const jsonLdGuideJobTitle =
       </div>
     </section>
 
-    <FAQ />
+    <FAQ itemsKey={`faq.tours.${tp}`} />
   </main>
 
   <MobileBookingBar href="#book" variant={variant} slug={tourSlug} />
@@ -183,6 +183,7 @@ const jsonLdGuideJobTitle =
     },
     "offers": {
       "@type": "Offer",
+      "price": TOUR_PRICES[tourConfig.slug],
       "priceCurrency": "EUR",
       "availability": "https://schema.org/InStock",
       "url": `https://www.parishistorytours.com/tours/${tourConfig.slug}`

@@ -54,7 +54,7 @@ Von Choltitz signed the surrender of the Paris garrison at the **Préfecture de 
 
 The following day, **General Charles de Gaulle** led a triumphal march from the Arc de Triomphe down the Champs-Élysées to Notre-Dame. Hundreds of thousands of Parisians filled the avenue and surrounding streets.
 
-The march was not without danger. Shots rang out at several points along the route — at Place de la Concorde and inside Notre-Dame itself. The origin of the shooting has been debated by historians, with theories ranging from remaining German snipers to nervous militiamen to accidental discharges.
+The march was not without danger. Shots rang out at several points along the route — at Place de la Concorde and [inside Notre-Dame itself](/blog/notre-dame-paris-ww2). The origin of the shooting has been debated by historians, with theories ranging from remaining German snipers to nervous militiamen to accidental discharges.
 
 De Gaulle, characteristically, barely flinched. He continued walking, projecting the image of authority and calm that he believed France needed.
 

@@ -34,7 +34,7 @@ The demolition orders were detailed and specific:
 
 - **All 45 bridges** over the Seine in the Paris area were to be mined and destroyed
 - The **Eiffel Tower** was to be toppled
-- **Notre-Dame**, the **Opéra**, the **Madeleine**, and other landmarks were to be demolished
+- [**Notre-Dame**](/blog/notre-dame-paris-ww2), the **Opéra**, the **Madeleine**, and other landmarks were to be demolished
 - Key industrial facilities and infrastructure were to be rendered useless
 - The **Paris water supply** was to be sabotaged
 

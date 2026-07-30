@@ -54,7 +54,7 @@ Von Choltitz signa la reddition de la garnison de Paris à la **Préfecture de P
 
 Le lendemain, le **général Charles de Gaulle** mena une marche triomphale de l'Arc de Triomphe jusqu'à Notre-Dame en descendant les Champs-Élysées. Des centaines de milliers de Parisiens remplirent l'avenue et les rues environnantes.
 
-La marche ne fut pas sans danger. Des coups de feu retentirent à plusieurs endroits du parcours — Place de la Concorde et à l'intérieur même de Notre-Dame. L'origine des tirs a été débattue par les historiens, les théories allant de snipers allemands restants à des miliciens nerveux en passant par des tirs accidentels.
+La marche ne fut pas sans danger. Des coups de feu retentirent à plusieurs endroits du parcours — Place de la Concorde et [à l'intérieur même de Notre-Dame](/fr/blog/notre-dame-paris-seconde-guerre-mondiale). L'origine des tirs a été débattue par les historiens, les théories allant de snipers allemands restants à des miliciens nerveux en passant par des tirs accidentels.
 
 De Gaulle, fidèle à lui-même, broncha à peine. Il continua à marcher, projetant l'image d'autorité et de calme dont il estimait que la France avait besoin.
 

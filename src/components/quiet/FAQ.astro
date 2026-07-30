@@ -5,7 +5,11 @@ import JsonLd from '../JsonLd.astro';
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
 
-const faqItems = t('faq.items') as { question: string; answer: string }[];
+// Tour pages pass their own itemsKey (e.g. faq.tours.leftBank) so each page
+// carries page-specific questions instead of duplicating the same FAQPage
+// schema site-wide.
+const { itemsKey = 'faq.items' } = Astro.props;
+const faqItems = t(itemsKey) as { question: string; answer: string }[];
 
 const faqSchema = {
   "@context": "https://schema.org",

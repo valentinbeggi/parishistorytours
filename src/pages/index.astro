@@ -4,7 +4,7 @@ import "../styles/global.css";
 import { useTranslations } from '../i18n/utils';
 
 import JsonLd from "../components/JsonLd.astro";
-import { GOOGLE_REVIEWS } from "../data/site";
+import { GOOGLE_REVIEWS, TOUR_PRICES } from "../data/site";
 
 // Quiet chrome + sections
 import TopBar from "../components/quiet/TopBar.astro";
@@ -102,7 +102,8 @@ const langPrefix = isDefaultLang ? '' : '/fr';
             "description": t('jsonLd.leftBankDescription'),
             "touristType": ["History enthusiast", "Cultural traveler"],
             "duration": "PT2H",
-            "url": `https://www.parishistorytours.com${langPrefix}/tours/left-bank`
+            "url": `https://www.parishistorytours.com${langPrefix}/tours/left-bank`,
+            "offers": { "@type": "Offer", "price": TOUR_PRICES["left-bank"], "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
           }
         },
         {
@@ -113,7 +114,8 @@ const langPrefix = isDefaultLang ? '' : '/fr';
             "description": t('jsonLd.rightBankDescription'),
             "touristType": ["History enthusiast", "Cultural traveler"],
             "duration": "PT2H",
-            "url": `https://www.parishistorytours.com${langPrefix}/tours/right-bank`
+            "url": `https://www.parishistorytours.com${langPrefix}/tours/right-bank`,
+            "offers": { "@type": "Offer", "price": TOUR_PRICES["right-bank"], "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
           }
         },
         {
@@ -124,7 +126,8 @@ const langPrefix = isDefaultLang ? '' : '/fr';
             "description": t('jsonLd.generalHistoryDescription'),
             "touristType": ["History enthusiast", "Cultural traveler", "First-time visitor"],
             "duration": "PT1H30M",
-            "url": `https://www.parishistorytours.com${langPrefix}/tours/general-history`
+            "url": `https://www.parishistorytours.com${langPrefix}/tours/general-history`,
+            "offers": { "@type": "Offer", "price": TOUR_PRICES["general-history"], "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
           }
         },
         {
@@ -135,7 +138,8 @@ const langPrefix = isDefaultLang ? '' : '/fr';
             "description": "A 3-hour food and wine walking tour through the 9th arrondissement of Paris — covered passages, the rue des Martyrs, four artisans (madeleines, cheese, charcuterie, wine) and four tasting flights.",
             "touristType": ["Food lover", "Wine enthusiast", "Cultural traveler"],
             "duration": "PT3H",
-            "url": `https://www.parishistorytours.com${langPrefix}/tours/food-wine`
+            "url": `https://www.parishistorytours.com${langPrefix}/tours/food-wine`,
+            "offers": { "@type": "Offer", "price": TOUR_PRICES["food-wine"], "priceCurrency": "EUR", "availability": "https://schema.org/InStock" }
           }
         }
       ]

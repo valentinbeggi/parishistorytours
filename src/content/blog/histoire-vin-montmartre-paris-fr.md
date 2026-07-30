@@ -2,6 +2,7 @@
 title: "Le Vin à Montmartre : L'Histoire Surprenante du Dernier Vignoble de Paris"
 description: "Des vignes romaines à la Fête des Vendanges, découvrez l'histoire fascinante de la viticulture à Montmartre — et pourquoi boire du vin à Paris était autrefois plus sûr que boire de l'eau."
 publishDate: 2026-04-11
+updatedDate: 2026-07-30
 author: "Clement Daguet-Schott"
 lang: fr
 translationKey: montmartre-wine

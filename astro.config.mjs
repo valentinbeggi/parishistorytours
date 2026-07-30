@@ -14,7 +14,7 @@ const blogMeta = readdirSync("./src/content/blog")
   .filter((f) => f.endsWith(".md"))
   .map((f) => {
     const fm = readFileSync(`./src/content/blog/${f}`, "utf8").split("---")[1] ?? "";
-    const get = (key) => fm.match(new RegExp(`^${key}:\\s*\"?([^\"\\n]+)\"?`, "m"))?.[1]?.trim();
+    const get = (/** @type {string} */ key) => fm.match(new RegExp(`^${key}:\\s*\"?([^\"\\n]+)\"?`, "m"))?.[1]?.trim();
     return {
       slug: f.replace(/\.md$/, ""),
       lang: get("lang"),
@@ -25,8 +25,8 @@ const blogMeta = readdirSync("./src/content/blog")
 const blogRedirects = Object.fromEntries(
   blogMeta.map(({ slug, lang }) =>
     lang === "fr"
-      ? [`/blog/${slug}`, { status: 301, destination: `/fr/blog/${slug}` }]
-      : [`/fr/blog/${slug}`, { status: 301, destination: `/blog/${slug}` }]
+      ? [`/blog/${slug}`, { status: /** @type {301} */ (301), destination: `/fr/blog/${slug}` }]
+      : [`/fr/blog/${slug}`, { status: /** @type {301} */ (301), destination: `/blog/${slug}` }]
   )
 );
 

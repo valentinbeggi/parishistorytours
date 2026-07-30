@@ -574,7 +574,97 @@ export const fr = {
         question: "Combien de temps à l'avance dois-je réserver ?",
         answer: "Nous recommandons de réserver au moins 3 à 5 jours à l'avance, surtout en haute saison (avril–octobre). Des réservations de dernière minute sont parfois possibles — consultez notre calendrier ou envoyez-nous un message WhatsApp."
       }
-    ]
+    ],
+    tours: {
+      leftBank: [
+        {
+          question: "Où commence et où se termine la visite Rive Gauche ?",
+          answer: "La visite commence près du boulevard Saint-Michel et se termine sur le parvis de Notre-Dame. Le point de rendez-vous exact vous est envoyé 24 heures avant la visite."
+        },
+        {
+          question: "Quelles sont les étapes de la visite Rive Gauche ?",
+          answer: "Quatre arrêts historiques en 2 heures et environ 2,5 km : le boulevard Saint-Michel, le palais du Luxembourg, la Sorbonne et Notre-Dame de Paris."
+        },
+        {
+          question: "Quelles histoires raconte la visite Rive Gauche ?",
+          answer: "La chute de Paris en juin 1940, la résistance étudiante à la Sorbonne, Agnès Humbert et le réseau du Musée de l'Homme, le quartier général de la Luftwaffe au palais du Luxembourg, et la Libération — dont le Te Deum sous les tirs à Notre-Dame le 26 août 1944."
+        },
+        {
+          question: "Combien coûte la visite Rive Gauche ?",
+          answer: "À partir de 49 € par personne pour la visite en groupe (10 participants maximum). Des visites privées, réservées à votre groupe, sont aussi disponibles avec des dates et horaires flexibles."
+        },
+        {
+          question: "La visite Rive Gauche convient-elle pour une première venue à Paris ?",
+          answer: "Oui. Le parcours traverse le cœur du Quartier latin — Saint-Michel, la Sorbonne, le jardin du Luxembourg, Notre-Dame — vous découvrez le Paris emblématique tout en entendant les histoires de la Seconde Guerre mondiale que la plupart des visiteurs ignorent."
+        }
+      ],
+      rightBank: [
+        {
+          question: "Où commence et où se termine la visite Rive Droite ?",
+          answer: "La visite commence au pont Alexandre III et se termine place Vendôme. Le point de rendez-vous exact vous est envoyé 24 heures avant la visite."
+        },
+        {
+          question: "Quelles sont les étapes de la visite Rive Droite ?",
+          answer: "Quatre arrêts historiques en 2 heures et environ 2,5 km : le pont Alexandre III, le ministère des Affaires étrangères sur le quai d'Orsay, la place de la Concorde et la place Vendôme."
+        },
+        {
+          question: "Quelles histoires raconte la visite Rive Droite ?",
+          answer: "La bataille de France, la mission secrète de Rose Valland pour tracer plus de 20 000 œuvres d'art pillées par les nazis, le premier drapeau français hissé sur la Concorde à la Libération, et la fameuse « libération » du bar du Ritz par Ernest Hemingway en août 1944."
+        },
+        {
+          question: "Combien coûte la visite Rive Droite ?",
+          answer: "À partir de 49 € par personne pour la visite en groupe (10 participants maximum). Des visites privées, réservées à votre groupe, sont aussi disponibles avec des dates et horaires flexibles."
+        },
+        {
+          question: "Dois-je choisir la visite Rive Gauche ou Rive Droite ?",
+          answer: "Elles sont complémentaires : mêmes trois thèmes — Chute, Résistance, Libération — mais des lieux et des histoires entièrement différents. Beaucoup de visiteurs font les deux sur deux jours. Amateur d'histoire de l'art ? Commencez par la Rive Droite (Rose Valland). Passionné de Résistance ? Commencez par la Rive Gauche."
+        }
+      ],
+      generalHistory: [
+        {
+          question: "Que couvre la visite Histoire Générale de Paris ?",
+          answer: "2 000 ans de Paris en trois épisodes marquants : la Lutèce romaine et la bataille de 52 av. J.-C. aux thermes de Cluny, le siège viking de 885-886 vu depuis l'île de la Cité, et la Révolution française avec la fuite à Varennes de Louis XVI, racontée aux Tuileries."
+        },
+        {
+          question: "Combien de temps dure la visite Histoire Générale ?",
+          answer: "Environ 1h30 avec 3 arrêts, des thermes de Cluny au jardin des Tuileries. Le rythme est confortable pour tous."
+        },
+        {
+          question: "Faut-il connaître l'histoire de France pour apprécier la visite ?",
+          answer: "Pas du tout. La visite est construite comme trois récits autonomes — une bataille romaine, un siège viking, une évasion royale — racontés pour que chacun puisse tout suivre sans aucune connaissance préalable."
+        },
+        {
+          question: "Combien coûte la visite Histoire Générale ?",
+          answer: "À partir de 45 € par personne pour la visite en groupe (10 participants maximum). Des visites privées sont aussi disponibles."
+        },
+        {
+          question: "Est-ce une bonne introduction à Paris ?",
+          answer: "C'est exactement son but : une visite idéale pour un premier jour, qui vous donne la frise chronologique complète de la ville. Les passionnés de la Seconde Guerre mondiale peuvent ensuite approfondir avec nos visites Rive Gauche et Rive Droite."
+        }
+      ],
+      foodWine: [
+        {
+          question: "Le Nourritour, c'est quoi exactement ?",
+          answer: "Une visite gourmande de 3 heures dans le 9e arrondissement, en deux mouvements : d'abord les passages couverts et la rue des Martyrs, avec des courses chez quatre artisans — madeleines, fromage, charcuterie, vin — puis une dégustation assise chez un caviste."
+        },
+        {
+          question: "Que mange-t-on et que boit-on pendant le Nourritour ?",
+          answer: "Les produits achetés chez les quatre artisans sont servis en quatre planches progressives qui traversent les régions viticoles de France : Loire, Bourgogne, Bordeaux et Sauternes."
+        },
+        {
+          question: "Y a-t-il beaucoup de marche ?",
+          answer: "Environ la moitié de la visite : à peu près 1h30 de marche facile dans les passages couverts et la rue des Martyrs, puis 1h30 assis pour la dégustation."
+        },
+        {
+          question: "Combien coûte le Nourritour ?",
+          answer: "À partir de 95 € par personne, dégustations comprises. La taille du groupe est limitée pour garder les visites d'artisans et la dégustation conviviales."
+        },
+        {
+          question: "Qui guide le Nourritour ?",
+          answer: "La visite est co-guidée : un historien raconte les passages couverts, la rue des Martyrs et la manière dont Paris a appris à manger, tandis qu'une passionnée de vin mène la dégustation. Disponible en français et en anglais."
+        }
+      ]
+    }
   },
 
   // Meta (SEO)

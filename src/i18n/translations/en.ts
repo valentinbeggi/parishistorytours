@@ -574,7 +574,97 @@ export const en = {
         question: "How far in advance should I book?",
         answer: "We recommend booking at least 3–5 days ahead, especially during peak season (April–October). Last-minute bookings are sometimes available — check our calendar or send us a WhatsApp message."
       }
-    ]
+    ],
+    tours: {
+      leftBank: [
+        {
+          question: "Where does the Left Bank WWII tour start and end?",
+          answer: "The tour starts near Boulevard Saint-Michel and ends on the parvis of Notre-Dame. The exact meeting point is sent to you 24 hours before the tour."
+        },
+        {
+          question: "What are the stops on the Left Bank WWII tour?",
+          answer: "Four historic stops over 2 hours and about 2.5 km: Boulevard Saint-Michel, the Palais du Luxembourg, the Sorbonne, and Notre-Dame de Paris."
+        },
+        {
+          question: "What stories does the Left Bank tour tell?",
+          answer: "The Fall of Paris in June 1940, the student resistance at the Sorbonne, Agnes Humbert and the Musee de l'Homme network, the Luftwaffe headquarters at the Luxembourg Palace, and the Liberation — including the Te Deum under sniper fire at Notre-Dame on August 26, 1944."
+        },
+        {
+          question: "How much does the Left Bank WWII tour cost?",
+          answer: "From €49 per person for the group tour (maximum 10 participants). Private tours for your group only are also available, with flexible dates and times."
+        },
+        {
+          question: "Is the Left Bank tour a good choice for a first visit to Paris?",
+          answer: "Yes. The route crosses the heart of the Latin Quarter — Saint-Michel, the Sorbonne, the Luxembourg Gardens, Notre-Dame — so you discover iconic Paris while hearing the WWII stories most visitors walk past without knowing."
+        }
+      ],
+      rightBank: [
+        {
+          question: "Where does the Right Bank WWII tour start and end?",
+          answer: "The tour starts at Pont Alexandre III and ends at Place Vendôme. The exact meeting point is sent to you 24 hours before the tour."
+        },
+        {
+          question: "What are the stops on the Right Bank WWII tour?",
+          answer: "Four historic stops over 2 hours and about 2.5 km: Pont Alexandre III, the Ministry of Foreign Affairs on the Quai d'Orsay, Place de la Concorde, and Place Vendôme."
+        },
+        {
+          question: "What stories does the Right Bank tour tell?",
+          answer: "The Battle of France, Rose Valland's secret mission to track more than 20,000 artworks looted by the Nazis, the first French flag raised over Concorde at the Liberation, and Ernest Hemingway's famous 'liberation' of the Ritz bar in August 1944."
+        },
+        {
+          question: "How much does the Right Bank WWII tour cost?",
+          answer: "From €49 per person for the group tour (maximum 10 participants). Private tours for your group only are also available, with flexible dates and times."
+        },
+        {
+          question: "Should I choose the Left Bank or the Right Bank tour?",
+          answer: "They are complementary: same three themes — Fall, Resistance, Liberation — but entirely different locations and stories. Many guests do both on consecutive days. If you love art history, start with the Right Bank (Rose Valland); if you prefer the Resistance, start with the Left Bank."
+        }
+      ],
+      generalHistory: [
+        {
+          question: "What does the General History tour cover?",
+          answer: "2,000 years of Paris in three dramatic episodes: Roman Lutetia and the battle of 52 BC at the Thermes de Cluny, the Viking siege of 885-886 seen from the Île de la Cité, and the French Revolution with Louis XVI's flight to Varennes told at the Tuileries."
+        },
+        {
+          question: "How long is the General History tour?",
+          answer: "About 1.5 hours with 3 stops, from the Thermes de Cluny to the Tuileries Garden. The pace is comfortable for all fitness levels."
+        },
+        {
+          question: "Do I need to know French history to enjoy the tour?",
+          answer: "Not at all. The tour is built as three self-contained stories — a Roman battle, a Viking siege, a royal escape — told so that first-time visitors can follow everything without any prior knowledge."
+        },
+        {
+          question: "How much does the General History tour cost?",
+          answer: "From €45 per person for the group tour (maximum 10 participants). Private tours are also available."
+        },
+        {
+          question: "Is the General History tour a good introduction to Paris?",
+          answer: "It's designed exactly for that: an ideal first-day tour that gives you the city's full timeline, so every monument you see afterwards fits into the story. History lovers who want the WWII chapter in depth can continue with our Left Bank and Right Bank tours."
+        }
+      ],
+      foodWine: [
+        {
+          question: "What is the Nourritour exactly?",
+          answer: "A 3-hour food and wine walking tour of the 9th arrondissement in two movements: first the covered passages and the rue des Martyrs, shopping at four artisans — madeleines, cheese, charcuterie, wine — then a sit-down tasting at a wine shop."
+        },
+        {
+          question: "What will I eat and drink on the Nourritour?",
+          answer: "The products bought at the four artisans are served as four progressive pairing boards that travel across France's wine regions: Loire, Burgundy, Bordeaux, and Sauternes."
+        },
+        {
+          question: "How much walking is involved?",
+          answer: "About half the tour: roughly 1.5 hours of easy walking through the covered passages and the rue des Martyrs, followed by 1.5 hours seated for the tasting."
+        },
+        {
+          question: "How much does the Nourritour cost?",
+          answer: "From €95 per person, tastings included. Group size is limited to keep the artisan visits and the tasting personal."
+        },
+        {
+          question: "Who guides the Nourritour?",
+          answer: "The tour is co-guided: a historian tells the story of the covered passages, the rue des Martyrs and how Paris learned to eat, while a wine specialist leads the tasting. Available in English and French."
+        }
+      ]
+    }
   },
 
   // Meta (SEO)

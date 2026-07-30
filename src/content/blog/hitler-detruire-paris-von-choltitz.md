@@ -34,7 +34,7 @@ Les ordres de démolition étaient détaillés et précis :
 
 - Les **45 ponts** sur la Seine dans la région parisienne devaient être minés et détruits
 - La **Tour Eiffel** devait être abattue
-- **Notre-Dame**, l'**Opéra**, la **Madeleine** et d'autres monuments devaient être démolis
+- [**Notre-Dame**](/fr/blog/notre-dame-paris-seconde-guerre-mondiale), l'**Opéra**, la **Madeleine** et d'autres monuments devaient être démolis
 - Les installations industrielles clés et les infrastructures devaient être rendues inutilisables
 - L'**approvisionnement en eau** de Paris devait être saboté
 

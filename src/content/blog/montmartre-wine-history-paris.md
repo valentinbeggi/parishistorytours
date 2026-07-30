@@ -2,6 +2,7 @@
 title: "Wine in Montmartre: The Surprising History of Paris's Last Vineyard"
 description: "From Roman vines to the annual Fête des Vendanges, discover the fascinating story of winemaking in Montmartre — and why drinking wine in Paris was once safer than drinking water."
 publishDate: 2026-04-11
+updatedDate: 2026-07-30
 author: "Clement Daguet-Schott"
 lang: en
 translationKey: montmartre-wine

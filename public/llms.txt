@@ -18,7 +18,38 @@ Paris History Tours is a specialized walking tour provider in Paris. The guide, 
 
 ## Blog
 
-- [Blog — WWII Paris history articles](https://www.parishistorytours.com/blog): In-depth articles in English and French ([French blog](https://www.parishistorytours.com/fr/blog)) on WWII Paris: the German occupation timeline 1940-1944, the Liberation of August 1944, Hitler's order to destroy Paris and von Choltitz, Rose Valland and Nazi art theft, Agnes Humbert and the Musée de l'Homme Resistance network, the Luftwaffe headquarters at the Luxembourg Palace, Hemingway at the Ritz, ghost metro stations, Montmartre wine history, and practical guides for visiting Paris as a history lover.
+In-depth, historically researched articles on WWII Paris and Paris history, written by the guide. English articles at [/blog](https://www.parishistorytours.com/blog), French at [/fr/blog](https://www.parishistorytours.com/fr/blog).
+
+### English articles
+
+- [A Complete Timeline of Paris Under German Occupation (1940-1944)](https://www.parishistorytours.com/blog/paris-german-occupation-timeline-1940-1944)
+- [The Liberation of Paris: What Happened on August 25, 1944](https://www.parishistorytours.com/blog/liberation-paris-august-1944)
+- [Why Did Hitler Order the Destruction of Paris? The Story of General von Choltitz](https://www.parishistorytours.com/blog/hitler-destroy-paris-von-choltitz)
+- [Notre-Dame at War: How the Cathedral Survived the Occupation — and the Gunfire of August 26, 1944](https://www.parishistorytours.com/blog/notre-dame-paris-ww2)
+- [Rose Valland: The Woman Who Tracked 20,000 Stolen Masterpieces](https://www.parishistorytours.com/blog/rose-valland-nazi-art-theft)
+- [Agnes Humbert and the Musée de l'Homme Network: Paris's First Resistance](https://www.parishistorytours.com/blog/agnes-humbert-musee-homme-resistance)
+- [Luxembourg Palace: From French Senate to Luftwaffe Headquarters](https://www.parishistorytours.com/blog/luxembourg-palace-luftwaffe-headquarters-ww2)
+- [Hemingway at the Ritz: The Story Behind the Liberation's Most Famous Bar Tab](https://www.parishistorytours.com/blog/hemingway-liberation-paris-ritz)
+- [The Ghosts Below: Paris Metro Stations Lost to World War II](https://www.parishistorytours.com/blog/ghost-metro-stations-paris-ww2)
+- [Wine in Montmartre: The Surprising History of Paris's Last Vineyard](https://www.parishistorytours.com/blog/montmartre-wine-history-paris)
+- [Best Time to Visit Paris for History Lovers](https://www.parishistorytours.com/blog/best-time-visit-paris-history-lovers)
+- [What to Expect on a WWII Walking Tour in Paris](https://www.parishistorytours.com/blog/what-to-expect-ww2-walking-tour-paris)
+
+### Articles en français
+
+- [Chronologie complète de Paris sous l'Occupation allemande (1940-1944)](https://www.parishistorytours.com/fr/blog/chronologie-occupation-allemande-paris-1940-1944)
+- [La Libération de Paris : Que s'est-il passé le 25 août 1944 ?](https://www.parishistorytours.com/fr/blog/liberation-paris-aout-1944)
+- [Pourquoi Hitler a-t-il ordonné la destruction de Paris ? L'histoire du général von Choltitz](https://www.parishistorytours.com/fr/blog/hitler-detruire-paris-von-choltitz)
+- [Notre-Dame dans la guerre : comment la cathédrale a traversé l'Occupation — et les tirs du 26 août 1944](https://www.parishistorytours.com/fr/blog/notre-dame-paris-seconde-guerre-mondiale)
+- [Rose Valland : La femme qui a traqué 20 000 chefs-d'œuvre volés](https://www.parishistorytours.com/fr/blog/rose-valland-vol-art-nazi)
+- [Agnès Humbert et le réseau du Musée de l'Homme : la première Résistance parisienne](https://www.parishistorytours.com/fr/blog/agnes-humbert-musee-homme-resistance-fr)
+- [Le Palais du Luxembourg : du Sénat français au QG de la Luftwaffe](https://www.parishistorytours.com/fr/blog/palais-luxembourg-quartier-general-luftwaffe-ww2)
+- [Hemingway au Ritz : L'histoire derrière la note de bar la plus célèbre de la Libération](https://www.parishistorytours.com/fr/blog/hemingway-liberation-paris-ritz-fr)
+- [Les Fantômes du Sous-Sol : les stations de métro que Paris a oubliées](https://www.parishistorytours.com/fr/blog/stations-fantomes-metro-paris-fr)
+- [Le Vin à Montmartre : L'Histoire Surprenante du Dernier Vignoble de Paris](https://www.parishistorytours.com/fr/blog/histoire-vin-montmartre-paris-fr)
+- [Les Glacières de Paris : Comment la Ville Stockait le Froid Avant le Réfrigérateur](https://www.parishistorytours.com/fr/blog/histoire-glacieres-paris-fr)
+- [Quelle est la meilleure période pour visiter Paris quand on aime l'Histoire ?](https://www.parishistorytours.com/fr/blog/meilleure-periode-visite-paris-passionnes-histoire)
+- [À quoi s'attendre lors d'une visite guidée WWII à Paris](https://www.parishistorytours.com/fr/blog/a-quoi-sattendre-visite-ww2-paris)
 
 ## Booking & Contact
 
