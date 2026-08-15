@@ -79,6 +79,6 @@ L'histoire de pourquoi Paris n'a pas été détruit — et le rôle du général
 
 ## Parcourez les lieux de la Libération
 
-Nos visites [**Rive Gauche**](/fr/tours/left-bank) et [**Rive Droite**](/fr/tours/right-bank) couvrent les moments clés de la Libération. À Notre-Dame, nous nous tenons là où de Gaulle a proclamé Paris libre. Au Pont Alexandre III, nous racontons l'histoire des ponts qui ont failli ne pas survivre. Place Vendôme, nous retraçons l'arrivée dramatique d'Hemingway.
+Nos visites [**Rive Gauche**](/fr/tours/left-bank) et [**Rive Droite**](/fr/tours/right-bank) couvrent les moments clés de la Libération. À Notre-Dame, nous nous tenons là où de Gaulle a proclamé Paris libre. Au Pont Alexandre III, nous racontons l'histoire des ponts qui ont failli ne pas survivre. Place Vendôme, nous retraçons l'arrivée dramatique d'Hemingway. Et pour retrouver seul les cicatrices de cette semaine, commencez par [notre guide des impacts de balles, plaques et bunkers du Paris de la Seconde Guerre mondiale](/fr/blog/traces-seconde-guerre-mondiale-paris-impacts-balles-plaques-bunkers).
 
 *Marchez sur leurs traces — [Réservez une visite WWII à Paris](/fr/#book-tour).*

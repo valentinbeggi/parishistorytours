@@ -79,6 +79,6 @@ The story of why Paris was not destroyed — and the role of General von Choltit
 
 ## Walk Through the Liberation
 
-Both our [**Left Bank Tour**](/tours/left-bank) and [**Right Bank Tour**](/tours/right-bank) cover key moments of the Liberation. At Notre-Dame, we stand where de Gaulle proclaimed Paris free. At Pont Alexandre III, we tell the story of the bridges that nearly didn't survive. At Place Vendôme, we recount Hemingway's dramatic arrival.
+Both our [**Left Bank Tour**](/tours/left-bank) and [**Right Bank Tour**](/tours/right-bank) cover key moments of the Liberation. At Notre-Dame, we stand where de Gaulle proclaimed Paris free. At Pont Alexandre III, we tell the story of the bridges that nearly didn't survive. At Place Vendôme, we recount Hemingway's dramatic arrival. And if you want to find the scars of that week on your own, start with [our guide to the bullet holes, plaques and bunkers of WWII Paris](/blog/ww2-traces-paris-bullet-holes-plaques-bunkers).
 
 *Walk in their footsteps — [Book a WWII tour in Paris](/#book-tour).*
