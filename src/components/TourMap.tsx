@@ -1,355 +1,357 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface TourMapProps {
   tour: 'left-bank' | 'right-bank' | 'general-history' | 'food-wine';
 }
 
+const MAPBOX_TOKEN = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+
+// Définir un type unifié pour les stops principaux
+type Stop = {
+  name: string;
+  coords: [number, number];
+  theme?: string;
+};
+
+type Waypoint = { name: string; coords: [number, number] };
+
+// Coordonnées des stops principaux Left Bank avec thèmes historiques
+const leftBankStops: Stop[] = [
+  { name: "Boulevard Saint-Michel", coords: [2.339351, 48.844696], theme: "Introduction & History Quiz" },
+  { name: "Palais du Luxembourg", coords: [2.338257, 48.847677], theme: "The Fall of Paris" },
+  { name: "La Sorbonne", coords: [2.343624, 48.849884], theme: "The Resistance" },
+  { name: "Notre-Dame", coords: [2.347286, 48.853813], theme: "Liberation" }
+];
+
+// Points de passage rapides (petits arrêts)
+const leftBankWaypoints: Waypoint[] = [
+  { name: "Théâtre de l'Odéon", coords: [2.339046, 48.849861] },
+  { name: "Rue Monsieur le Prince", coords: [2.340444, 48.848995] },
+  { name: "Collège de France", coords: [2.344951, 48.849512] },
+  { name: "Saint Severin Church", coords: [2.346410, 48.852279] },
+];
+
+// Coordonnées des stops principaux Right Bank avec thèmes historiques
+const rightBankStops: Stop[] = [
+  { name: "Bridge Alexander III", coords: [2.313925, 48.864547], theme: "Introduction & History Quiz" },
+  { name: "Ministry of Foreign Affairs", coords: [2.316339, 48.862828], theme: "The Fall of Paris" },
+  { name: "Concorde Square", coords: [2.321153, 48.865483], theme: "The Resistance" },
+  { name: "Place Vendôme - The Ritz", coords: [2.329531, 48.867756], theme: "Liberation" }
+];
+
+// Points de passage rapides Right Bank (petits arrêts)
+const rightBankWaypoints: Waypoint[] = [
+  { name: "Concorde Bridge", coords: [2.319477, 48.863381] },
+  { name: "Musée du Jeu de Paume", coords: [2.324681, 48.865602] },
+  { name: "Rue Saint-Honoré", coords: [2.328747, 48.866584] },
+];
+
+// Coordonnées des stops principaux General History
+const generalHistoryStops: Stop[] = [
+  { name: "Thermes de Cluny", coords: [2.3442, 48.8509], theme: "Roman Lutetia" },
+  { name: "Île de la Cité", coords: [2.3470, 48.8534], theme: "The Viking Siege" },
+  { name: "Jardin des Tuileries", coords: [2.3275, 48.8635], theme: "The French Revolution" },
+];
+
+// Points de passage rapides General History
+const generalHistoryWaypoints: Waypoint[] = [
+  { name: "Rue Saint-Jacques", coords: [2.3440, 48.8490] },
+  { name: "Pont Neuf", coords: [2.3415, 48.8568] },
+];
+
+// Nourritour — Food & Wine: 5 stops (Passage Verdeau + 4 artisans)
+// Coordinates (user-provided, lat/lng from Google Maps):
+//   Passage Verdeau — 48.873060, 2.342241  (start)
+//   Madlen          — 48.874386, 2.342656  (6 rue Cadet, géocodé Mapbox)
+//   Chataigner      — 48.877081, 2.339308
+//   Thielen         — 48.878177, 2.339600
+//   Flaconneurs     — 48.876205, 2.340546
+const foodWineStops: Stop[] = [
+  { name: "Passage Verdeau",            coords: [2.342241, 48.873060], theme: "Départ" },
+  { name: "Maison Madlen",              coords: [2.342656, 48.874386], theme: "Madeleines" },
+  { name: "Fromagerie Chataigner",      coords: [2.339308, 48.877081], theme: "Fromage" },
+  { name: "Charcuterie Maison Thielen", coords: [2.339600, 48.878177], theme: "Charcuterie" },
+  { name: "Les Flaconneurs",            coords: [2.340546, 48.876205], theme: "Dégustation" },
+];
+const foodWineWaypoints: Waypoint[] = [];
+
+const TOUR_DATA: Record<TourMapProps['tour'], {
+  stops: Stop[];
+  waypoints: Waypoint[];
+  center: [number, number];
+  label: string;
+  defaultInfo: string;
+  /** Ordre de marche réel : stops et waypoints entrelacés. */
+  path: [number, number][];
+}> = {
+  'left-bank': {
+    stops: leftBankStops,
+    waypoints: leftBankWaypoints,
+    center: [2.3444, 48.8500],
+    label: 'Left Bank',
+    defaultInfo: '2.5 km · 4 stops · 2 h',
+    path: [
+      leftBankStops[0].coords,     // Boulevard Saint-Michel
+      leftBankStops[1].coords,     // Palais du Luxembourg
+      leftBankWaypoints[0].coords, // Théâtre de l'Odéon
+      leftBankWaypoints[1].coords, // Rue Monsieur le Prince
+      leftBankStops[2].coords,     // La Sorbonne
+      leftBankWaypoints[2].coords, // Collège de France
+      leftBankWaypoints[3].coords, // Saint Severin
+      leftBankStops[3].coords,     // Notre-Dame
+    ],
+  },
+  'right-bank': {
+    stops: rightBankStops,
+    waypoints: rightBankWaypoints,
+    center: [2.3215, 48.8655],
+    label: 'Right Bank',
+    defaultInfo: '2.5 km · 4 stops · 2 h',
+    path: [
+      rightBankStops[0].coords,
+      rightBankStops[1].coords,
+      rightBankWaypoints[0].coords,
+      rightBankStops[2].coords,
+      rightBankWaypoints[1].coords,
+      rightBankWaypoints[2].coords,
+      rightBankStops[3].coords,
+    ],
+  },
+  'general-history': {
+    stops: generalHistoryStops,
+    waypoints: generalHistoryWaypoints,
+    center: [2.3380, 48.8560],
+    label: 'General History',
+    defaultInfo: '2.5 km · 3 stops · 1 h 30',
+    path: [
+      generalHistoryStops[0].coords,
+      generalHistoryWaypoints[0].coords,
+      generalHistoryStops[1].coords,
+      generalHistoryWaypoints[1].coords,
+      generalHistoryStops[2].coords,
+    ],
+  },
+  'food-wine': {
+    stops: foodWineStops,
+    waypoints: foodWineWaypoints,
+    center: [2.3425, 48.8790],
+    label: 'Nourritour',
+    defaultInfo: '~1 km · 5 stops · 3 h',
+    path: foodWineStops.map((s) => s.coords),
+  },
+};
+
+/**
+ * Itinéraire piéton réel via l'API Directions de Mapbox.
+ * - `walking` : réseau piéton (trottoirs, rues piétonnes, passerelles)
+ * - `overview=full` : géométrie pleine résolution, sinon le tracé coupe les angles
+ * - `walkway_bias=1` : privilégie fortement les voies piétonnes plutôt que les axes routiers
+ * Retourne null si l'API échoue (on retombe alors sur la ligne droite, en pointillés).
+ */
+async function fetchWalkingRoute(path: [number, number][], signal: AbortSignal) {
+  if (!MAPBOX_TOKEN || path.length < 2) return null;
+
+  // L'API Directions accepte 25 coordonnées max — nos parcours en font 5 à 8.
+  const coordinates = path.map((c) => `${c[0]},${c[1]}`).join(';');
+  const url =
+    `https://api.mapbox.com/directions/v5/mapbox/walking/${coordinates}` +
+    `?geometries=geojson&overview=full&walkway_bias=1&steps=false` +
+    `&access_token=${MAPBOX_TOKEN}`;
+
+  const res = await fetch(url, { signal });
+  if (!res.ok) throw new Error(`Directions API ${res.status}`);
+
+  const data = await res.json();
+  if (data.code !== 'Ok' || !data.routes?.length) {
+    throw new Error(`Directions API: ${data.code ?? 'no route'}`);
+  }
+  return data.routes[0] as {
+    geometry: { type: 'LineString'; coordinates: [number, number][] };
+    distance: number;
+    duration: number;
+  };
+}
+
 const TourMap: React.FC<TourMapProps> = ({ tour }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<any>(null);
-
-  // Définir un type unifié pour les stops principaux
-  type Stop = {
-    name: string;
-    coords: [number, number];
-    theme?: string;
-  };
-
-  // Coordonnées des stops principaux Left Bank avec thèmes historiques
-  const leftBankStops: Stop[] = [
-    { name: "Boulevard Saint-Michel", coords: [2.339351, 48.844696], theme: "Introduction & History Quiz" },
-    { name: "Palais du Luxembourg", coords: [2.338257, 48.847677], theme: "The Fall of Paris" },
-    { name: "La Sorbonne", coords: [2.343624, 48.849884], theme: "The Resistance" },
-    { name: "Notre-Dame", coords: [2.347286, 48.853813], theme: "Liberation" }
-  ];
-
-  // Points de passage rapides (petits arrêts)
-  const leftBankWaypoints = [
-    { name: "Théâtre de l'Odéon", coords: [2.339046, 48.849861] },
-    { name: "Rue Monsieur le Prince", coords: [2.340444, 48.848995] },
-    { name: "Collège de France", coords: [2.344951, 48.849512] },
-    { name: "Saint Severin Church", coords: [2.346410, 48.852279] },
-  ];
-
-  // Coordonnées des stops principaux Right Bank avec thèmes historiques
-  const rightBankStops: Stop[] = [
-    { name: "Bridge Alexander III", coords: [2.313925, 48.864547], theme: "Introduction & History Quiz" },
-    { name: "Ministry of Foreign Affairs", coords: [2.316339, 48.862828], theme: "The Fall of Paris" },
-    { name: "Concorde Square", coords: [2.321153, 48.865483], theme: "The Resistance" },
-    { name: "Place Vendôme - The Ritz", coords: [2.329531, 48.867756], theme: "Liberation" }
-  ];
-
-  // Points de passage rapides Right Bank (petits arrêts)
-  const rightBankWaypoints = [
-    { name: "Concorde Bridge", coords: [2.319477, 48.863381] },
-    { name: "Musée du Jeu de Paume", coords: [2.324681, 48.865602] },
-    { name: "Rue Saint-Honoré", coords: [2.328747, 48.866584] },
-  ];
-
-  // Coordonnées des stops principaux General History
-  const generalHistoryStops: Stop[] = [
-    { name: "Thermes de Cluny", coords: [2.3442, 48.8509], theme: "Roman Lutetia" },
-    { name: "Île de la Cité", coords: [2.3470, 48.8534], theme: "The Viking Siege" },
-    { name: "Jardin des Tuileries", coords: [2.3275, 48.8635], theme: "The French Revolution" },
-  ];
-
-  // Points de passage rapides General History
-  const generalHistoryWaypoints = [
-    { name: "Rue Saint-Jacques", coords: [2.3440, 48.8490] as [number, number] },
-    { name: "Pont Neuf", coords: [2.3415, 48.8568] as [number, number] },
-  ];
-
-  // Nourritour — Food & Wine: 5 stops (Passage Verdeau + 4 artisans)
-  // Coordinates (user-provided, lat/lng from Google Maps):
-  //   Passage Verdeau — 48.873060, 2.342241  (start)
-  //   Madlen          — 48.8754,   2.3456   (6 rue Cadet — estimated; confirm)
-  //   Chataigner      — 48.877081, 2.339308
-  //   Thielen         — 48.878177, 2.339600
-  //   Flaconneurs     — 48.876205, 2.340546
-  const foodWineStops: Stop[] = [
-    { name: "Passage Verdeau",            coords: [2.342241, 48.873060], theme: "Départ" },
-    { name: "Maison Madlen",              coords: [2.345600, 48.875400], theme: "Madeleines" },
-    { name: "Fromagerie Chataigner",      coords: [2.339308, 48.877081], theme: "Fromage" },
-    { name: "Charcuterie Maison Thielen", coords: [2.339600, 48.878177], theme: "Charcuterie" },
-    { name: "Les Flaconneurs",            coords: [2.340546, 48.876205], theme: "Dégustation" },
-  ];
-  const foodWineWaypoints: { name: string; coords: [number, number] }[] = [];
-
-  const stops = tour === 'left-bank'
-    ? leftBankStops
-    : tour === 'right-bank'
-      ? rightBankStops
-      : tour === 'food-wine'
-        ? foodWineStops
-        : generalHistoryStops;
+  const data = TOUR_DATA[tour];
+  const [routeInfo, setRouteInfo] = useState<string>(data.defaultInfo);
 
   useEffect(() => {
     if (!mapContainer.current) return;
 
-    let mapboxgl: any;
+    const controller = new AbortController();
+    let disposed = false;
     let cleanup: (() => void) | undefined;
 
     (async () => {
-      const mod = await import('mapbox-gl');
-      await import('mapbox-gl/dist/mapbox-gl.css');
-      mapboxgl = mod.default;
+      const [mod] = await Promise.all([
+        import('mapbox-gl'),
+        import('mapbox-gl/dist/mapbox-gl.css'),
+      ]);
+      if (disposed) return;
 
-    mapboxgl.accessToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+      const mapboxgl = mod.default;
+      mapboxgl.accessToken = MAPBOX_TOKEN;
 
-    // Calculer le centre en fonction du tour
-    const centerCoords: [number, number] = tour === 'left-bank'
-      ? [2.3444, 48.8500] // Centre pour Left Bank
-      : tour === 'right-bank'
-        ? [2.3215, 48.8655] // Centre pour Right Bank
-        : tour === 'food-wine'
-          ? [2.3425, 48.8790] // Centre pour Nourritour (9ème)
-          : [2.3380, 48.8560]; // Centre pour General History
+      const instance = new mapboxgl.Map({
+        container: mapContainer.current!,
+        // Quiet: desaturated light style for an editorial paper feel
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: data.center,
+        zoom: 14,
+        attributionControl: false,
+      });
+      map.current = instance;
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      // Quiet: desaturated light style for an editorial paper feel
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: centerCoords,
-      zoom: 14,
-      attributionControl: false
-    });
-
-    map.current.on('load', async () => {
-      // Quiet numbered markers: 28px circle, cream fill, 1px ink border, Playfair numeral.
-      // Inline styles keep this independent of the page's Tailwind layer.
-      stops.forEach((stop, index) => {
-        const el = document.createElement('div');
-        el.className = 'quiet-marker';
-        el.innerHTML = `
-          <div style="
-            width:28px;height:28px;
-            display:grid;place-items:center;
-            background:#fafaf7;
-            color:#1a1a1a;
-            border:1px solid #1a1a1a;
-            border-radius:50%;
-            font-family:'Playfair Display Variable', Georgia, serif;
-            font-weight:500;
-            font-size:13px;
-            line-height:1;
-            box-shadow:0 1px 2px rgba(0,0,0,0.06);
-          ">${index + 1}</div>
-        `;
-
-        new mapboxgl.Marker(el)
-          .setLngLat(stop.coords as [number, number])
-          .setPopup(
-            new mapboxgl.Popup({ offset: 18, className: 'quiet-popup' }).setHTML(`
-              <div style="padding:4px 2px;font-family:'Inter Variable',system-ui,sans-serif;">
-                <div style="font-family:'Playfair Display Variable',Georgia,serif;font-weight:500;font-size:15px;color:#1a1a1a;margin-bottom:4px;">${stop.name}</div>
-                <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#4a4a4a;">Stop ${index + 1}${stop.theme ? ' · ' + stop.theme : ''}</div>
-              </div>
-            `)
-          )
-          .addTo(map.current!);
+      // Lancer l'appel Directions en parallèle du chargement du style :
+      // le tracé est prêt dès que la carte peut l'afficher.
+      const routePromise = fetchWalkingRoute(data.path, controller.signal).catch((err) => {
+        if (err?.name !== 'AbortError') {
+          console.error('Itinéraire piéton indisponible, repli en ligne droite :', err);
+        }
+        return null;
       });
 
-      // Waypoints: small teal dots, no border.
-      const waypoints = tour === 'left-bank'
-        ? leftBankWaypoints
-        : tour === 'right-bank'
-          ? rightBankWaypoints
-          : tour === 'food-wine'
-            ? foodWineWaypoints
-            : generalHistoryWaypoints;
+      instance.on('load', async () => {
+        if (disposed) return;
 
-      waypoints.forEach((waypoint) => {
-        const el = document.createElement('div');
-        el.className = 'quiet-waypoint';
-        el.innerHTML = `
-          <div style="
-            width:8px;height:8px;
-            background:#3a4a48;
-            border-radius:50%;
-            opacity:0.75;
-          "></div>
-        `;
+        // Quiet numbered markers: 28px circle, cream fill, 1px ink border, Playfair numeral.
+        // Inline styles keep this independent of the page's Tailwind layer.
+        data.stops.forEach((stop, index) => {
+          const el = document.createElement('div');
+          el.className = 'quiet-marker';
+          el.innerHTML = `
+            <div style="
+              width:28px;height:28px;
+              display:grid;place-items:center;
+              background:#fafaf7;
+              color:#1a1a1a;
+              border:1px solid #1a1a1a;
+              border-radius:50%;
+              font-family:'Playfair Display Variable', Georgia, serif;
+              font-weight:500;
+              font-size:13px;
+              line-height:1;
+              box-shadow:0 1px 2px rgba(0,0,0,0.06);
+            ">${index + 1}</div>
+          `;
 
-        new mapboxgl.Marker(el)
-          .setLngLat(waypoint.coords as [number, number])
-          .setPopup(
-            new mapboxgl.Popup({ offset: 10, className: 'quiet-popup' }).setHTML(`
-              <div style="padding:4px 2px;font-family:'Inter Variable',system-ui,sans-serif;">
-                <div style="font-family:'Playfair Display Variable',Georgia,serif;font-weight:500;font-size:14px;color:#1a1a1a;">${waypoint.name}</div>
-              </div>
-            `)
-          )
-          .addTo(map.current!);
-      });
-
-      // Calculer l'itinéraire piéton réel
-      await drawWalkingRoute();
-
-      // Ajuster la vue pour inclure tous les points du tour
-      const bounds = new mapboxgl.LngLatBounds();
-
-      // Ajouter tous les stops principaux aux bounds
-      stops.forEach(stop => bounds.extend(stop.coords as mapboxgl.LngLatLike));
-      // Ajouter tous les waypoints aux bounds
-      waypoints.forEach(waypoint => bounds.extend(waypoint.coords as mapboxgl.LngLatLike));
-
-      // Ajuster la vue avec un padding approprié
-      map.current!.fitBounds(bounds, {
-        padding: { top: 50, bottom: 50, left: 50, right: 50 },
-        maxZoom: 15
-      });
-    });
-
-    cleanup = () => {
-      if (map.current) {
-        map.current.remove();
-      }
-    };
-    })();
-
-    return () => { cleanup?.(); };
-  }, [tour]);
-
-  const drawWalkingRoute = async () => {
-    try {
-      // Combiner tous les points dans l'ordre du parcours
-      const allPoints: [number, number][] = [];
-
-      if (tour === 'left-bank') {
-        allPoints.push(leftBankStops[0].coords);
-        allPoints.push(leftBankStops[1].coords);
-        allPoints.push(leftBankWaypoints[0].coords as [number, number]);
-        allPoints.push(leftBankWaypoints[1].coords as [number, number]);
-        allPoints.push(leftBankWaypoints[2].coords as [number, number]);
-        allPoints.push(leftBankStops[2].coords);
-        allPoints.push(leftBankWaypoints[3].coords as [number, number]);
-        allPoints.push(leftBankStops[3].coords);
-      } else if (tour === 'right-bank') {
-        allPoints.push(rightBankStops[0].coords);
-        allPoints.push(rightBankStops[1].coords);
-        allPoints.push(rightBankWaypoints[0].coords as [number, number]);
-        allPoints.push(rightBankStops[2].coords);
-        allPoints.push(rightBankWaypoints[1].coords as [number, number]);
-        allPoints.push(rightBankWaypoints[2].coords as [number, number]);
-        allPoints.push(rightBankStops[3].coords);
-      } else if (tour === 'food-wine') {
-        // Nourritour: Verdeau → Madlen → Chataigner → Thielen → Flaconneurs
-        allPoints.push(foodWineStops[0].coords); // Passage Verdeau
-        allPoints.push(foodWineStops[1].coords); // Madlen
-        allPoints.push(foodWineStops[2].coords); // Chataigner
-        allPoints.push(foodWineStops[3].coords); // Thielen
-        allPoints.push(foodWineStops[4].coords); // Flaconneurs
-      } else {
-        // General History route
-        allPoints.push(generalHistoryStops[0].coords); // Thermes de Cluny
-        allPoints.push(generalHistoryWaypoints[0].coords); // Rue Saint-Jacques
-        allPoints.push(generalHistoryStops[1].coords); // Île de la Cité
-        allPoints.push(generalHistoryWaypoints[1].coords); // Pont Neuf
-        allPoints.push(generalHistoryStops[2].coords); // Jardin des Tuileries
-      }
-
-      // Créer la chaîne de coordonnées pour l'API Directions
-      const coordinates = allPoints.map(coords => coords.join(',')).join(';');
-
-      // Appel à l'API Directions de Mapbox pour l'itinéraire piéton
-      const directionsResponse = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/walking/${coordinates}?geometries=geojson&access_token=${mapboxgl.accessToken}`
-      );
-
-      const directionsData = await directionsResponse.json();
-
-      if (directionsData.routes && directionsData.routes.length > 0) {
-        const route = directionsData.routes[0];
-
-        // Ajouter l'itinéraire réel à la carte
-        map.current!.addSource('walking-route', {
-          'type': 'geojson',
-          'data': {
-            'type': 'Feature',
-            'properties': {},
-            'geometry': route.geometry
-          }
+          new mapboxgl.Marker(el)
+            .setLngLat(stop.coords)
+            .setPopup(
+              new mapboxgl.Popup({ offset: 18, className: 'quiet-popup' }).setHTML(`
+                <div style="padding:4px 2px;font-family:'Inter Variable',system-ui,sans-serif;">
+                  <div style="font-family:'Playfair Display Variable',Georgia,serif;font-weight:500;font-size:15px;color:#1a1a1a;margin-bottom:4px;">${stop.name}</div>
+                  <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#4a4a4a;">Stop ${index + 1}${stop.theme ? ' · ' + stop.theme : ''}</div>
+                </div>
+              `)
+            )
+            .addTo(instance);
         });
 
-        map.current!.addLayer({
-          'id': 'walking-route',
-          'type': 'line',
-          'source': 'walking-route',
-          'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
+        // Waypoints: small teal dots, no border.
+        data.waypoints.forEach((waypoint) => {
+          const el = document.createElement('div');
+          el.className = 'quiet-waypoint';
+          el.innerHTML = `
+            <div style="
+              width:8px;height:8px;
+              background:#3a4a48;
+              border-radius:50%;
+              opacity:0.75;
+            "></div>
+          `;
+
+          new mapboxgl.Marker(el)
+            .setLngLat(waypoint.coords)
+            .setPopup(
+              new mapboxgl.Popup({ offset: 10, className: 'quiet-popup' }).setHTML(`
+                <div style="padding:4px 2px;font-family:'Inter Variable',system-ui,sans-serif;">
+                  <div style="font-family:'Playfair Display Variable',Georgia,serif;font-weight:500;font-size:14px;color:#1a1a1a;">${waypoint.name}</div>
+                </div>
+              `)
+            )
+            .addTo(instance);
+        });
+
+        const route = await routePromise;
+        if (disposed || !instance.getStyle()) return;
+
+        const lineCoords = route
+          ? route.geometry.coordinates
+          : data.path; // repli : ligne droite, signalée en pointillés
+
+        instance.addSource('walking-route', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: { type: 'LineString', coordinates: lineCoords },
           },
-          'paint': {
+        });
+
+        // Liseré crème sous le tracé : le chemin reste lisible par-dessus les rues,
+        // les parcs et la Seine du style light-v11.
+        instance.addLayer({
+          id: 'walking-route-casing',
+          type: 'line',
+          source: 'walking-route',
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: {
+            'line-color': '#fafaf7',
+            'line-width': 6,
+            'line-opacity': 0.9,
+          },
+        });
+
+        instance.addLayer({
+          id: 'walking-route',
+          type: 'line',
+          source: 'walking-route',
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: {
             // Quiet teal (--teal)
             'line-color': '#3a4a48',
-            'line-width': 2,
-            'line-opacity': 0.95
-          }
+            'line-width': 2.5,
+            'line-opacity': route ? 0.95 : 0.5,
+            ...(route ? {} : { 'line-dasharray': [2, 2] as any }),
+          },
         });
 
-        // Mettre à jour les infos de distance et durée
-        const distance = (route.distance / 1000).toFixed(1); // en km
-        const duration = Math.round(route.duration / 60); // en minutes
-
-        // Mettre à jour l'affichage avec les vraies données
-        updateRouteInfo(distance, duration);
-      }
-    } catch (error) {
-      console.error('Erreur lors du calcul de l\'itinéraire:', error);
-
-      // Fallback: tracer une ligne droite si l'API échoue
-      const routeCoords = stops.map(stop => stop.coords);
-
-      map.current!.addSource('fallback-route', {
-        'type': 'geojson',
-        'data': {
-          'type': 'Feature',
-          'properties': {},
-          'geometry': {
-            'type': 'LineString',
-            'coordinates': routeCoords
-          }
+        if (route) {
+          const distance = (route.distance / 1000).toFixed(1);
+          const duration = Math.round(route.duration / 60);
+          setRouteInfo(`${distance} km · ${data.stops.length} stops · ${duration} min walk`);
         }
+
+        // Cadrer sur le tracé lui-même (et pas seulement les points),
+        // pour qu'aucun détour de rue ne sorte du cadre.
+        const bounds = new mapboxgl.LngLatBounds();
+        lineCoords.forEach((c) => bounds.extend(c as [number, number]));
+        data.stops.forEach((s) => bounds.extend(s.coords));
+        data.waypoints.forEach((w) => bounds.extend(w.coords));
+
+        instance.fitBounds(bounds, {
+          padding: { top: 56, bottom: 56, left: 56, right: 56 },
+          maxZoom: 15.5,
+          duration: 0,
+        });
       });
 
-      map.current!.addLayer({
-        'id': 'fallback-route',
-        'type': 'line',
-        'source': 'fallback-route',
-        'layout': {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        'paint': {
-          'line-color': '#3a4a48',
-          'line-width': 2,
-          'line-opacity': 0.75
-        }
-      });
-    }
-  };
+      cleanup = () => {
+        instance.remove();
+        if (map.current === instance) map.current = null;
+      };
+    })();
 
-  const updateRouteInfo = (distance: string, duration: number) => {
-    // Mettre à jour l'affichage avec les vraies données de l'itinéraire
-    const infoElement = document.querySelector('.route-info');
-    if (infoElement) {
-      infoElement.innerHTML = `${distance}km • ${stops.length} stops • ${duration} minutes`;
-    }
-  };
-
-  const tourLabel = tour === 'left-bank'
-    ? 'Left Bank'
-    : tour === 'right-bank'
-      ? 'Right Bank'
-      : tour === 'food-wine'
-        ? 'Nourritour'
-        : 'General History';
-
-  const defaultRouteInfo = tour === 'general-history'
-    ? '2.5 km · 3 stops · 1 h 30'
-    : tour === 'food-wine'
-      ? '~1 km · 5 stops · 3 h'
-      : '2.5 km · 4 stops · 2 h';
+    return () => {
+      disposed = true;
+      controller.abort();
+      cleanup?.();
+    };
+  }, [tour]);
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -380,7 +382,7 @@ const TourMap: React.FC<TourMapProps> = ({ tour }) => {
             marginBottom: 4,
           }}
         >
-          {tourLabel}
+          {data.label}
         </div>
         <div
           className="route-info"
@@ -392,7 +394,7 @@ const TourMap: React.FC<TourMapProps> = ({ tour }) => {
             letterSpacing: '0.01em',
           }}
         >
-          {defaultRouteInfo}
+          {routeInfo}
         </div>
       </div>
     </div>
