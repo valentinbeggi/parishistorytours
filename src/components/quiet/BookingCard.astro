@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from '../../i18n/utils';
+import { waLink } from '../../lib/whatsapp';
 import BookTour from '../BookTour.astro';
 import type { TourConfig } from '../../data/tours';
 
@@ -11,6 +12,10 @@ interface Props {
 const { tour, variant } = Astro.props;
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
+
+// WhatsApp CTA opens a chat with the tour name prefilled — no blank input.
+const tourTitle = t(`tours.${tour.translationPrefix}.title`) as string;
+const waHref = waLink((t('quiet.wa.book') as string).replace('{tour}', tourTitle));
 
 const links = tour.bookingLinks;
 const duration =
@@ -65,7 +70,7 @@ const partnerItems = [
       </dl>
 
       <div class="qbc__ctas">
-        <a href={links.whatsapp} class="qbc__primary" target="_blank" rel="noopener">{t('quiet.tour.booking.primaryCta')} <span aria-hidden="true">→</span></a>
+        <a href={waHref} class="qbc__primary" target="_blank" rel="noopener">{t('quiet.tour.booking.primaryCta')} <span aria-hidden="true">→</span></a>
         <a href="#book-tour" class="qbc__secondary">{t('quiet.tour.booking.secondaryCta')}</a>
       </div>
     </div>

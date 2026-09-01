@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from '../../i18n/utils';
+import { waLink } from '../../lib/whatsapp';
 import BookTour from '../BookTour.astro';
 
 interface Props {
@@ -35,7 +36,7 @@ const partners = [
     </header>
 
     <div class="qbook__chips">
-      <a class="qbook__chip" href="https://wa.me/+33620622480" rel="noopener">
+      <a class="qbook__chip" href={waLink(t('quiet.wa.generic') as string)} rel="noopener">
         <span class="qbook__chip-label">{t('quiet.home.booking.whatsappLabel')}</span>
         <span class="qbook__chip-value">+33 6 20 62 24 80</span>
       </a>

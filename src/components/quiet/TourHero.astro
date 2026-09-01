@@ -10,9 +10,32 @@ interface Props {
   subtitle: string;
   /** object-position override (e.g. "center 70%" to push the subject down) */
   objectPosition?: string;
+  /** Google rating badge — links to the Business Profile. */
+  rating?: { value: string; count: string; href: string; label: string };
+  /** Short facts rendered as a separated strip (price, duration, group size). */
+  facts?: string[];
+  /** Direct booking CTA (usually the on-page #book anchor). */
+  cta?: { label: string; href: string };
+  /** Tour slug — enables the live "Next date · spots left" line. */
+  slug?: string;
+  nextLabel?: string;
+  spotsTemplate?: string;
 }
 
-const { image, alt, kicker, title, subtitle, objectPosition } = Astro.props;
+const {
+  image,
+  alt,
+  kicker,
+  title,
+  subtitle,
+  objectPosition,
+  rating,
+  facts,
+  cta,
+  slug,
+  nextLabel,
+  spotsTemplate,
+} = Astro.props;
 ---
 
 <section class="qtourhero">
@@ -33,6 +56,32 @@ const { image, alt, kicker, title, subtitle, objectPosition } = Astro.props;
     <p class="qtourhero__kicker">{kicker}</p>
     <h1 class="qtourhero__title">{title}</h1>
     {subtitle && <p class="qtourhero__subtitle">{subtitle}</p>}
+
+    {(rating || (facts && facts.length > 0)) && (
+      <div class="qtourhero__meta">
+        {rating && (
+          <a class="qtourhero__rating" href={rating.href} target="_blank" rel="noopener">
+            <span aria-hidden="true">★</span> <b>{rating.value}</b> · {rating.count} {rating.label}
+          </a>
+        )}
+        {facts && facts.map((f) => <span class="qtourhero__fact">{f}</span>)}
+      </div>
+    )}
+
+    {cta && (
+      <div class="qtourhero__cta-row">
+        <a href={cta.href} class="qtourhero__cta" data-track="cta_tour_hero_book">{cta.label} <span aria-hidden="true">→</span></a>
+        {slug && (
+          <div
+            class="qtourhero__next pht-next pht-next--dark"
+            data-next-session={slug}
+            data-next-label={nextLabel}
+            data-spots-template={spotsTemplate}
+            hidden
+          ></div>
+        )}
+      </div>
+    )}
   </div>
 </section>
 
@@ -59,7 +108,7 @@ const { image, alt, kicker, title, subtitle, objectPosition } = Astro.props;
       to bottom,
       rgba(0, 0, 0, 0.15) 0%,
       rgba(0, 0, 0, 0.25) 50%,
-      rgba(0, 0, 0, 0.65) 100%
+      rgba(0, 0, 0, 0.7) 100%
     );
   }
   .qtourhero__content {
@@ -100,9 +149,72 @@ const { image, alt, kicker, title, subtitle, objectPosition } = Astro.props;
     max-width: 56ch;
   }
 
+  .qtourhero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 12px;
+    margin-top: 20px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .qtourhero__meta > * + *::before {
+    content: "·";
+    margin-right: 12px;
+    opacity: 0.6;
+  }
+  .qtourhero__rating {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 1px;
+    transition: border-color 120ms ease;
+  }
+  .qtourhero__rating:hover { border-bottom-color: #fff; }
+  .qtourhero__rating b { font-weight: 600; }
+
+  .qtourhero__cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .qtourhero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--paper-3);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 14px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: 1px solid var(--paper-3);
+    transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  }
+  .qtourhero__cta:hover {
+    background: var(--rouge);
+    border-color: var(--rouge);
+    color: #fff;
+  }
+  .qtourhero__next {
+    font-size: 13px;
+  }
+
   @media (max-width: 760px) {
-    .qtourhero { height: 68vh; }
+    .qtourhero { height: 74vh; }
     .qtourhero__content { bottom: 36px; padding: 0 20px; }
     .qtourhero__subtitle { font-size: 15px; }
+    .qtourhero__meta { font-size: 13px; }
   }
 </style>
+
+<script>
+  import { initNextSessions } from '../../scripts/next-session';
+  initNextSessions();
+</script>

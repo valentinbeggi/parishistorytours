@@ -1,12 +1,17 @@
 ---
 import { Picture } from 'astro:assets';
 import { useTranslations } from '../../i18n/utils';
+import { GOOGLE_REVIEWS, GOOGLE_MAPS_URL, TOUR_PRICES } from '../../data/site';
 import notreDame from '../../images/notre-dame-de-paris.webp';
 import bridge from '../../images/bridge_alexander_third_paris.webp';
 import vendome from '../../images/place_vendome_paris_day.webp';
 
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
+
+// The primary CTA carries the entry price — "how much?" answered above the fold.
+const minPrice = Math.min(...Object.values(TOUR_PRICES).map(Number));
+const bookPriceLabel = (t('quiet.common.fromPriceShort') as string).replace('{price}', String(minPrice));
 
 const stats = [
   { value: t('quiet.home.hero.statToursValue'),     label: t('quiet.home.hero.statToursLabel') },
@@ -30,9 +35,15 @@ const stats = [
 
     <p class="qhero__lede">{t('quiet.home.hero.lede')}</p>
 
+    <a class="qhero__rating" href={GOOGLE_MAPS_URL} target="_blank" rel="noopener">
+      <span class="qhero__rating-stars" aria-hidden="true">★★★★★</span>
+      <b>{GOOGLE_REVIEWS.ratingValue}</b>
+      <span class="qhero__rating-count">· {GOOGLE_REVIEWS.ratingCount} {t('quiet.common.googleReviews')}</span>
+    </a>
+
     <div class="qhero__cta-row">
-      <a href="#tours" class="qhero__btn qhero__btn--primary">{t('quiet.home.hero.browseCta')} <span aria-hidden="true">→</span></a>
-      <a href="#route" class="qhero__btn qhero__btn--ghost">{t('quiet.home.hero.seeRouteCta')}</a>
+      <a href="#book" class="qhero__btn qhero__btn--primary" data-track="cta_hero_book">{t('quiet.home.hero.bookCta')} <span class="qhero__btn-price">· {bookPriceLabel}</span> <span aria-hidden="true">→</span></a>
+      <a href="#tours" class="qhero__btn qhero__btn--ghost">{t('quiet.home.hero.browseCta')}</a>
     </div>
 
     <div class="qhero__media">
@@ -142,6 +153,30 @@ const stats = [
     line-height: 0.9;
     padding: 6px 12px 0 0;
   }
+
+  .qhero__rating {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--ink-2);
+    text-decoration: none;
+    margin-bottom: 26px;
+    border-bottom: 1px solid transparent;
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+  .qhero__rating:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .qhero__rating-stars { color: var(--rouge); letter-spacing: 2px; font-size: 12px; }
+  .qhero__rating b {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .qhero__btn-price { font-weight: 400; opacity: 0.85; }
 
   .qhero__cta-row {
     display: flex;

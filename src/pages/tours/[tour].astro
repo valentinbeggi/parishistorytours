@@ -2,7 +2,8 @@
 import { Picture } from 'astro:assets';
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import JsonLd from "../../components/JsonLd.astro";
-import { GOOGLE_REVIEWS, TOUR_PRICES } from "../../data/site";
+import { GOOGLE_REVIEWS, TOUR_PRICES, GOOGLE_MAPS_URL } from "../../data/site";
+import { formatEUR } from "../../lib/price";
 import { useTranslations } from '../../i18n/utils';
 import { tours } from '../../data/tours';
 
@@ -70,6 +71,18 @@ const heroKicker = t(kickerKey);
 const heroTitle = t(`tours.${tp}.title`);
 const heroSubtitle = t(`tours.${tp}.description`);
 
+// Hero conversion strip — price, duration, rating and a direct CTA visible
+// before any scrolling (the booking card itself sits far down the page).
+const heroDuration =
+  variant === 'general'  ? t('quiet.tour.booking.durationValueGeneral')  :
+  variant === 'foodWine' ? t('quiet.tour.booking.durationValueFoodWine') :
+                           t('quiet.tour.booking.durationValueWW2');
+const heroFacts = [
+  `${t('quiet.common.from')} ${formatEUR(lang, TOUR_PRICES[tourSlug])} ${t('quiet.tour.booking.perPerson')}`,
+  heroDuration as string,
+  t('quiet.tour.booking.groupValue') as string,
+];
+
 // JSON-LD helpers
 const jsonLdDuration =
   variant === 'general'  ? 'PT1H30M' :
@@ -96,7 +109,7 @@ const jsonLdGuideJobTitle =
   theme="quiet"
 >
   <TopBar />
-  <Nav context="tour" />
+  <Nav context="tour" book="#book" />
 
   <main>
     <TourHero
@@ -106,6 +119,12 @@ const jsonLdGuideJobTitle =
       title={heroTitle}
       subtitle={heroSubtitle}
       objectPosition={variant === 'foodWine' ? 'center 75%' : undefined}
+      rating={{ value: GOOGLE_REVIEWS.ratingValue, count: GOOGLE_REVIEWS.ratingCount, href: GOOGLE_MAPS_URL, label: t('quiet.common.googleReviews') as string }}
+      facts={heroFacts}
+      cta={{ label: t('quiet.tour.heroCta') as string, href: '#book' }}
+      slug={tourSlug}
+      nextLabel={t('quiet.common.nextDate') as string}
+      spotsTemplate={t('quiet.common.spotsLeft') as string}
     />
 
     {tourConfig.coGuides && tourConfig.coGuides.length > 0 && (

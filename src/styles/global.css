@@ -103,3 +103,32 @@
     background-position: 350% 50%, 350% 50%;
   }
 }
+
+/* ---------- Conversion UI additions (quiet theme) ---------- */
+
+/* react-day-picker v9 — ink-on-paper theming for the booking wizard */
+[data-theme="quiet"] .rdp-root {
+  --rdp-accent-color: var(--ink);
+  --rdp-accent-background-color: var(--paper-2);
+  --rdp-day_button-border-radius: 2px;
+  --rdp-selected-border: 1.5px solid var(--ink);
+  --rdp-today-color: var(--rouge);
+  font-family: var(--font-sans);
+}
+[data-theme="quiet"] .pht-day-available:not(.rdp-selected) .rdp-day_button {
+  background: rgba(138, 59, 46, 0.08);
+  color: var(--rouge-dark);
+  font-weight: 600;
+}
+
+/* "Next date · spots left" lines filled client-side by next-session.ts.
+   --light sits on paper backgrounds (tour cards); --dark on photo heroes. */
+[data-theme="quiet"] .pht-next { font-family: var(--font-sans); }
+[data-theme="quiet"] .pht-next--light .pht-next__label,
+[data-theme="quiet"] .pht-next--light .pht-next__spots { color: var(--ink-2); }
+[data-theme="quiet"] .pht-next--light b { color: var(--ink); font-weight: 600; }
+[data-theme="quiet"] .pht-next--light .pht-next__spots.is-low { color: var(--rouge); font-weight: 600; }
+[data-theme="quiet"] .pht-next--dark .pht-next__label,
+[data-theme="quiet"] .pht-next--dark .pht-next__spots { color: rgba(255, 255, 255, 0.82); }
+[data-theme="quiet"] .pht-next--dark b { color: #fff; font-weight: 600; }
+[data-theme="quiet"] .pht-next--dark .pht-next__spots.is-low { color: #ffb9a6; }

@@ -7,6 +7,9 @@ export const GOOGLE_REVIEWS = {
   ratingCount: "51",
 } as const;
 
+// Public Google Business Profile — target of every "read our reviews" link.
+export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8";
+
 // Public starting prices (EUR), as displayed in the booking UI ("From €…").
 // Keep in sync with the active Stripe prices.
 export const TOUR_PRICES: Record<string, string> = {

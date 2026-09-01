@@ -300,6 +300,19 @@ export const en = {
     subtitle: "Let's organize your visit step by step",
     whatsappCta: "Or contact me directly on WhatsApp",
     alsoBookOn: "Also book on",
+    // Upcoming-sessions quick-pick (first screen of the wizard)
+    upcoming: {
+      title: "Next available dates",
+      subtitle: "Pick a session and book in under a minute — or choose another option below.",
+      spotsLeft: "{n} spots left",
+      book: "Book",
+      empty: "No scheduled dates right now — book a private tour below, or message me on WhatsApp and we'll find one.",
+      seeCalendar: "See the full calendar",
+      privateCta: "Private tour — pick your own date & time",
+      showingTour: "Showing dates for",
+      showAll: "Show all tours",
+      loading: "Loading dates…",
+    },
     // Mode selector
     modeSelector: {
       joinTour: "Join a scheduled tour",
@@ -348,6 +361,10 @@ export const en = {
       reserveBtn: "Reserve",
       sendRequest: "Send request",
       modify: "← Modify",
+      reassuranceCancel: "Free cancellation up to 24 h before the tour",
+      reassuranceInstant: "Instant confirmation by email",
+      reassuranceSecure: "Secure payment — Stripe",
+      reassuranceReply: "Personal reply within 12 hours",
       onSiteConfirmMessage: "Your booking is confirmed! You will pay on the day of the tour. We've sent you a confirmation email with all the details.",
     },
     participants: "participants",
@@ -763,6 +780,19 @@ export const en = {
 
   // "Quiet" redesign — copy scoped to the new homepage + tour detail template
   quiet: {
+    common: {
+      from: "From",
+      fromPriceShort: "from €{price}",
+      perPerson: "/ person",
+      nextDate: "Next date:",
+      spotsLeft: "{n} spots left",
+      googleReviews: "Google reviews",
+    },
+    wa: {
+      generic: "Hello Clément! I have a question about your Paris tours.",
+      book: "Hello Clément! I'd like to book the {tour}. Could you tell me more about availability?",
+      booked: "Hello Clément! I just booked a tour on your site and have a question.",
+    },
     topBar: {
       notice: "Tours in English & French · Private groups available"
     },
@@ -846,6 +876,7 @@ export const en = {
         headlinePart2: "keeps in the streets, from Lutetia to the",
         headlinePart3: "Liberation",
         lede: "Private walking tours through two thousand years of Parisian history — Roman Lutetia, Viking sieges, revolutionary nights, and a specialist focus on the Fall, the Resistance, and the Liberation of 1940–44. Led by an independent history enthusiast who has spent years in the archives so every story reaches you in full.",
+        bookCta: "Book a Tour",
         browseCta: "Browse Tours",
         seeRouteCta: "See the Route",
         mediaMainAlt: "Notre-Dame de Paris",
@@ -954,6 +985,7 @@ export const en = {
       compare: {
         kicker: "Compare",
         title: "One guide, three walks.",
+        axisPrice: "Price",
         axisFocus: "Focus",
         axisRoute: "Route",
         axisDuration: "Duration",
@@ -1006,6 +1038,7 @@ export const en = {
       }
     },
     tour: {
+      heroCta: "Book this tour",
       heroKickerLeftBank: "Left Bank · WWII",
       heroKickerRightBank: "Right Bank · WWII",
       heroKickerGeneral: "Two thousand years · General",

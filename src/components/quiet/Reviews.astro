@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from '../../i18n/utils';
+import { GOOGLE_MAPS_URL } from '../../data/site';
 
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
@@ -36,6 +37,36 @@ try {
   reviews = [];
 }
 
+// Static fallback — real published Google reviews (snapshot 2026-09), so the
+// social-proof section never disappears when the live API call fails.
+const FALLBACK_REVIEWS: Review[] = [
+  {
+    name: "Celeste Chidiac",
+    rating: 5,
+    text: "Excellent guided tour with Clement. He gave us a lot of interesting information about the World war 2, the fall of Paris and the liberation of Paris. He also made the tour interactive and engaging. I highly recommend taking this tour with Clement.",
+    source: "Google",
+  },
+  {
+    name: "Rita Fougea",
+    rating: 5,
+    text: "We had a fantastic guided tour of Paris’s Left Bank through the lens of WWII with Clément. He is an incredibly knowledgeable, passionate, and engaging guide who led us through some of Paris’s most beautiful sites, bringing history to life with fascinating stories and anecdotes.",
+    source: "Google",
+  },
+  {
+    name: "Ellen Lutton",
+    rating: 5,
+    text: "We absolutely loved the tour Clément took us on around Paris. His knowledge about WW2 is next-level and the way he delivers it is fantastic. It was very special to stand in front of places where history was made, and have it all explained to us in such incredible detail.",
+    source: "Google",
+  },
+  {
+    name: "Herbert Briggs",
+    rating: 5,
+    text: "Clément is a top-of-class talent. He possess an endless historical knowledge, presented in an approachable anecdotal style. Side note, he has a great sense of humor that surfaces at the right moments along delivering the very serious topics of WW1 + WW2.",
+    source: "Google",
+  },
+];
+if (reviews.length === 0) reviews = FALLBACK_REVIEWS;
+
 // Graceful fallbacks — these values are also used in JSON-LD and have been stable
 const displayRating = averageRating !== null ? averageRating.toFixed(1).replace('.', lang === 'fr' ? ',' : '.') : '4.9';
 const displayTotal = totalReviews ?? 42;
@@ -64,7 +95,7 @@ const fractional = (averageRating ?? 4.9) - fullStars;
             );
           })}
         </span>
-        <span class="qreviews__summary-meta">Google · {displayTotal} {lang === 'fr' ? 'avis' : 'reviews'}</span>
+        <a class="qreviews__summary-meta" href={GOOGLE_MAPS_URL} target="_blank" rel="noopener">Google · {displayTotal} {lang === 'fr' ? 'avis' : 'reviews'} ↗</a>
       </div>
 
       <div class="qreviews__grid">

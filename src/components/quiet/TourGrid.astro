@@ -1,6 +1,8 @@
 ---
 import { Picture } from 'astro:assets';
 import { useTranslations } from '../../i18n/utils';
+import { TOUR_PRICES } from '../../data/site';
+import { formatEUR } from '../../lib/price';
 import leftBankImg from '../../images/notre-dame-de-paris.webp';
 import rightBankImg from '../../images/place_vendome_paris_day.webp';
 import generalImg from '../../images/luxembourg_palace_paris.webp';
@@ -12,6 +14,7 @@ const langPrefix = lang === 'en' ? '' : '/fr';
 
 const cards = [
   {
+    slug: 'left-bank',
     href: `${langPrefix}/tours/left-bank`,
     img: leftBankImg,
     alt: t('quiet.home.hero.mediaMainAlt'),
@@ -27,6 +30,7 @@ const cards = [
     ],
   },
   {
+    slug: 'right-bank',
     href: `${langPrefix}/tours/right-bank`,
     img: rightBankImg,
     alt: t('quiet.home.hero.mediaSideBAlt'),
@@ -42,6 +46,7 @@ const cards = [
     ],
   },
   {
+    slug: 'general-history',
     href: `${langPrefix}/tours/general-history`,
     img: generalImg,
     alt: 'Palais du Luxembourg',
@@ -57,6 +62,7 @@ const cards = [
     ],
   },
   {
+    slug: 'food-wine',
     href: `${langPrefix}/tours/food-wine`,
     img: foodWineImg,
     alt: 'Nourritour — Food & Wine',
@@ -73,6 +79,10 @@ const cards = [
   },
 ];
 const reserveCta = t('quiet.home.tours.reserveCta');
+const fromLabel = t('quiet.common.from');
+const perPersonLabel = t('quiet.tour.booking.perPerson');
+const nextDateLabel = t('quiet.common.nextDate');
+const spotsTemplate = t('quiet.common.spotsLeft');
 ---
 
 <section id="tours" class="qtours">
@@ -116,7 +126,21 @@ const reserveCta = t('quiet.home.tours.reserveCta');
                 </div>
               ))}
             </div>
-            <a href="#book" class="qtours__cta">{reserveCta} <span aria-hidden="true">→</span></a>
+            <div class="qtours__meta">
+              <div class="qtours__price">
+                <span>{fromLabel}</span>
+                <b>{formatEUR(lang, TOUR_PRICES[card.slug])}</b>
+                <span>{perPersonLabel}</span>
+              </div>
+              <div
+                class="qtours__next pht-next pht-next--light"
+                data-next-session={card.slug}
+                data-next-label={nextDateLabel}
+                data-spots-template={spotsTemplate}
+                hidden
+              ></div>
+            </div>
+            <a href="#book" class="qtours__cta" data-select-tour={card.slug} data-track="select_tour_card">{reserveCta} <span aria-hidden="true">→</span></a>
           </div>
         </article>
       ))}
@@ -296,6 +320,33 @@ const reserveCta = t('quiet.home.tours.reserveCta');
     text-transform: uppercase;
   }
 
+  .qtours__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 0 16px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-sans);
+  }
+  .qtours__price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .qtours__price b {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+    letter-spacing: 0;
+  }
+  .qtours__next {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
   .qtours__cta {
     display: flex;
     align-items: center;
@@ -333,3 +384,17 @@ const reserveCta = t('quiet.home.tours.reserveCta');
     .qtours__card { scroll-snap-align: start; }
   }
 </style>
+
+<script>
+  import { initNextSessions } from '../../scripts/next-session';
+
+  // "Reserve a Spot" on a card pre-selects that tour in the booking wizard
+  // below (the wizard listens for this event), then the anchor scrolls to it.
+  document.querySelectorAll<HTMLElement>('[data-select-tour]').forEach((el) => {
+    el.addEventListener('click', () => {
+      window.dispatchEvent(new CustomEvent('pht:select-tour', { detail: el.dataset.selectTour }));
+    });
+  });
+
+  initNextSessions();
+</script>

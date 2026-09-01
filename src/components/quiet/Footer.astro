@@ -1,11 +1,13 @@
 ---
 import { useTranslations } from '../../i18n/utils';
+import { waLink } from '../../lib/whatsapp';
 
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
 const isDefaultLang = lang === 'en';
 const langPrefix = isDefaultLang ? '' : '/fr';
 const year = new Date().getFullYear();
+const waHref = waLink(t('quiet.wa.generic') as string);
 ---
 
 <footer class="quiet-footer">
@@ -46,7 +48,7 @@ const year = new Date().getFullYear();
       <div class="quiet-footer__col">
         <p class="quiet-footer__heading">{t('quiet.footer.contactHeading')}</p>
         <ul>
-          <li><a href="https://wa.me/+33620622480" rel="noopener">{t('quiet.footer.whatsapp')}</a></li>
+          <li><a href={waHref} rel="noopener">{t('quiet.footer.whatsapp')}</a></li>
           <li><a href="mailto:clement@parishistorytours.com">{t('quiet.footer.email')}</a></li>
           <li><a href="https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8" rel="noopener">{t('quiet.footer.maps')}</a></li>
           <li><a href="https://www.instagram.com/parishistorytour/" rel="noopener">{t('quiet.footer.instagram')}</a></li>

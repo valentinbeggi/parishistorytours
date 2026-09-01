@@ -2,6 +2,14 @@ export type Tour = "left-bank" | "right-bank" | "general-history" | "food-wine";
 export type TourType = "regular" | "private";
 export type PaymentMethod = "stripe" | "on_site";
 
+/** A bookable session slot as returned by /api/sessions. */
+export interface SessionSlot {
+  id: string;
+  start_time: string;
+  free: number;
+  tour_type: string;
+}
+
 export interface BookingData {
   tour: Tour;
   participants: number;

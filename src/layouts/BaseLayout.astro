@@ -128,6 +128,12 @@ const canonicalUrl = (lang === 'fr' ? frUrl : enUrl) ?? `${origin}${norm(pathnam
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K6M2KKL7"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+    <script>
+      // Site-wide conversion click tracking (WhatsApp, email, partner logos,
+      // [data-track] CTAs). Pushes queue in dataLayer until GTM boots.
+      import { initClickTracking } from '../scripts/track';
+      initClickTracking();
+    </script>
     <slot />
     {isQuiet ? <QuietFooter /> : <Footer />}
   </body>

@@ -300,6 +300,19 @@ export const fr = {
     subtitle: "Organisez votre visite étape par étape",
     whatsappCta: "Ou contactez-moi directement sur WhatsApp",
     alsoBookOn: "Également disponible sur",
+    // Liste des prochaines sessions (premier écran du wizard)
+    upcoming: {
+      title: "Prochaines dates disponibles",
+      subtitle: "Choisissez une session et réservez en moins d'une minute — ou passez par une autre option ci-dessous.",
+      spotsLeft: "{n} places restantes",
+      book: "Réserver",
+      empty: "Aucune date programmée pour le moment — réservez une visite privée ci-dessous, ou écrivez-moi sur WhatsApp et nous en trouverons une.",
+      seeCalendar: "Voir le calendrier complet",
+      privateCta: "Visite privée — choisissez votre date et votre heure",
+      showingTour: "Dates pour",
+      showAll: "Toutes les visites",
+      loading: "Chargement des dates…",
+    },
     // Mode selector
     modeSelector: {
       joinTour: "Rejoindre une visite programmée",
@@ -348,6 +361,10 @@ export const fr = {
       reserveBtn: "Réserver",
       sendRequest: "Envoyer la demande",
       modify: "← Modifier",
+      reassuranceCancel: "Annulation gratuite jusqu'à 24 h avant la visite",
+      reassuranceInstant: "Confirmation immédiate par email",
+      reassuranceSecure: "Paiement sécurisé — Stripe",
+      reassuranceReply: "Réponse personnelle sous 12 heures",
       onSiteConfirmMessage: "Votre réservation est confirmée ! Vous réglerez le jour de la visite. Nous vous avons envoyé un email de confirmation avec tous les détails.",
     },
     participants: "participants",
@@ -763,6 +780,19 @@ export const fr = {
 
   // Refonte « Quiet » — copy pour la nouvelle page d'accueil et les pages de tour
   quiet: {
+    common: {
+      from: "À partir de",
+      fromPriceShort: "dès {price} €",
+      perPerson: "/ personne",
+      nextDate: "Prochaine date :",
+      spotsLeft: "{n} places restantes",
+      googleReviews: "avis Google",
+    },
+    wa: {
+      generic: "Bonjour Clément ! J'ai une question sur vos visites de Paris.",
+      book: "Bonjour Clément ! Je souhaite réserver la visite {tour}. Pouvez-vous m'en dire plus sur vos disponibilités ?",
+      booked: "Bonjour Clément ! Je viens de réserver une visite sur votre site et j'ai une question.",
+    },
     topBar: {
       notice: "Visites en anglais & français · Groupes privés disponibles"
     },
@@ -846,6 +876,7 @@ export const fr = {
         headlinePart2: "garde dans ses rues, de Lutèce à la",
         headlinePart3: "Libération",
         lede: "Visites privées à pied à travers deux mille ans d'histoire parisienne — Lutèce romaine, sièges vikings, nuits révolutionnaires, et un intérêt particulier pour la Chute, la Résistance et la Libération de 1940-44. Guidées par un passionné d'histoire indépendant qui a passé des années en archives pour que chaque récit vous parvienne en entier.",
+        bookCta: "Réserver une visite",
         browseCta: "Voir les visites",
         seeRouteCta: "Voir le parcours",
         mediaMainAlt: "Notre-Dame de Paris",
@@ -954,6 +985,7 @@ export const fr = {
       compare: {
         kicker: "Comparer",
         title: "Un guide, trois parcours.",
+        axisPrice: "Tarif",
         axisFocus: "Thème",
         axisRoute: "Parcours",
         axisDuration: "Durée",
@@ -1006,6 +1038,7 @@ export const fr = {
       }
     },
     tour: {
+      heroCta: "Réserver cette visite",
       heroKickerLeftBank: "Rive Gauche · WWII",
       heroKickerRightBank: "Rive Droite · WWII",
       heroKickerGeneral: "Deux mille ans · Général",

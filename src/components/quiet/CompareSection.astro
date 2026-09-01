@@ -1,14 +1,19 @@
 ---
 import { useTranslations } from '../../i18n/utils';
+import { TOUR_PRICES } from '../../data/site';
+import { formatEUR } from '../../lib/price';
 
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
 const langPrefix = lang === 'en' ? '' : '/fr';
 
+const priceFor = (slug: string) => `${t('quiet.common.from')} ${formatEUR(lang, TOUR_PRICES[slug])}`;
+
 const tours = [
   {
     title: t('quiet.home.tours.leftBankTitle'),
     href: `${langPrefix}/tours/left-bank`,
+    price: priceFor('left-bank'),
     focus: t('quiet.home.compare.leftBankFocus'),
     route: t('quiet.home.compare.leftBankRoute'),
     duration: t('quiet.home.compare.leftBankDuration'),
@@ -18,6 +23,7 @@ const tours = [
   {
     title: t('quiet.home.tours.rightBankTitle'),
     href: `${langPrefix}/tours/right-bank`,
+    price: priceFor('right-bank'),
     focus: t('quiet.home.compare.rightBankFocus'),
     route: t('quiet.home.compare.rightBankRoute'),
     duration: t('quiet.home.compare.rightBankDuration'),
@@ -27,6 +33,7 @@ const tours = [
   {
     title: t('quiet.home.tours.generalTitle'),
     href: `${langPrefix}/tours/general-history`,
+    price: priceFor('general-history'),
     focus: t('quiet.home.compare.generalFocus'),
     route: t('quiet.home.compare.generalRoute'),
     duration: t('quiet.home.compare.generalDuration'),
@@ -36,6 +43,7 @@ const tours = [
 ];
 
 const axes: { key: keyof (typeof tours)[number]; label: string }[] = [
+  { key: 'price',    label: t('quiet.home.compare.axisPrice') },
   { key: 'focus',    label: t('quiet.home.compare.axisFocus') },
   { key: 'route',    label: t('quiet.home.compare.axisRoute') },
   { key: 'duration', label: t('quiet.home.compare.axisDuration') },

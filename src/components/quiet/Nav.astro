@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from '../../i18n/utils';
+import { waLink } from '../../lib/whatsapp';
 
 interface Props {
   /**
@@ -7,9 +8,15 @@ interface Props {
    * "tour" (or other) prefixes them with the localized root so they jump back to the homepage.
    */
   context?: 'home' | 'tour';
+  /**
+   * Override for the "Book a Tour" button target. Tour pages pass "#book" so
+   * the CTA scrolls to their own booking card instead of leaving for the
+   * homepage (which would lose the pre-selected tour).
+   */
+  book?: string;
 }
 
-const { context = 'home' } = Astro.props;
+const { context = 'home', book } = Astro.props;
 
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
@@ -27,7 +34,8 @@ const links = [
   { key: 'faq',     href: anchor('faq'),     label: t('quiet.nav.faq') },
 ];
 
-const bookHref = context === 'home' ? '#book' : `${homeRoot}#book`;
+const bookHref = book ?? (context === 'home' ? '#book' : `${homeRoot}#book`);
+const waHref = waLink(t('quiet.wa.generic') as string);
 ---
 
 <nav class="quiet-nav" data-quiet-nav>
@@ -47,7 +55,7 @@ const bookHref = context === 'home' ? '#book' : `${homeRoot}#book`;
     </div>
 
     <div class="quiet-nav__right">
-      <a href={bookHref} class="quiet-nav__book">{t('quiet.nav.bookTour')}</a>
+      <a href={bookHref} class="quiet-nav__book" data-track="nav_book">{t('quiet.nav.bookTour')}</a>
       <button class="quiet-nav__burger" id="quietNavBurger" aria-label={t('quiet.nav.menuLabel')} aria-expanded="false" aria-controls="quietDrawer">
         <span></span><span></span><span></span>
       </button>
@@ -73,10 +81,10 @@ const bookHref = context === 'home' ? '#book' : `${homeRoot}#book`;
       {links.map((l) => (
         <a href={l.href} class="quiet-drawer__link" data-drawer-dismiss>{l.label}</a>
       ))}
-      <a href={bookHref} class="quiet-drawer__link quiet-drawer__link--cta" data-drawer-dismiss>{t('quiet.nav.bookTour')}</a>
+      <a href={bookHref} class="quiet-drawer__link quiet-drawer__link--cta" data-drawer-dismiss data-track="nav_book_mobile">{t('quiet.nav.bookTour')}</a>
     </nav>
     <div class="quiet-drawer__foot">
-      <a href="https://wa.me/+33620622480" class="quiet-drawer__foot-item" rel="noopener">+33 6 20 62 24 80</a>
+      <a href={waHref} class="quiet-drawer__foot-item" rel="noopener">+33 6 20 62 24 80</a>
     </div>
   </aside>
 </div>

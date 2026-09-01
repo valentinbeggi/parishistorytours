@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BookingProvider, useBooking } from "./BookingContext";
-import ModeSelector from "./steps/ModeSelector";
+import UpcomingSessions from "./steps/UpcomingSessions";
 import RegularCalendar from "./steps/RegularCalendar";
 import RegularCheckout from "./steps/RegularCheckout";
 import PrivateSetup from "./steps/PrivateSetup";
 import PrivateCheckout from "./steps/PrivateCheckout";
+import { track } from "../../scripts/track";
+import type { SessionSlot, Tour } from "./types";
 
 type Mode = "choose" | "regular" | "private";
+
+const ALL_TOURS: Tour[] = ["left-bank", "right-bank", "general-history", "food-wine"];
 
 interface WizardProps {
   /** Hide the wizard's own title / WhatsApp CTA / partner-logos row.
@@ -18,34 +22,64 @@ const Wizard: React.FC<WizardProps> = ({ hideChrome = false }) => {
   const { booking, setBooking, t } = useBooking();
   const [mode, setMode] = useState<Mode>("choose");
   const [step, setStep] = useState(1);
+  // Session picked from the "next dates" quick list — the calendar opens on it.
+  const [preselectedSlot, setPreselectedSlot] = useState<SessionSlot | null>(null);
 
-  // Read ?tour= from URL — pre-select tour for private path
+  // Latest booking in a ref so window-event handlers never see stale state.
+  const bookingRef = useRef(booking);
+  useEffect(() => {
+    bookingRef.current = booking;
+  });
+
+  // Read ?tour= from URL — pre-select that tour (all four tours supported).
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const tourParam = params.get("tour");
-    if (
-      tourParam &&
-      ["left-bank", "right-bank", "general-history"].includes(tourParam) &&
-      !booking.tour
-    ) {
-      setBooking({
-        ...booking,
-        tour: tourParam as "left-bank" | "right-bank" | "general-history",
-      });
+    const tourParam = params.get("tour") as Tour | null;
+    if (tourParam && ALL_TOURS.includes(tourParam) && !bookingRef.current.tour) {
+      setBooking({ ...bookingRef.current, tour: tourParam });
     }
   }, []);
 
+  // Tour cards dispatch this when their "Reserve a Spot" CTA is clicked —
+  // pre-select that tour so the wizard opens on its next available dates.
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const slug = (e as CustomEvent<string>).detail as Tour;
+      if (!ALL_TOURS.includes(slug)) return;
+      setBooking({ ...bookingRef.current, tour: slug });
+      setPreselectedSlot(null);
+      setMode("choose");
+      setStep(1);
+    };
+    window.addEventListener("pht:select-tour", handler);
+    return () => window.removeEventListener("pht:select-tour", handler);
+  }, []);
+
   const goToMode = (m: Mode) => {
+    if (m === "choose") setPreselectedSlot(null);
     setMode(m);
+    setStep(1);
+  };
+
+  const handleSlotFromList = (slot: SessionSlot) => {
+    setPreselectedSlot(slot);
+    setMode("regular");
     setStep(1);
   };
 
   const renderContent = () => {
     if (mode === "choose") {
       return (
-        <ModeSelector
-          onSelectRegular={() => goToMode("regular")}
-          onSelectPrivate={() => goToMode("private")}
+        <UpcomingSessions
+          onSelectSlot={handleSlotFromList}
+          onSeeCalendar={() => {
+            track("select_mode", { mode: "calendar" });
+            goToMode("regular");
+          }}
+          onSelectPrivate={() => {
+            track("select_mode", { mode: "private" });
+            goToMode("private");
+          }}
         />
       );
     }
@@ -55,6 +89,7 @@ const Wizard: React.FC<WizardProps> = ({ hideChrome = false }) => {
         case 1:
           return (
             <RegularCalendar
+              initialSlot={preselectedSlot}
               onNext={() => setStep(2)}
               onBack={() => goToMode("choose")}
             />
@@ -109,7 +144,7 @@ const Wizard: React.FC<WizardProps> = ({ hideChrome = false }) => {
           {/* WhatsApp CTA */}
           <div className="text-center mb-10">
             <a
-              href="https://wa.me/+33620622480"
+              href="https://wa.me/33620622480"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors text-sm border border-gray-200 rounded-full px-5 py-2.5 hover:border-gray-400 hover:shadow-sm"

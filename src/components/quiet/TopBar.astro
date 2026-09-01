@@ -1,11 +1,13 @@
 ---
 import { useTranslations } from '../../i18n/utils';
+import { waLink } from '../../lib/whatsapp';
 
 const lang = Astro.locals.lang;
 const t = useTranslations(lang);
 const isDefaultLang = lang === 'en';
 const langPrefix = isDefaultLang ? '' : '/fr';
 const pathname = Astro.url.pathname;
+const waHref = waLink(t('quiet.wa.generic') as string);
 const basePath = pathname.startsWith('/fr') ? (pathname.replace(/^\/fr/, '') || '/') : pathname;
 const enUrl = basePath;
 const frUrl = basePath === '/' ? '/fr' : `/fr${basePath}`;
@@ -15,7 +17,7 @@ const frUrl = basePath === '/' ? '/fr' : `/fr${basePath}`;
   <div class="quiet-topbar__inner">
     <span class="quiet-topbar__notice">{t('quiet.topBar.notice')}</span>
     <div class="quiet-topbar__right">
-      <a href="https://wa.me/+33620622480" class="quiet-topbar__link" rel="noopener">+33 6 20 62 24 80</a>
+      <a href={waHref} class="quiet-topbar__link" rel="noopener">+33 6 20 62 24 80</a>
       <span class="quiet-topbar__sep" aria-hidden="true">·</span>
       <div class="quiet-topbar__lang">
         <a href={enUrl} class:list={["quiet-topbar__lang-item", { 'is-active': lang === 'en' }]}>EN</a>
