@@ -55,7 +55,10 @@ const canonicalUrl = (lang === 'fr' ? frUrl : enUrl) ?? `${origin}${norm(pathnam
   function gtag(){ dataLayer.push(arguments); }
   window.gtag = gtag;
   gtag('js', new Date());
-  gtag('config', 'G-26695P8H33');
+  // ?ga_debug=1 sur n'importe quelle page → les hits de cette visite
+  // apparaissent en direct dans GA4 Admin → DebugView (diagnostic).
+  var GA_DBG = /[?&]ga_debug=1/.test(location.search);
+  gtag('config', 'G-26695P8H33', GA_DBG ? { debug_mode: true } : {});
 
   function loadAnalytics() {
     var j = document.createElement('script');
