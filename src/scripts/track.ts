@@ -1,17 +1,33 @@
 /**
- * GA4/GTM conversion events.
+ * GA4 conversion events, sent through gtag.js.
  *
- * GTM is injected by BaseLayout after idle (~3.5s); pushes made before the
- * container boots queue in the dataLayer array and are replayed when it
- * loads, so calling track() is always safe.
+ * BaseLayout loads gtag.js for G-26695P8H33 directly (deferred until idle) —
+ * the GTM container this site used to load (GTM-K6M2KKL7) is empty, so GA4
+ * never actually started through it. gtag() queues its arguments in
+ * window.dataLayer; anything pushed before the library boots is replayed once
+ * it loads, so calling track() is always safe, at any time.
  */
 type TrackParams = Record<string, string | number | boolean | undefined>;
 
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export function track(event: string, params: TrackParams = {}): void {
   try {
-    const w = window as unknown as { dataLayer?: unknown[] };
-    w.dataLayer = w.dataLayer || [];
-    w.dataLayer.push({ event, ...params });
+    window.dataLayer = window.dataLayer || [];
+    // Same shim as the official snippet — gtag must push the *arguments
+    // object* (not a plain object) for the library to process it.
+    if (!window.gtag) {
+      window.gtag = function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer!.push(arguments);
+      };
+    }
+    window.gtag("event", event, params);
   } catch {
     /* analytics must never break the page */
   }

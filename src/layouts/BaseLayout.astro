@@ -42,18 +42,25 @@ const canonicalUrl = (lang === 'fr' ? frUrl : enUrl) ?? `${origin}${norm(pathnam
 <!DOCTYPE html>
 <html lang={lang}>
   <head>
-    <!-- Google Tag Manager — deferred to reduce unused JS on initial load.
-         GA4 (G-26695P8H33) is loaded by the GTM container itself; loading
-         gtag.js directly here would download it a second time. -->
-<script>
+    <!-- Google Analytics 4 (gtag.js) — deferred to reduce unused JS on initial
+         load. Loaded directly rather than through GTM: the published container
+         (GTM-K6M2KKL7) is empty (no GA4 config tag), so routing through it
+         shipped ~330 KB of JS without ever starting analytics. Events are sent
+         via gtag('event', …) from src/scripts/track.ts; calls made before the
+         library boots queue in dataLayer and are replayed at load.
+         is:inline keeps the bootstrap in the HTML itself (no bundling). -->
+<script is:inline>
   // @ts-nocheck
   window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', 'G-26695P8H33');
 
   function loadAnalytics() {
-    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
     var j = document.createElement('script');
     j.async = true;
-    j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-K6M2KKL7';
+    j.src = 'https://www.googletagmanager.com/gtag/js?id=G-26695P8H33';
     document.head.appendChild(j);
   }
 
@@ -124,10 +131,6 @@ const canonicalUrl = (lang === 'fr' ? frUrl : enUrl) ?? `${origin}${norm(pathnam
   </head>
 
   <body class={isQuiet ? "antialiased" : "font-sans text-gray-900 antialiased"} data-theme={isQuiet ? "quiet" : undefined}>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K6M2KKL7"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
     <script>
       // Site-wide conversion click tracking (WhatsApp, email, partner logos,
       // [data-track] CTAs). Pushes queue in dataLayer until GTM boots.
