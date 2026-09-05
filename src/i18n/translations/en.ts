@@ -1,3 +1,10 @@
+import { GOOGLE_REVIEWS, TOUR_PRICES } from '../../data/site';
+
+// Shared figures: single source of truth (src/data/site.ts).
+const RATING = GOOGLE_REVIEWS.ratingValue;
+const REVIEW_COUNT = GOOGLE_REVIEWS.ratingCount;
+const PRICE = TOUR_PRICES['left-bank'];
+
 export const en = {
   // Navigation
   nav: {
@@ -684,41 +691,43 @@ export const en = {
     }
   },
 
-  // Meta (SEO)
+  // Meta (SEO) — titles <= 60 characters (Google's display limit), keyword first,
+  // no brand suffix on the home page: Google already renders the site name above
+  // the title. Rating and prices come from src/data/site.ts, never hard-coded.
   meta: {
     home: {
-      title: "Paris History Tours - Private WWII Walking Tours in Paris | 4.9\u2605",
-      description: "Private WWII walking tours in Paris rated 4.9/5. Explore the Fall, Resistance & Liberation across Left Bank & Right Bank with a personal guide. Book your tour."
+      title: "Private WWII Walking Tours in Paris",
+      description: `2-hour walks with your own guide through Occupied Paris: Resistance, Liberation, hidden sites. From €${PRICE} — rated ${RATING}/5 by ${REVIEW_COUNT} Google reviews.`
     },
     leftBank: {
-      title: "Left Bank WWII Tour - Panth\u00e9on, Sorbonne, Notre-Dame | Paris History Tours",
-      description: "2-hour Left Bank WWII walking tour: Saint-Michel, Luxembourg Palace, Sorbonne & Notre-Dame. 4 historic stops on the Fall, Resistance & Liberation. Book now."
+      title: "Left Bank WWII Walking Tour in Paris",
+      description: `2 hours on foot: Saint-Michel, the Luxembourg Palace, the Sorbonne and Notre-Dame. Four stops on the Fall, Resistance and Liberation. From €${PRICE}, private guide.`
     },
     rightBank: {
-      title: "Right Bank WWII Tour - Vend\u00f4me, Concorde, Ritz | Paris History Tours",
-      description: "2-hour Right Bank WWII walking tour: Pont Alexandre III, Concorde, Vend\u00f4me & the Ritz. Rose Valland, Hemingway & Liberation stories. Rated 4.9/5. Book now."
+      title: "Right Bank WWII Walking Tour in Paris",
+      description: `2 hours on foot: Pont Alexandre III, Concorde, Vendôme and the Ritz. Rose Valland, Hemingway and the Liberation. From €${PRICE}, with a private guide.`
     },
     generalHistory: {
-      title: "General History of Paris Tour - 2,000 Years in 1.5 Hours | Paris History Tours",
-      description: "Walk through 2,000 years of Paris history: Roman Lutetia, the Viking siege of 885, and the French Revolution. 3 stops, 1.5 hours. Small group with a local guide."
+      title: "General History of Paris — 2,000 Years in 90 Min",
+      description: `Roman Lutetia, the Viking siege of 885, the French Revolution: 2,000 years in three stops and 90 minutes. Small group, local guide. From €${TOUR_PRICES["general-history"]}.`
     },
     foodWine: {
-      title: "Nourritour — Food & Wine Walking Tour in Paris | Paris History Tours",
-      description: "A 3-hour food and wine walking tour through the 9th — covered passages, rue des Martyrs, four artisans (madeleines, cheese, charcuterie, wine) and four tasting flights. Guided by two."
+      title: "Nourritour — Food & Wine Walking Tour in Paris",
+      description: `3 hours in the 9th: covered passages, rue des Martyrs, four artisans (madeleines, cheese, charcuterie, wine) and four tasting flights. Guided by two, from €${TOUR_PRICES["food-wine"]}.`
     },
     keyFigures: {
-      title: "About Paris History Tours - Our Guide & Journey",
-      description: "Meet Cl\u00e9ment, history enthusiast and personal guide in Paris. 20+ books of research, visitors from 25+ countries, and a 4.9/5 Google Maps rating."
+      title: "Your Guide in Paris — Clément Daguet-Schott",
+      description: `History enthusiast and independent guide in Paris. Over 20 books of research, visitors from 25+ countries and a ${RATING}/5 rating on Google Maps.`
     },
     blog: {
-      title: "Blog - WWII Paris History | Paris History Tours",
-      description: "Articles about World War II history in Paris: the Resistance, Liberation, key figures and iconic landmarks.",
+      title: "Blog — Paris During World War II",
+      description: "The Resistance, the Liberation, key figures and landmarks: the stories of Paris between 1940 and 1944, told by a guide who walks them every week.",
       heading: "WWII Paris History",
       subheading: "Explore the fascinating stories of Paris during World War II, by Clement Daguet-Schott.",
       empty: "Articles coming soon."
     },
     success: {
-      title: "Booking Confirmed - Paris History Tours",
+      title: "Booking Confirmed — Paris History Tours",
       description: "Your booking request for Paris History Tours has been confirmed."
     }
   },

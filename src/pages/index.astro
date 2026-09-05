@@ -4,7 +4,7 @@ import "../styles/global.css";
 import { useTranslations } from '../i18n/utils';
 
 import JsonLd from "../components/JsonLd.astro";
-import { GOOGLE_REVIEWS, TOUR_PRICES } from "../data/site";
+import { GOOGLE_REVIEWS, GOOGLE_MAPS_URL, TOUR_PRICES } from "../data/site";
 
 // Quiet chrome + sections
 import TopBar from "../components/quiet/TopBar.astro";
@@ -153,6 +153,45 @@ const langPrefix = isDefaultLang ? '' : '/fr';
     },
     "sameAs": [
       "https://maps.app.goo.gl/AGYuzh8jHA9KXv9h8",
+      "https://www.instagram.com/parishistorytour/",
+      "https://www.getyourguide.com/paris-l16/world-war-ii-tour-in-paris-fall-resistance-liberation-t537162/",
+      "https://www.viator.com/tours/Paris/World-War-II-Tour-in-Paris-Fall-Resistance-and-Liberation/d479-5642691P2",
+      "https://www.tripadvisor.fr/Attraction_Review-g187147-d34229671-Reviews-Paris_History_Tours-Paris_Ile_de_France.html"
+    ]
+  }} />
+
+  {/* Site-name markup: without a WebSite node carrying an explicit `name`,
+      Google falls back to the bare domain ("parishistorytours.com") in the
+      SERP. The Organization node is the entity the site name hangs off. */}
+  <JsonLd data={{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `https://www.parishistorytours.com${langPrefix}/#website`,
+    "name": "Paris History Tours",
+    "alternateName": t('jsonLd.alternateName'),
+    "url": `https://www.parishistorytours.com${langPrefix}/`,
+    "inLanguage": lang === 'fr' ? 'fr-FR' : 'en-US',
+    "publisher": { "@id": "https://www.parishistorytours.com/#organization" }
+  }} />
+
+  <JsonLd data={{
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://www.parishistorytours.com/#organization",
+    "name": "Paris History Tours",
+    "url": "https://www.parishistorytours.com/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.parishistorytours.com/apple-touch-icon.png",
+      "width": 180,
+      "height": 180
+    },
+    "email": "clement@parishistorytours.com",
+    "telephone": "+33620622480",
+    "foundingDate": "2024",
+    "founder": { "@type": "Person", "name": "Clement Daguet-Schott" },
+    "sameAs": [
+      GOOGLE_MAPS_URL,
       "https://www.instagram.com/parishistorytour/",
       "https://www.getyourguide.com/paris-l16/world-war-ii-tour-in-paris-fall-resistance-liberation-t537162/",
       "https://www.viator.com/tours/Paris/World-War-II-Tour-in-Paris-Fall-Resistance-and-Liberation/d479-5642691P2",

@@ -1,3 +1,10 @@
+import { GOOGLE_REVIEWS, TOUR_PRICES } from '../../data/site';
+
+// Chiffres partagés : une seule source de vérité (src/data/site.ts).
+const RATING = GOOGLE_REVIEWS.ratingValue.replace('.', ',');
+const REVIEW_COUNT = GOOGLE_REVIEWS.ratingCount;
+const PRICE = TOUR_PRICES['left-bank'];
+
 export const fr = {
   // Navigation
   nav: {
@@ -684,41 +691,43 @@ export const fr = {
     }
   },
 
-  // Meta (SEO)
+  // Meta (SEO) — titres <= 60 caracteres (limite d'affichage Google), mot-cle en
+  // tete, pas de suffixe de marque sur la home : Google affiche deja le nom du
+  // site. Note et prix viennent de src/data/site.ts, jamais codes en dur ici.
   meta: {
     home: {
-      title: "Paris History Tours - Visites privées Seconde Guerre mondiale à Paris | 4.9\u2605",
-      description: "Visites privées Seconde Guerre mondiale à Paris notées 4.9/5. Chute, Résistance & Libération sur la Rive Gauche & Droite avec un guide personnel. Réservez."
+      title: "Visites privées Seconde Guerre mondiale à Paris",
+      description: `2 h à pied avec un guide personnel : Occupation, Résistance, Libération. Rive Gauche ou Rive Droite. Dès ${PRICE} € — noté ${RATING}/5 sur ${REVIEW_COUNT} avis Google.`
     },
     leftBank: {
-      title: "Visite Seconde Guerre mondiale Rive Gauche - Panthéon, Sorbonne, Notre-Dame | Paris History Tours",
-      description: "Visite à pied WWII Rive Gauche de 2h : Saint-Michel, Luxembourg, Sorbonne & Notre-Dame. 4 arrêts sur la Chute, Résistance & Libération. Réservez maintenant."
+      title: "Visite Seconde Guerre mondiale à Paris — Rive Gauche",
+      description: `2 h à pied : Saint-Michel, le Luxembourg, la Sorbonne et Notre-Dame. Quatre arrêts sur la Chute, la Résistance et la Libération. Dès ${PRICE} €, guide privé.`
     },
     rightBank: {
-      title: "Visite Seconde Guerre mondiale Rive Droite - Vendôme, Concorde, Ritz | Paris History Tours",
-      description: "Visite à pied WWII Rive Droite de 2h : Pont Alexandre III, Concorde, Vendôme & le Ritz. Rose Valland, Hemingway & Libération. Noté 4.9/5. Réservez."
+      title: "Visite Seconde Guerre mondiale à Paris — Rive Droite",
+      description: `2 h à pied : Pont Alexandre III, Concorde, Vendôme et le Ritz. Rose Valland, Hemingway et la Libération. Dès ${PRICE} €, avec un guide privé.`
     },
     generalHistory: {
-      title: "Visite Histoire Générale de Paris - 2 000 Ans en 1h30 | Paris History Tours",
-      description: "Parcourez 2 000 ans d'histoire de Paris : Lutèce romaine, le siège viking de 885, la Révolution française. 3 arrêts, 1h30. Petit groupe avec un guide local."
+      title: "Visite histoire de Paris — 2 000 ans en 1 h 30",
+      description: `Lutèce romaine, le siège viking de 885, la Révolution française : 2 000 ans en trois arrêts et 1 h 30. Petit groupe, guide local. Dès ${TOUR_PRICES["general-history"]} €.`
     },
     foodWine: {
-      title: "Nourritour — Visite food & wine à Paris | Paris History Tours",
-      description: "Visite à pied food & wine de 3 heures dans le 9e — passages couverts, rue des Martyrs, quatre artisans (madeleines, fromage, charcuterie, vin) et quatre planches de dégustation. Guidé à deux."
+      title: "Nourritour — visite food & wine à Paris",
+      description: `3 h dans le 9e : passages couverts, rue des Martyrs, quatre artisans (madeleines, fromage, charcuterie, vin) et quatre dégustations. Guidé à deux, dès ${TOUR_PRICES["food-wine"]} €.`
     },
     keyFigures: {
-      title: "À propos de Paris History Tours - Notre Guide & Parcours",
-      description: "Rencontrez Clément, passionné d'histoire et guide personnel à Paris. 20+ livres de recherche, visiteurs de 25+ pays et une note de 4.9/5 sur Google Maps."
+      title: "Votre guide à Paris — Clément Daguet-Schott",
+      description: `Passionné d'histoire et guide indépendant à Paris. Plus de 20 livres de recherche, des visiteurs de 25+ pays et une note de ${RATING}/5 sur Google Maps.`
     },
     blog: {
-      title: "Blog - Histoire de Paris pendant la Seconde Guerre mondiale | Paris History Tours",
-      description: "Articles sur l'histoire de Paris pendant la Seconde Guerre mondiale : Résistance, Libération, personnages clés et lieux emblématiques.",
+      title: "Blog — Paris pendant la Seconde Guerre mondiale",
+      description: "Résistance, Libération, personnages clés et lieux emblématiques : les histoires de Paris entre 1940 et 1944, racontées par un guide sur place.",
       heading: "Histoire de Paris pendant la Seconde Guerre mondiale",
       subheading: "Explorez les histoires fascinantes de Paris pendant la Seconde Guerre mondiale, par Clément Daguet-Schott.",
       empty: "Articles à venir prochainement."
     },
     success: {
-      title: "Réservation Confirmée - Paris History Tours",
+      title: "Réservation confirmée — Paris History Tours",
       description: "Votre demande de réservation pour Paris History Tours a été confirmée."
     }
   },
