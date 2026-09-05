@@ -76,7 +76,7 @@ const blogLabel = lang === 'fr' ? 'Blog' : 'Blog';
       tags={post.data.tags}
       image={post.data.image}
       imageAlt={post.data.imageAlt}
-      blogHref={`${langPrefix}/blog`}
+      blogHref={`${langPrefix}/blog/`}
     />
 
     <article class="qarticle__body">
@@ -90,7 +90,7 @@ const blogLabel = lang === 'fr' ? 'Blog' : 'Blog';
       toursHref={`${langPrefix}/#tours`}
     />
 
-    <ArticleAuthor authorLink={`${langPrefix}/key-figures`} />
+    <ArticleAuthor authorLink={`${langPrefix}/key-figures/`} />
 
     <ArticleRelated posts={relatedPosts} langPrefix={langPrefix} />
   </main>

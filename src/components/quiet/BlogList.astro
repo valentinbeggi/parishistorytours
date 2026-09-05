@@ -36,7 +36,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString(dateLocale, { year: 'numeric',
     )}
 
     {featured && (
-      <a href={`${langPrefix}/blog/${featured.id}`} class="qbloglist__feature">
+      <a href={`${langPrefix}/blog/${featured.id}/`} class="qbloglist__feature">
         {featured.data.image && (
           <div class="qbloglist__feature-img">
             <img src={featured.data.image} alt={featured.data.imageAlt || featured.data.title} loading="lazy" decoding="async" />
@@ -58,7 +58,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString(dateLocale, { year: 'numeric',
     {rest.length > 0 && (
       <div class="qbloglist__grid">
         {rest.map((post) => (
-          <a href={`${langPrefix}/blog/${post.id}`} class="qbloglist__card">
+          <a href={`${langPrefix}/blog/${post.id}/`} class="qbloglist__card">
             {post.data.image && (
               <div class="qbloglist__card-img">
                 <img src={post.data.image} alt={post.data.imageAlt || post.data.title} loading="lazy" decoding="async" />

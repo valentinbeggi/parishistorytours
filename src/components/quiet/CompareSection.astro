@@ -12,7 +12,7 @@ const priceFor = (slug: string) => `${t('quiet.common.from')} ${formatEUR(lang, 
 const tours = [
   {
     title: t('quiet.home.tours.leftBankTitle'),
-    href: `${langPrefix}/tours/left-bank`,
+    href: `${langPrefix}/tours/left-bank/`,
     price: priceFor('left-bank'),
     focus: t('quiet.home.compare.leftBankFocus'),
     route: t('quiet.home.compare.leftBankRoute'),
@@ -22,7 +22,7 @@ const tours = [
   },
   {
     title: t('quiet.home.tours.rightBankTitle'),
-    href: `${langPrefix}/tours/right-bank`,
+    href: `${langPrefix}/tours/right-bank/`,
     price: priceFor('right-bank'),
     focus: t('quiet.home.compare.rightBankFocus'),
     route: t('quiet.home.compare.rightBankRoute'),
@@ -32,7 +32,7 @@ const tours = [
   },
   {
     title: t('quiet.home.tours.generalTitle'),
-    href: `${langPrefix}/tours/general-history`,
+    href: `${langPrefix}/tours/general-history/`,
     price: priceFor('general-history'),
     focus: t('quiet.home.compare.generalFocus'),
     route: t('quiet.home.compare.generalRoute'),
